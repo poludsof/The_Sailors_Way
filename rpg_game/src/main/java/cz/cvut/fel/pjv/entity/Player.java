@@ -30,62 +30,48 @@ public class Player extends Entity {
         direction = "down";
     }
     public void getPlayerImage(){
-        InputStream up_1 = Player.class.getClassLoader().getResourceAsStream("player/sailor_up1.png");
-        InputStream up_2 = Player.class.getClassLoader().getResourceAsStream("player/sailor_up2.png");
-        InputStream left_1 = Player.class.getClassLoader().getResourceAsStream("player/sailor_left1.png");
-        InputStream left_2 = Player.class.getClassLoader().getResourceAsStream("player/sailor_left2.png");
-        InputStream right_1 = Player.class.getClassLoader().getResourceAsStream("player/sailor_right1.png");
-        InputStream right_2 = Player.class.getClassLoader().getResourceAsStream("player/sailor_right2.png");
-        InputStream down_1 = Player.class.getClassLoader().getResourceAsStream("player/sailor_down1.png");
-        InputStream down_2 = Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png");
         try {
-            up1 = ImageIO.read(up_1);
-            up2 = ImageIO.read(up_2);
-            left1 = ImageIO.read(left_1);
-            left2 = ImageIO.read(left_2);
-            right1 = ImageIO.read(right_1);
-            right2 = ImageIO.read(right_2);
-            down1 = ImageIO.read(down_1);
-            down2 = ImageIO.read(down_2);
+            up1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up1.png"));
+            up2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up2.png"));
+            left1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_left1.png"));
+            left2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_left2.png"));
+            right1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_right1.png"));
+            right2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_right2.png"));
+            down1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down1.png"));
+            down2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png"));
 
 //            up1 = ImageIO.read(Player.class.getClassLoader().getResource("player/boy_down_1.png"));
 //            up1 = ImageIO.read(getClass().getResourceAsStream("/resources2/boy_d_1.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
-//            e.printStackTrace();
         }
-//        finally {
-//            try {
-//                up_1.close();
-//                up_2.close();
-//            } catch (IOException e) {
-//                throw new RuntimeException();
-//            }
-//        }
     }
 
     public void update() {
-        if (keyH.upPressed) {
-            direction = "up";
-            y -= speed;
-        } else if (keyH.downPressed) {
-            direction = "down";
-            y += speed;
-        } else if (keyH.rightPressed) {
-            direction = "right";
-            x += speed;
-        } else if (keyH.leftPressed) {
-            direction = "left";
-            x -= speed;
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+            if (keyH.upPressed) {
+                direction = "up";
+                y -= speed;
+            } else if (keyH.downPressed) {
+                direction = "down";
+                y += speed;
+            } else if (keyH.leftPressed) {
+                direction = "left";
+                x -= speed;
+            } else if (keyH.rightPressed) {
+                direction = "right";
+                x += speed;
+            }
+            spriteCounter++;
+            if (spriteCounter > 10) {
+                if (spriteNum == 1)
+                    spriteNum = 2;
+                else if (spriteNum == 2)
+                    spriteNum = 1;
+                spriteCounter = 0;
+            }
         }
-        spriteCounter++;
-        if (spriteCounter > 10) {
-            if (spriteNum == 1)
-                spriteNum = 2;
-            else if (spriteNum == 2)
-                spriteNum = 1;
-            spriteCounter = 0;
-        }
+
     }
     public void draw(Graphics2D g2) {
 

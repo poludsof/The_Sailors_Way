@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.entity.Player;
+import cz.cvut.fel.pjv.tile.TileManager;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -10,12 +11,12 @@ import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel implements Runnable{
 
-    final int originalTileSize = 20; // 16 x 16 character
+    final int originalTileSize = 20; // 20 x 20 character
     final int scale = 4;
 
-    public final int tileSize = originalTileSize * scale; // // 16 * 3 = 48 --> 48 x 48
-    final int screen_col = 12;
-    final int screen_row = 8;
+    public final int tileSize = originalTileSize * scale; // // 20 * 3 = 60 --> 60 x 60
+    final int screen_col = 10;
+    final int screen_row = 7;
 
     // Size of game screen
     final int screen_width = tileSize * screen_col; // 768 pixels
@@ -23,13 +24,10 @@ public class GamePanel extends JPanel implements Runnable{
 
     int FPS = 60;
 
+    TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyH);
-
-//    int player_x = 100;
-//    int player_y = 100;
-//    int player_speed = 4;
 
 
     public GamePanel() {
@@ -80,8 +78,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        tileM.draw(g2);
         player.draw(g2);
         g2.dispose();
-
     }
 }
