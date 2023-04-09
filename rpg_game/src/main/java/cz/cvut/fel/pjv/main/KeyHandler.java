@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv;
+package cz.cvut.fel.pjv.main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

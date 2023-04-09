@@ -1,16 +1,21 @@
-package cz.cvut.fel.pjv;
+package cz.cvut.fel.pjv.main;
+
+import cz.cvut.fel.pjv.entity.Player;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel implements Runnable{
 
-    final int originalTileSize = 16; // 16 x 16 character
-    final int scale = 3;
+    final int originalTileSize = 20; // 16 x 16 character
+    final int scale = 4;
 
-    final int tileSize = originalTileSize * scale; // // 16 * 3 = 48 --> 48 x 48
-    final int screen_col = 16;
-    final int screen_row = 12;
+    public final int tileSize = originalTileSize * scale; // // 16 * 3 = 48 --> 48 x 48
+    final int screen_col = 12;
+    final int screen_row = 8;
 
     // Size of game screen
     final int screen_width = tileSize * screen_col; // 768 pixels
@@ -20,15 +25,16 @@ public class GamePanel extends JPanel implements Runnable{
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
+    Player player = new Player(this, keyH);
 
-    int player_x = 100;
-    int player_y = 100;
-    int player_speed = 4;
+//    int player_x = 100;
+//    int player_y = 100;
+//    int player_speed = 4;
 
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screen_width, screen_height));
-        this.setBackground(Color.cyan);
+        this.setBackground(Color.blue);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
@@ -68,24 +74,13 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void update() {
-        if (keyH.upPressed)
-            player_y -= player_speed;
-        else if (keyH.downPressed)
-            player_y += player_speed;
-        else if (keyH.rightPressed)
-            player_x += player_speed;
-        else if (keyH.leftPressed)
-            player_x -= player_speed;
+        player.update();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
-        g2.setColor(Color.blue);
-
-        g2.fillRect(player_x, player_y, tileSize, tileSize);
-
+        player.draw(g2);
         g2.dispose();
 
     }
