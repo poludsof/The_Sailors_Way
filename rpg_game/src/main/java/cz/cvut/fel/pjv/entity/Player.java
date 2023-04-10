@@ -15,17 +15,29 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int screenX;
+    public final int screenY;
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screen_width / 2 - (gp.tileSize / 2);
+        screenY = gp.screen_height / 2 - (gp.tileSize / 2);
+
+        solidArea = new Rectangle();
+        solidArea.x = 20;
+        solidArea.y = 24;
+        solidArea.height = 56;
+        solidArea.width = 40;
 
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldX = 14 * gp.tileSize;
+        worldY = 24 * gp.tileSize;
         speed = 4;
         direction = "down";
     }
@@ -51,17 +63,29 @@ public class Player extends Entity {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) {
                 direction = "up";
-                y -= speed;
+//                worldY -= speed;
             } else if (keyH.downPressed) {
                 direction = "down";
-                y += speed;
+//                worldY += speed;
             } else if (keyH.leftPressed) {
                 direction = "left";
-                x -= speed;
+//                worldX -= speed;
             } else if (keyH.rightPressed) {
                 direction = "right";
-                x += speed;
+//                worldX += speed;
             }
+
+            collision = false;
+            gp.checker.CheckTile(this);
+            if (!collision) {
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+
             spriteCounter++;
             if (spriteCounter > 10) {
                 if (spriteNum == 1)
@@ -106,7 +130,7 @@ public class Player extends Entity {
                     image = right2;
             }
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
     }
 }

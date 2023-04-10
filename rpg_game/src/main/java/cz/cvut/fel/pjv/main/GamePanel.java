@@ -14,20 +14,26 @@ public class GamePanel extends JPanel implements Runnable{
     final int originalTileSize = 20; // 20 x 20 character
     final int scale = 4;
 
-    public final int tileSize = originalTileSize * scale; // // 20 * 3 = 60 --> 60 x 60
-    public int screen_col = 12;
-    public int screen_row = 8;
+    public final int tileSize = originalTileSize * scale; // // 20 * 4 = 80 --> 80 x 80
+    public int screen_col = 14;
+    public int screen_row = 10;
 
     // Size of game screen
-    final int screen_width = tileSize * screen_col; // 768 pixels
-    final int screen_height = tileSize * screen_row; // 576 pixels
+    public int screen_width = tileSize * screen_col; // 768 pixels
+    public int screen_height = tileSize * screen_row; // 576 pixels
+
+    public final int maxWordCol = 55;
+    public final int maxWordRow = 33;
+    public final int wordWidth = tileSize * maxWordCol;
+    public final int wordHeight = tileSize * maxWordRow;
 
     int FPS = 60;
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    Player player = new Player(this, keyH);
+    public CollisionChecker checker = new CollisionChecker(this);
+    public Player player = new Player(this, keyH);
 
 
     public GamePanel() {
