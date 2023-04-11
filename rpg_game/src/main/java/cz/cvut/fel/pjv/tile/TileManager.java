@@ -1,11 +1,9 @@
 package cz.cvut.fel.pjv.tile;
 
-import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,7 +70,7 @@ public class TileManager {
             }
             br.close();
         } catch (Exception e) {
-
+            throw new RuntimeException(e);
         }
     }
     public void draw(Graphics2D g2) {

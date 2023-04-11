@@ -8,9 +8,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-//import java.io.IOException;
-//import java.io.InputStream;
-
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;

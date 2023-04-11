@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed; // Variables to track key presses.
     @Override
     public void keyTyped(KeyEvent k) {
 
@@ -12,34 +12,38 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent k) {
-        int code = k.getKeyCode();
-        if (code == KeyEvent.VK_W) {
+        int key = k.getKeyCode();
+
+        // Detect the pressed key and set the appropriate variable.
+        if (key == KeyEvent.VK_W) {
             upPressed = true;
         }
-        if (code == KeyEvent.VK_S) {
+        if (key == KeyEvent.VK_S) {
             downPressed = true;
         }
-        if (code == KeyEvent.VK_A) {
+        if (key == KeyEvent.VK_A) {
             leftPressed = true;
         }
-        if (code == KeyEvent.VK_D) {
+        if (key == KeyEvent.VK_D) {
             rightPressed = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent k) {
-        int code = k.getKeyCode();
-        if (code == KeyEvent.VK_W) {
+        int key = k.getKeyCode();
+
+        // Detect the released key and set the corresponding variable.
+        if (key == KeyEvent.VK_W) {
             upPressed = false;
         }
-        if (code == KeyEvent.VK_S) {
+        if (key == KeyEvent.VK_S) {
             downPressed = false;
         }
-        if (code == KeyEvent.VK_A) {
+        if (key == KeyEvent.VK_A) {
             leftPressed = false;
         }
-        if (code == KeyEvent.VK_D) {
+        if (key == KeyEvent.VK_D) {
             rightPressed = false;
         }
     }
