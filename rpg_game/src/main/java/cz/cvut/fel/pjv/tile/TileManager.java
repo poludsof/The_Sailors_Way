@@ -16,14 +16,20 @@ public class TileManager {
 
     public int[][] mapTileNum;
 
+    /**
+     * Initializes the tile array, loads the tile images and loads the map.
+     */
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[10];
-        mapTileNum = new int[gp.maxWordCol][gp.maxWordRow];
+        tile = new Tile[10]; //Tile array
+        mapTileNum = new int[gp.worldCol][gp.worldRow]; // A 2d array storing tile numbers on the map
         getTileImage();
         loadMap("/maps/map.txt");
     }
 
+    /**
+     * Loads tile images from a resource folder into the tile array.
+     */
     public void getTileImage() {
         try {
             tile[1] = new Tile();
@@ -54,16 +60,16 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             int col = 0;
             int row = 0;
-            while (col < gp.maxWordCol && row < gp.maxWordRow) {
+            while (col < gp.worldCol && row < gp.worldRow) {
                 String line = br.readLine();
 
-                while (col < gp.maxWordCol) {
+                while (col < gp.worldCol) {
                     String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     ++col;
                 }
-                if (col == gp.maxWordCol) {
+                if (col == gp.worldCol) {
                     col = 0;
                     ++row;
                 }
@@ -77,7 +83,7 @@ public class TileManager {
         int world_col = 0;
         int world_row = 0;
 
-        while (world_col < gp.maxWordCol && world_row < gp.maxWordRow) {
+        while (world_col < gp.worldCol && world_row < gp.worldRow) {
 
             int tileNum = mapTileNum[world_col][world_row];
 
@@ -86,15 +92,15 @@ public class TileManager {
             int screenX = worldX - gp.player.worldX + gp.player.screenX; // where tile on the screen
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-            if (worldX + 3*gp.tileSize > gp.player.worldX - gp.player.screenX
-                    && worldX - 3*gp.tileSize < gp.player.worldX + gp.player.screenY
+            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
+                    && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
                     && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
                     && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
                 g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             }
             ++world_col;
 
-            if (world_col == gp.maxWordCol) {
+            if (world_col == gp.worldCol) {
                 world_col = 0;
                 ++world_row;
             }

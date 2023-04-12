@@ -22,6 +22,7 @@ public class Player extends Entity {
         screenX = gp.screen_width / 2 - (gp.tileSize / 2);
         screenY = gp.screen_height / 2 - (gp.tileSize / 2);
 
+        // Set the player's solid area
         solidArea = new Rectangle();
         solidArea.x = 20;
         solidArea.y = 24;
@@ -32,12 +33,20 @@ public class Player extends Entity {
         getPlayerImage();
     }
 
+    /**
+     * Sets default values for the player's properties, such as coordinates and movement speed.
+     */
     public void setDefaultValues() {
+        // Coordinates of the initial position of the player on the map
         worldX = 14 * gp.tileSize;
         worldY = 24 * gp.tileSize;
         speed = 4;
         direction = "down";
     }
+
+    /**
+     * Loads the player's image from the resource folder.
+     */
     public void getPlayerImage(){
         try {
             up1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up1.png"));
@@ -48,29 +57,24 @@ public class Player extends Entity {
             right2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_right2.png"));
             down1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down1.png"));
             down2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png"));
-
-//            up1 = ImageIO.read(Player.class.getClassLoader().getResource("player/boy_down_1.png"));
-//            up1 = ImageIO.read(getClass().getResourceAsStream("/resources2/boy_d_1.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Updates the player's movements and animations based on the user's input.
+     */
     public void update() {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) {
                 direction = "up";
-//                worldY -= speed;
             } else if (keyH.downPressed) {
                 direction = "down";
-//                worldY += speed;
             } else if (keyH.leftPressed) {
                 direction = "left";
-//                worldX -= speed;
-            } else if (keyH.rightPressed) {
+            } else if (keyH.rightPressed)
                 direction = "right";
-//                worldX += speed;
-            }
 
             collision = false;
             gp.checker.CheckTile(this);
@@ -95,10 +99,6 @@ public class Player extends Entity {
 
     }
     public void draw(Graphics2D g2) {
-
-//        g2.setColor(Color.blue);
-//        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-
         BufferedImage image = null;
 
         switch (direction) {
