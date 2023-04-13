@@ -18,7 +18,7 @@ public class EnemyEvents {
 
     }
 
-    public void dead() {
+    public void isDead() {
 
     }
 }

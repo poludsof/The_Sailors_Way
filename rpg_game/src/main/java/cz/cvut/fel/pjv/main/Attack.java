@@ -18,7 +18,7 @@ public class Attack {
 
     }
 
-    public void dead() {
+    public void isDead() {
 
     }
 }
