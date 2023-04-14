@@ -11,7 +11,7 @@ public class KeyHandler implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent k) {
+    public void keyPressed(KeyEvent k) { // Override the keyPressed method of the KeyListener interface.
         int key = k.getKeyCode();
 
         // Detect the pressed key and set the appropriate variable.
@@ -30,7 +30,7 @@ public class KeyHandler implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent k) {
+    public void keyReleased(KeyEvent k) { // Override the keyReleased method of the KeyListener interface.
         int key = k.getKeyCode();
 
         // Detect the released key and set the corresponding variable.

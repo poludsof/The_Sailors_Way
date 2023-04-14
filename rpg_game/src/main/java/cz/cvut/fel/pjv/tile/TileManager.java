@@ -10,14 +10,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class TileManager {
-
     GamePanel gp;
     public Tile[] tile; // array with tiles
 
     public int[][] mapTileNum;
 
     /**
-     * Initializes the tile array, loads the tile images and loads the map.
+     * A constructor that initializes the tile array and loads the map.
      */
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -50,10 +49,14 @@ public class TileManager {
             tile[6].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/water.png"));
 
         } catch (IOException e) {
+            // Throws a RuntimeException if there is an error reading the map text file
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Loads the map from a text file and stores it in the mapTileNum 2D array.
+     */
     public void loadMap(String map_path) {
         try {
             InputStream is = getClass().getResourceAsStream(map_path);
@@ -79,6 +82,10 @@ public class TileManager {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Draws the tiles on the screen.
+     */
     public void draw(Graphics2D g2) {
         int world_col = 0;
         int world_row = 0;

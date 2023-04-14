@@ -54,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
     long timer = 0;
     int drawCount = 0;
     @Override
+    // the game loop that updates the game and redraws the screen
     public void run() { // GAME LOOP == core of game
         while (gameThread != null) {
             currentTime = System.nanoTime();
