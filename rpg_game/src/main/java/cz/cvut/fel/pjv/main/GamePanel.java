@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.entity.Player;
+import cz.cvut.fel.pjv.object.Objects;
 import cz.cvut.fel.pjv.tile.TileManager;
 
 import javax.swing.JPanel;
@@ -31,8 +32,9 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     public CollisionChecker checker = new CollisionChecker(this);
+    public AssertSetter ASetter = new AssertSetter(this);
     public Player player = new Player(this, keyH);
-
+    public Objects[] obj_arr = new Objects[10];
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screen_width, screen_height));
@@ -42,9 +44,14 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
 
+    public void setupGame() {
+        ASetter.setObject();
+    }
+
     public void startGameTread() {
         gameThread = new Thread(this); // passing GamePanel class to this thread's constructor
         gameThread.start(); // automatically call run() method
+//        run();
     }
 
     double drawInterval = 1000000000 / (double) FPS;
@@ -84,6 +91,13 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         tileM.draw(g2);
+
+        for (int i = 0; i < obj_arr.length; ++i) {
+            if (obj_arr[i] != null) {
+                obj_arr[i].draw(g2, this);
+            }
+        }
+
         player.draw(g2);
         g2.dispose();
     }
