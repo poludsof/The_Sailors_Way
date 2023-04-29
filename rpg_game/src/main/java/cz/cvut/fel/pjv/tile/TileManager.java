@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.tile;
 
+import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.main.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -8,57 +9,67 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class TileManager {
     GamePanel gp;
     public Tile[] tile; // array with tiles
 
     public int[][] mapTileNum;
+    ArrayList<String> tile_names = new ArrayList<>();
+    ArrayList<String> tile_collisions = new ArrayList<>();
 
     /**
      * A constructor that initializes the tile array and loads the map.
      */
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[10]; //Tile array
+//        getMapSize("/maps/map_last.txt");
         mapTileNum = new int[gp.worldCol][gp.worldRow]; // A 2d array storing tile numbers on the map
+        loadData("/maps/tile_data_last.txt");
+        tile = new Tile[tile_names.size()]; //Tile array
         getTileImage();
-        loadMap("/maps/map.txt");
+        loadMap("/maps/map_last.txt");
+    }
+
+    private void getMapSize(String map_path) {
+        try {
+            InputStream is = getClass().getResourceAsStream(map_path);
+            assert is != null;
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String line = br.readLine();
+            String[] line2 = line.split(" ");
+            gp.worldCol = line2.length;
+            gp.worldRow = line2.length;
+            br.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
      * Loads tile images from a resource folder into the tile array.
      */
-    public void getTileImage() {
-        try {
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
+    private void getTileImage() {
+        for (int i = 0; i < tile_names.size(); ++i) {
+            try {
+                tile[i] = new Tile();
+//                tile[i].image = ImageIO.read(TileManager.class.getClassLoader().getResourceAsStream("tiles2/" + tile_names.get(i)));
+                String st = "tiles2/" + tile_names.get(i);
+                System.out.println(st);
+                tile[i].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(st));
 
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/wall.png"));
-            tile[0].collision = true;
-
-            tile[7] = new Tile();
-            tile[7].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
-
-            tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/tree+.png"));
-            tile[4].collision = true;
-
-            tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/water.png"));
-
-        } catch (IOException e) {
-            // Throws a RuntimeException if there is an error reading the map text file
-            throw new RuntimeException(e);
+                tile[i].collision = Boolean.parseBoolean(tile_collisions.get(i));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     /**
      * Loads the map from a text file and stores it in the mapTileNum 2D array.
      */
-    public void loadMap(String map_path) {
+    private void loadMap(String map_path) {
         try {
             InputStream is = getClass().getResourceAsStream(map_path);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -79,7 +90,25 @@ public class TileManager {
                 }
             }
             br.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void loadData(String file_path) {
+        try {
+            InputStream is = getClass().getResourceAsStream(file_path);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            String line = br.readLine();
+            while (line  != null) {
+                tile_names.add(line);
+                tile_collisions.add(br.readLine());
+                line = br.readLine();
+            }
+            br.close();
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

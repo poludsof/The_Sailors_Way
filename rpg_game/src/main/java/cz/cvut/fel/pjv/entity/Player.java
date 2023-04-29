@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.main.KeyHandler;
+import cz.cvut.fel.pjv.object.Objects;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,6 +12,8 @@ import java.io.*;
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
+    Objects obj = new Objects();
+    public int key_count = 0;
 
     public final int screenX;
     public final int screenY;
@@ -38,8 +41,8 @@ public class Player extends Entity {
      */
     public void setDefaultValues() {
         // Coordinates of the initial position of the player on the map
-        worldX = 14 * gp.tileSize;
-        worldY = 24 * gp.tileSize;
+        worldX = 10 * gp.tileSize;
+        worldY = 93 * gp.tileSize;
         speed = 4;
         direction = "down";
     }
@@ -77,7 +80,10 @@ public class Player extends Entity {
                 direction = "right";
 
             collision = false;
-            gp.checker.CheckTile(this);
+            gp.checker.CheckCollisionTile(this);
+            int idx_obj = gp.checker.CheckCollisionObj(this);
+            obj.pickUpObj(idx_obj, gp, this);
+
             if (!collision) {
                 switch (direction) {
                     case "up" -> worldY -= speed;
@@ -128,6 +134,19 @@ public class Player extends Entity {
             }
         }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-
+    }
+    public void pickUpObj(int idx) {
+        if (idx != -1) {
+            if (gp.obj_arr[idx].name_object.equals("Key")) {
+                gp.obj_arr[idx] = null;
+                ++key_count;
+            }
+            else if (gp.obj_arr[idx].name_object.equals("Door")) {
+                if (key_count >= 1) {
+                    gp.obj_arr[idx] = null;
+                    --key_count;
+                }
+            }
+        }
     }
 }

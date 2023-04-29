@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.entity.Entity;
+import cz.cvut.fel.pjv.entity.Player;
 
 public class CollisionChecker {
     GamePanel gp;
@@ -8,7 +9,7 @@ public class CollisionChecker {
         this.gp = gp;
     }
 
-    public void CheckTile(Entity entity) {
+    public void CheckCollisionTile(Entity entity) {
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;
         int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
         int entityTopWorldY = entity.worldY + entity.solidArea.y;
@@ -55,5 +56,59 @@ public class CollisionChecker {
                 }
             }
         }
+    }
+
+    public int CheckCollisionObj(Entity entity) {
+        int idx = -1;
+        for (int i = 0; i < gp.obj_arr.length; ++i) {
+            if (gp.obj_arr[i] != null) {
+                entity.solidArea.x += entity.worldX;  // get position on the map
+                entity.solidArea.y += entity.worldY;
+
+                gp.obj_arr[i].solidArea.x += gp.obj_arr[i].worldX;  // get position on the map
+                gp.obj_arr[i].solidArea.y += gp.obj_arr[i].worldY;
+
+                switch (entity.direction) {
+                    case "up" -> {
+                        entity.solidArea.y -= entity.speed;
+                        if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
+                            if (gp.obj_arr[i].collision_obj) // is solid obj
+                                entity.collision = true;
+                            idx = i;
+                        }
+                    }
+                    case "down" -> {
+                        entity.solidArea.y += entity.speed;
+                        if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) {
+                            if (gp.obj_arr[i].collision_obj) // is solid obj
+                                entity.collision = true;
+                            idx = i;
+                        }
+                    }
+                    case "right" -> {
+                        entity.solidArea.x += entity.speed;
+                        if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) {
+                            if (gp.obj_arr[i].collision_obj) // is solid obj
+                                entity.collision = true;
+                            idx = i;
+                        }
+                    }
+                    case "left" -> {
+                        entity.solidArea.x -= entity.speed;
+                        if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) {
+                            if (gp.obj_arr[i].collision_obj) // is solid obj
+                                entity.collision = true;
+                            idx = i;
+                        }
+                    }
+                }
+                entity.solidArea.x = 20;
+                entity.solidArea.y = 24;
+
+                gp.obj_arr[i].solidArea.x = 0;  // get position on the map
+                gp.obj_arr[i].solidArea.y = 0;
+            }
+        }
+        return idx;
     }
 }

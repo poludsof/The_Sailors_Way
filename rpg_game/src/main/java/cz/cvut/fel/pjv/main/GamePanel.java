@@ -23,8 +23,8 @@ public class GamePanel extends JPanel implements Runnable{
     public int screen_width = tileSize * screen_col; // 768 pixels
     public int screen_height = tileSize * screen_row; // 576 pixels
 
-    public final int worldCol = 55;
-    public final int worldRow = 33;
+    public int worldCol = 100;
+    public int worldRow = 100;
 
     int FPS = 60;
 
@@ -32,9 +32,10 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     public CollisionChecker checker = new CollisionChecker(this);
-    public AssertSetter ASetter = new AssertSetter(this);
-    public Player player = new Player(this, keyH);
+    public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
     public Objects[] obj_arr = new Objects[10];
+    public Player player = new Player(this, keyH);
+
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screen_width, screen_height));
@@ -45,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void setupGame() {
-        ASetter.setObject();
+        ASetter.PlaceObject();
     }
 
     public void startGameTread() {
@@ -77,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
                 ++drawCount;
             }
             if (timer >= 1000000000) {
-                System.out.println("FPS:" + drawCount);
+//                System.out.println("FPS:" + drawCount);
                 drawCount = 0;
                 timer = 0;
             }
@@ -92,9 +93,9 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D) g;
         tileM.draw(g2);
 
-        for (int i = 0; i < obj_arr.length; ++i) {
-            if (obj_arr[i] != null) {
-                obj_arr[i].draw(g2, this);
+        for (Objects obj : obj_arr) {
+            if (obj != null) {
+                obj.draw(g2, this);
             }
         }
 
