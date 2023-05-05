@@ -35,10 +35,14 @@ public class Objects {
             else if (gp.obj_arr[idx].name_object.equals("Door")) {
                 if (player.key_count >= 1) {
                     gp.obj_arr[idx] = null;
-                    if (idx == 2)
-                        gp.obj_arr[idx + 1] = null;
-                    else
-                        gp.obj_arr[idx - 1] = null;
+                    if (idx == 2) gp.obj_arr[idx + 1] = null;
+                    else gp.obj_arr[idx - 1] = null;
+
+                    if (idx == 4) gp.obj_arr[idx + 1] = null;
+                    else gp.obj_arr[idx - 1] = null;
+
+                    if (idx == 7) gp.obj_arr[idx + 1] = null;
+                    else gp.obj_arr[idx - 1] = null;
                     --player.key_count;
                 }
             }

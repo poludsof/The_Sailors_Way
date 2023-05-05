@@ -171,11 +171,11 @@ true
 x___xhell_closed_door_not_intended_2.png
 true
 x___xhell_floor.png
-true
+false
 x___xhell_floor_dark.png
-true
+false
 x___xhell_floor_darkest.png
-true
+false
 x___xhell__door_left_open.png
 false
 x___xhell__door_right_open.png

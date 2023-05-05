@@ -43,7 +43,7 @@ public class Player extends Entity {
         // Coordinates of the initial position of the player on the map
         worldX = 10 * gp.tileSize;
         worldY = 93 * gp.tileSize;
-        speed = 4;
+        speed = 6;
         direction = "down";
     }
 
@@ -134,19 +134,5 @@ public class Player extends Entity {
             }
         }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-    }
-    public void pickUpObj(int idx) {
-        if (idx != -1) {
-            if (gp.obj_arr[idx].name_object.equals("Key")) {
-                gp.obj_arr[idx] = null;
-                ++key_count;
-            }
-            else if (gp.obj_arr[idx].name_object.equals("Door")) {
-                if (key_count >= 1) {
-                    gp.obj_arr[idx] = null;
-                    --key_count;
-                }
-            }
-        }
     }
 }
