@@ -4,6 +4,8 @@ import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.object.Objects;
 import cz.cvut.fel.pjv.tile.TileManager;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,10 +32,12 @@ public class GamePanel extends JPanel implements Runnable{
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
+    Sound sound = new Sound();
     Thread gameThread;
     public CollisionChecker checker = new CollisionChecker(this);
     public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
     public Objects[] obj_arr = new Objects[10];
+    public Boat boat = new Boat();
     public Player player = new Player(this, keyH);
 
 
@@ -98,8 +102,13 @@ public class GamePanel extends JPanel implements Runnable{
                 obj.draw(g2, this);
             }
         }
+        boat.draw(g2, this);
 
         player.draw(g2);
         g2.dispose();
+    }
+
+    public void playMusic(int idx) {
+        sound.setMusic(idx);
     }
 }

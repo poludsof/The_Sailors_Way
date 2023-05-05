@@ -39,11 +39,15 @@ public class PlaceOnTheMap {
         gp.obj_arr[6].worldY = 44 * gp.tileSize;
 
         gp.obj_arr[7] = new HellRDoor();
-        gp.obj_arr[7].worldX = 81 * gp.tileSize;
+        gp.obj_arr[7].worldX = 90 * gp.tileSize;
         gp.obj_arr[7].worldY = 33 * gp.tileSize;
 
         gp.obj_arr[8] = new HellLDoor();
-        gp.obj_arr[8].worldX = 80 * gp.tileSize;
+        gp.obj_arr[8].worldX = 89 * gp.tileSize;
         gp.obj_arr[8].worldY = 33 * gp.tileSize;
+
+        gp.boat = new Boat();
+        gp.boat.worldX = 88 * gp.tileSize;
+        gp.boat.worldY = 2 * gp.tileSize;
     }
 }
