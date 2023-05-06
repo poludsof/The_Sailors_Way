@@ -7,12 +7,15 @@ import cz.cvut.fel.pjv.tile.TileManager;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable{
+    public static enum State {
+        TITLE,
+        GAME,
+        HELP
+    }
+    public State state;
 
     final int originalTileSize = 20; // 20 x 20 character
     final int scale = 4;
@@ -32,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
+    MouseHandler keyM = new MouseHandler(this);
     Sound sound = new Sound();
     Thread gameThread;
     public CollisionChecker checker = new CollisionChecker(this);
@@ -39,18 +43,20 @@ public class GamePanel extends JPanel implements Runnable{
     public Objects[] obj_arr = new Objects[10];
     public Boat boat = new Boat();
     public Player player = new Player(this, keyH);
-
+    private final TitleMenu menu = new TitleMenu(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screen_width, screen_height));
-        this.setBackground(Color.blue);
+        this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
+        this.addMouseListener(keyM);
         this.setFocusable(true);
     }
 
     public void setupGame() {
         ASetter.PlaceObject();
+        state = State.TITLE;
     }
 
     public void startGameTread() {
@@ -95,17 +101,20 @@ public class GamePanel extends JPanel implements Runnable{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        tileM.draw(g2);
-
-        for (Objects obj : obj_arr) {
-            if (obj != null) {
-                obj.draw(g2, this);
+        if (state == State.TITLE) {
+            menu.show(g, this);
+        } else if (state == State.GAME) {
+            tileM.draw(g2);
+            for (Objects obj : obj_arr) {
+                if (obj != null) {
+                    obj.draw(g2, this);
+                }
             }
-        }
-        boat.draw(g2, this);
+            boat.draw(g2, this);
 
-        player.draw(g2);
-        g2.dispose();
+            player.draw(g2);
+            g2.dispose();
+        }
     }
 
     public void playMusic(int idx) {
