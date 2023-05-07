@@ -12,7 +12,7 @@ public class Main {
         // Window setting
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("The Sea East");
+        window.setTitle("The Sailor's Way");
 
         // Creating a game panel.
         GamePanel gamePanel = new GamePanel();

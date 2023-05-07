@@ -22,19 +22,31 @@ public class MouseHandler implements MouseListener {
         int mouseX = m.getX();
         int mouseY = m.getY();
 
-//        playButton = new Rectangle(gp.screen_width / 2 - 105, 390, 220, 80);
-//        helpButton = new Rectangle(gp.screen_width / 2 - 105, 510, 220, 80);
-//        quitButton = new Rectangle(gp.screen_width / 2 - 105, 630, 220, 80);
-
         if (mouseX >= gp.screen_width / 2 - 105 && mouseX <= gp.screen_width / 2 + 115) {
             if (mouseY >= 390 && mouseY <= 470) {
-                gp.state = GamePanel.State.GAME;
+                if (gp.state == GamePanel.State.TITLE)
+                    gp.state = GamePanel.State.GAME;
             }
             else if (mouseY >= 510 && mouseY <= 590) {
-                gp.state = GamePanel.State.HELP;
+                if (gp.state == GamePanel.State.TITLE)
+                    gp.state = GamePanel.State.HELP;
             }
             else if (mouseY >= 630 && mouseY <= 710) {
-                System.exit(1);
+                if (gp.state == GamePanel.State.TITLE)
+                    System.exit(1);
+            }
+        }
+        if (mouseX >= gp.screen_width - 100 && mouseX <= gp.screen_width - 20) {
+            if (mouseY >= 20 && mouseY <= 100) {
+                if (gp.state == GamePanel.State.GAME)
+                    gp.state = GamePanel.State.PAUSE;
+            }
+        }
+        //reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
+        if (mouseX >= gp.screen_width / 2 - 40 && mouseX <= gp.screen_width / 2 + 40) {
+            if (mouseY >= gp.screen_height / 2 + 120 && mouseY <= gp.screen_height / 2 + 200) {
+                if (gp.state == GamePanel.State.PAUSE)
+                    gp.state = GamePanel.State.GAME;
             }
         }
     }

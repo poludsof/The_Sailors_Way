@@ -4,8 +4,6 @@ import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.object.Objects;
 import cz.cvut.fel.pjv.tile.TileManager;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.swing.JPanel;
 import java.awt.*;
 
@@ -13,7 +11,8 @@ public class GamePanel extends JPanel implements Runnable{
     public static enum State {
         TITLE,
         GAME,
-        HELP
+        HELP,
+        PAUSE
     }
     public State state;
 
@@ -57,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame() {
         ASetter.PlaceObject();
         state = State.TITLE;
+        //sound.setMusic(3);
     }
 
     public void startGameTread() {
@@ -94,8 +94,12 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
-    public void update() {
-        player.update();
+    private void update() {
+
+        if (state == State.GAME) { player.update(); }
+        if (state == State.PAUSE) {
+
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -103,7 +107,8 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D) g;
         if (state == State.TITLE) {
             menu.show(g, this);
-        } else if (state == State.GAME) {
+
+        } else if (state == State.GAME || state == State.PAUSE) {
             tileM.draw(g2);
             for (Objects obj : obj_arr) {
                 if (obj != null) {
@@ -111,13 +116,23 @@ public class GamePanel extends JPanel implements Runnable{
                 }
             }
             boat.draw(g2, this);
-
             player.draw(g2);
-            g2.dispose();
+
+            if (state == State.PAUSE) {
+                menu.drawPauseScreen(g, this);
+            } else {
+                menu.showPauseButton(g2, this);
+            }
         }
+
+        g2.dispose();
     }
 
     public void playMusic(int idx) {
         sound.setMusic(idx);
+    }
+
+    public void stopMusic() {
+        sound.pauseTrack();
     }
 }

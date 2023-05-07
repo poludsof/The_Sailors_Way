@@ -28,24 +28,25 @@ public class Objects {
 
     public void pickUpObj(int idx, GamePanel gp, Player player) {
         if (idx != -1) {
-            if (gp.obj_arr[idx].name_object.equals("Key")) {
-                gp.playMusic(2);
-                gp.obj_arr[idx] = null;
-                ++player.key_count;
-            }
-            else if (gp.obj_arr[idx].name_object.equals("Door")) {
+            if (gp.obj_arr[idx].name_object.equals("Door")) {
+                System.out.println("STOP MUSIC");
                 if (player.key_count >= 1) {
                     gp.obj_arr[idx] = null;
-                    if (idx == 2) { gp.obj_arr[idx + 1] = null; gp.playMusic(1); }
-                    if (idx == 3) { gp.obj_arr[idx - 1] = null; gp.playMusic(1); }
+                    if (idx == 2) { gp.obj_arr[idx + 1] = null; }
+                    if (idx == 3) { gp.obj_arr[idx - 1] = null; }
 
-                    if (idx == 4) { gp.obj_arr[idx + 1] = null; gp.playMusic(1); }
-                    if (idx == 5) { gp.obj_arr[idx - 1] = null; gp.playMusic(1); }
+                    if (idx == 4) { gp.obj_arr[idx + 1] = null; }
+                    if (idx == 5) { gp.obj_arr[idx - 1] = null; }
 
                     if (idx == 7) { gp.obj_arr[idx + 1] = null; gp.playMusic(0); }
                     if (idx == 8) { gp.obj_arr[idx - 1] = null; gp.playMusic(0); }
                     --player.key_count;
                 }
+            }
+            else if (gp.obj_arr[idx].name_object.equals("Key")) {
+                gp.obj_arr[idx] = null;
+                ++player.key_count;
+                gp.playMusic(2);
             }
         }
     }

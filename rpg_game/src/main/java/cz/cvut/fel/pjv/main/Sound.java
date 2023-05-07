@@ -10,6 +10,7 @@ public class Sound {
         url[0] = this.getClass().getClassLoader().getResource("sound/rammstein_reisereise.wav");
         url[1] = this.getClass().getClassLoader().getResource("sound/open_door.wav");
         url[2] = this.getClass().getClassLoader().getResource("sound/pickup_key.wav");
+        url[3] = this.getClass().getClassLoader().getResource("sound/SabatonBismark.wav");
     }
 
     public void setMusic(int idx) {
