@@ -30,7 +30,8 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
                     if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
-                        entity.heart_count--;
+                        if (entity.heart_count > 0)
+                            entity.heart_count--;
                     }
                 }
             }
@@ -41,7 +42,8 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
                     if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
-                        entity.heart_count--;
+                        if (entity.heart_count > 0)
+                            entity.heart_count--;
                     }
                 }
             }
@@ -52,7 +54,8 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
                     if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
-                        entity.heart_count--;
+                        if (entity.heart_count > 0)
+                            entity.heart_count--;
                     }
                 }
             }
@@ -63,7 +66,8 @@ public class CollisionChecker {
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
                     if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
-                        entity.heart_count--;
+                        if (entity.heart_count > 0)
+                            entity.heart_count--;
                     }
                 }
             }
@@ -83,37 +87,23 @@ public class CollisionChecker {
                 switch (entity.direction) {
                     case "up" -> {
                         entity.solidArea.y -= entity.speed;
-                        if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
-                            if (gp.obj_arr[i].collision_obj) // is solid obj
-                                entity.collision = true;
-                            idx = i;
-                        }
                     }
                     case "down" -> {
                         entity.solidArea.y += entity.speed;
-                        if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) {
-                            if (gp.obj_arr[i].collision_obj) // is solid obj
-                                entity.collision = true;
-                            idx = i;
-                        }
                     }
                     case "right" -> {
                         entity.solidArea.x += entity.speed;
-                        if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) {
-                            if (gp.obj_arr[i].collision_obj) // is solid obj
-                                entity.collision = true;
-                            idx = i;
-                        }
                     }
                     case "left" -> {
                         entity.solidArea.x -= entity.speed;
-                        if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) {
-                            if (gp.obj_arr[i].collision_obj) // is solid obj
-                                entity.collision = true;
-                            idx = i;
-                        }
                     }
                 }
+                if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
+                    if (gp.obj_arr[i].collision_obj) // is solid obj
+                        entity.collision = true;
+                    idx = i;
+                }
+
                 entity.solidArea.x = 20;
                 entity.solidArea.y = 24;
 
@@ -122,5 +112,77 @@ public class CollisionChecker {
             }
         }
         return idx;
+    }
+
+    public int CheckCollisionEntity(Entity entity, Entity[] arrayEntity) {
+        int idx = -1;
+        for (int i = 0; i < arrayEntity.length; ++i) {
+            if (arrayEntity[i] != null) {
+                entity.solidArea.x += entity.worldX;  // get position on the map
+                entity.solidArea.y += entity.worldY;
+
+                arrayEntity[i].solidArea.x += arrayEntity[i].worldX;  // get position on the map
+                arrayEntity[i].solidArea.y += arrayEntity[i].worldY;
+
+                switch (entity.direction) {
+                    case "up" -> {
+                        entity.solidArea.y -= entity.speed;
+                    }
+                    case "down" -> {
+                        entity.solidArea.y += entity.speed;
+                    }
+                    case "right" -> {
+                        entity.solidArea.x += entity.speed;
+                    }
+                    case "left" -> {
+                        entity.solidArea.x -= entity.speed;
+                    }
+                }
+                if (arrayEntity[i].solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
+                    entity.collision = true;
+                    idx = i;
+                }
+
+                entity.solidArea.x = 20;
+                entity.solidArea.y = 24;
+
+                arrayEntity[i].solidArea.x = 20;  // get position on the map
+                arrayEntity[i].solidArea.y = 24;
+            }
+        }
+        return idx;
+    }
+
+    public boolean CheckCollisionPlayer(Entity entity) {
+        boolean fight = false;
+        if (gp.player != null) {
+            entity.solidArea.x += entity.worldX;  // get position on the map
+            entity.solidArea.y += entity.worldY;
+            gp.player.solidArea.x += gp.player.worldX;  // get position on the map
+            gp.player.solidArea.y += gp.player.worldY;
+            switch (entity.direction) {
+                case "up" -> {
+                    entity.solidArea.y -= entity.speed;
+                }
+                case "down" -> {
+                    entity.solidArea.y += entity.speed;
+                }
+                case "right" -> {
+                    entity.solidArea.x += entity.speed;
+                }
+                case "left" -> {
+                    entity.solidArea.x -= entity.speed;
+                }
+            }
+            if (entity.solidArea.intersects(gp.player.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
+                entity.collision = true;
+                fight = true;
+            }
+            entity.solidArea.x = 20;
+            entity.solidArea.y = 24;
+            gp.player.solidArea.x = 20;  // get position on the map
+            gp.player.solidArea.y = 24;
+        }
+        return fight;
     }
 }

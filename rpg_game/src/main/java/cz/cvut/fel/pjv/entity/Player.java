@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.main.KeyHandler;
+import cz.cvut.fel.pjv.monster.Pirate;
 import cz.cvut.fel.pjv.object.Objects;
 
 import javax.imageio.ImageIO;
@@ -13,6 +14,7 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     Objects obj = new Objects();
+    Pirate pirate = new Pirate(gp);
     public int key_count = 0;
     public int level = 1;
 
@@ -20,9 +22,10 @@ public class Player extends Entity {
     public final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH) {
+        super(gp);
         this.gp = gp;
         this.keyH = keyH;
-        heart_count = 6;
+        heart_count = 5;
 
         screenX = gp.screen_width / 2 - (gp.tileSize / 2);
         screenY = gp.screen_height / 2 - (gp.tileSize / 2);
@@ -83,6 +86,12 @@ public class Player extends Entity {
 
             collision = false;
             gp.checker.CheckCollisionTile(this);
+
+            int idx_m = gp.checker.CheckCollisionEntity(this, gp.monsters);
+            if (idx_m >= 0) {
+                gp.monsters[idx_m].fightMonster(idx_m);
+            }
+
             int idx_obj = gp.checker.CheckCollisionObj(this);
             obj.pickUpObj(idx_obj, gp, this);
 
@@ -104,6 +113,15 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+
+        if (timeToDamage) {
+            DamageCounter++;
+            if (DamageCounter == 60) { //  каждую секунду получает удар
+                timeToDamage = false;
+                DamageCounter = 0;
+            }
+        }
+
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
@@ -134,6 +152,10 @@ public class Player extends Entity {
                     image = right2;
             }
         }
+        if (timeToDamage) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }

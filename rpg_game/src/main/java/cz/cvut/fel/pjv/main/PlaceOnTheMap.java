@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.main;
 
+import cz.cvut.fel.pjv.monster.Pirate;
 import cz.cvut.fel.pjv.object.*;
 
 public class PlaceOnTheMap {
@@ -62,4 +63,11 @@ public class PlaceOnTheMap {
         gp.boat.worldX = 88 * gp.tileSize;
         gp.boat.worldY = 2 * gp.tileSize;
     }
+
+    public void PlaceMonster() {
+        gp.monsters[0] = new Pirate(gp);
+        gp.monsters[0].worldX = 14 * gp.tileSize;
+        gp.monsters[0].worldY = 93 * gp.tileSize;
+    }
+
 }

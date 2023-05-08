@@ -68,16 +68,13 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent m) {
-
     }
 
     @Override
     public void mouseEntered(MouseEvent m) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent m) {
-
     }
 }

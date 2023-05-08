@@ -14,7 +14,6 @@ public class TitleMenu {
     public Rectangle quitButton;
     public Rectangle reloadButton;
     public Rectangle arrowButton;
-    public Rectangle exitButton;
     private final Font Bruno;
 
     public TitleMenu(GamePanel gp) {
@@ -29,21 +28,21 @@ public class TitleMenu {
         quitButton = new Rectangle(gp.screen_width / 2 - 105, 630, 220, 80);
         reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
         arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
-        exitButton = new Rectangle(gp.screen_width - 110, 20, gp.tileSize, gp.tileSize);
+//        exitButton = new Rectangle(gp.screen_width - 110, 20, gp.tileSize, gp.tileSize);
     }
 
     public void show(Graphics g, GamePanel gp) {
 //        BufferedImage daniil;
 //        BufferedImage andrej;
 
-        BufferedImage hat;
-        BufferedImage sailor;
+        BufferedImage hat, sailor, under;
 
         try {
 //            andrej = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/andrej.png"));
 //            daniil = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/daniil2.png"));
             hat = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("objects/hat.png"));
             sailor = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png"));
+            under = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/under.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -58,20 +57,21 @@ public class TitleMenu {
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
         g.drawString("PLAY", gp.screen_width / 2 - 85, gp.screen_height / 2 + 50);
 
-        g.setFont(g2.getFont().deriveFont(Font.BOLD, 46F));
-        g.drawString("RULES", gp.screen_width / 2 - 97, gp.screen_height / 2 + 167);
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 44F));
+        g.drawString("RULES", gp.screen_width / 2 - 95, gp.screen_height / 2 + 167);
 
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
-        g.drawString("QUIT", gp.screen_width / 2 - 73, gp.screen_height / 2 + 287);
+        g.drawString("QUIT", gp.screen_width / 2 - 73, gp.screen_height / 2 + 290);
 
 //        g2.drawImage(andrej, gp.screen_width/2 - 530, gp.screen_height/2 - 70, gp.tileSize*2, gp.tileSize*5,null);
 //        g2.drawImage(daniil, gp.screen_width/2 - 453, gp.screen_height/2 - 250, gp.tileSize*4 + 15, gp.tileSize*4 + 10,null);
         g2.drawImage(hat, gp.screen_width/2 - 70, gp.screen_height/2 - 200, gp.tileSize * 2, gp.tileSize * 2,null);
         g2.drawImage(sailor, 100, gp.screen_height/2, gp.tileSize * 3, gp.tileSize * 3,null);
 
-        g2.draw(playButton);
-        g2.draw(helpButton);
-        g2.draw(quitButton);
+        g2.drawImage(under, gp.screen_width / 2 - 105, 395, 220, 80,null);
+        g2.drawImage(under, gp.screen_width / 2 - 105, 515, 220, 80,null);
+        g2.drawImage(under, gp.screen_width / 2 - 105, 635, 220, 80,null);
+
     }
 
     public void showPauseButton(Graphics2D g2, GamePanel gp) {

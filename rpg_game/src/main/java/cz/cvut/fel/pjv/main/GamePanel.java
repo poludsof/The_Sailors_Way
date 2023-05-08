@@ -1,6 +1,8 @@
 package cz.cvut.fel.pjv.main;
 
+import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
+import cz.cvut.fel.pjv.monster.Pirate;
 import cz.cvut.fel.pjv.object.Objects;
 import cz.cvut.fel.pjv.object.RDoor;
 import cz.cvut.fel.pjv.tile.TileManager;
@@ -48,11 +50,12 @@ public class GamePanel extends JPanel implements Runnable{
     public Objects[] obj_arr = new Objects[50];
     public Boat boat = new Boat();
     public Player player = new Player(this, keyH);
+    public Entity[] monsters = new Entity[1];
     private final TitleMenu menu = new TitleMenu(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screen_width, screen_height));
-        this.setBackground(Color.black);
+        this.setBackground(Color.DARK_GRAY);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.addMouseListener(keyM);
@@ -61,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void setupGame() {
         ASetter.PlaceObject();
+        ASetter.PlaceMonster();
         state = State.TITLE;
         //sound.setMusic(3);
     }
@@ -102,7 +106,12 @@ public class GamePanel extends JPanel implements Runnable{
     }
     private void update() {
 
-        if (state == State.GAME) { player.update(); }
+        if (state == State.GAME) {
+            player.update();
+            for (Entity monster : monsters) {
+                monster.update();
+            }
+        }
         if (state == State.PAUSE) {
 
         }
@@ -126,6 +135,11 @@ public class GamePanel extends JPanel implements Runnable{
             drawLevels(g, this);
             boat.draw(g2, this);
             player.draw(g2);
+
+            for (Entity monster : monsters) {
+                monster.draw(g2);
+            }
+
             if (state == State.PAUSE) {
                 menu.drawPauseScreen(g, this);
             } else {
