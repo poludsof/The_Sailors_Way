@@ -2,7 +2,6 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.main.KeyHandler;
-import cz.cvut.fel.pjv.monster.Pirate;
 import cz.cvut.fel.pjv.object.Objects;
 
 import javax.imageio.ImageIO;
@@ -14,7 +13,6 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     Objects obj = new Objects();
-    Pirate pirate = new Pirate(gp);
     public int key_count = 0;
     public int level = 1;
 
@@ -65,6 +63,12 @@ public class Player extends Entity {
             right2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_right2.png"));
             down1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down1.png"));
             down2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png"));
+
+            attack_up = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/attack_up.png"));
+            attack_down = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/attack_down.png"));
+            attack_left = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/attack_left.png"));
+            attack_right = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/attack_right.png"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -74,6 +78,13 @@ public class Player extends Entity {
      * Updates the player's movements and animations based on the user's input.
      */
     public void update() {
+        if (timeToDamage) {
+            damageCounter++;
+            if (damageCounter == 10) { //  каждую секунду получает удар
+                timeToDamage = false;
+                damageCounter = 0;
+            }
+        }
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) {
                 direction = "up";
@@ -113,49 +124,40 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
-
-        if (timeToDamage) {
-            DamageCounter++;
-            if (DamageCounter == 60) { //  каждую секунду получает удар
-                timeToDamage = false;
-                DamageCounter = 0;
-            }
-        }
-
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
 
+        if (timeToDamage) {
+            if (direction.equals("up"))  g2.drawImage(attack_up, screenX, screenY - gp.tileSize, gp.tileSize, gp.tileSize * 2, null);
+            if (direction.equals("down")) g2.drawImage(attack_down, screenX, screenY, gp.tileSize, gp.tileSize * 2, null);
+            if (direction.equals("left")) g2.drawImage(attack_left, screenX - gp.tileSize, screenY, gp.tileSize * 2, gp.tileSize, null);
+            if (direction.equals("right")) g2.drawImage(attack_right, screenX, screenY, gp.tileSize * 2, gp.tileSize, null);
+        }
+
         switch (direction) {
             case "up" -> {
-                if (spriteNum == 1)
-                    image = up1;
-                if (spriteNum == 2)
-                    image = up2;
+                if (spriteNum == 1) image = up1;
+                if (spriteNum == 2) image = up2;
             }
             case "down" -> {
-                if (spriteNum == 1)
-                    image = down1;
-                if (spriteNum == 2)
-                    image = down2;
+                if (spriteNum == 1) image = down1;
+                if (spriteNum == 2) image = down2;
             }
             case "left" -> {
-                if (spriteNum == 1)
-                    image = left1;
-                if (spriteNum == 2)
-                    image = left2;
+                if (spriteNum == 1) image = left1;
+                if (spriteNum == 2) image = left2;
             }
             case "right" -> {
-                if (spriteNum == 1)
-                    image = right1;
-                if (spriteNum == 2)
-                    image = right2;
+                if (spriteNum == 1) image = right1;
+                if (spriteNum == 2) image = right2;
             }
         }
-        if (timeToDamage) {
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+
+        if (!timeToDamage) {
+            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
+
+
 }

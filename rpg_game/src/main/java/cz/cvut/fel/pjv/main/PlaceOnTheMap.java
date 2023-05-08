@@ -68,6 +68,10 @@ public class PlaceOnTheMap {
         gp.monsters[0] = new Pirate(gp);
         gp.monsters[0].worldX = 14 * gp.tileSize;
         gp.monsters[0].worldY = 93 * gp.tileSize;
+
+        gp.monsters[1] = new Pirate(gp);
+        gp.monsters[1].worldX = 5 * gp.tileSize;
+        gp.monsters[1].worldY = 93 * gp.tileSize;
     }
 
 }

@@ -13,14 +13,13 @@ import java.util.Random;
 
 public class Pirate extends Entity {
     GamePanel gp;
-    Objects obj = new Objects();
     int time = 0;
 
     public Pirate(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        heart_count = 3;
-        speed = 3;
+        heart_count = 4;
+        speed = 2;
         entityType = Type.PIRATE;
 
         // Set the player's solid area
@@ -50,7 +49,7 @@ public class Pirate extends Entity {
     }
 
     public void randomAction() {
-        if (time == 20) {
+        if (time == 30) {
             time = 0;
             Random num = new Random();
             int i = num.nextInt(4);
@@ -68,12 +67,15 @@ public class Pirate extends Entity {
 
     public void fightMonster(int idx) {
         if (idx >= 0){
-            if (gp.player.timeToDamage) {
-                if (gp.player.heart_count > 0) {
-                    System.out.println("minus one");
-                    gp.player.heart_count--;
+            if (!this.timeToDamage) {
+                if (this.heart_count != 0) {
+                    --this.heart_count;
+                    System.out.println("minus life " + heart_count);
+                } else {
+                    System.out.println("bye");
+                    gp.monsters[idx] = null;
                 }
-                gp.player.timeToDamage = false;
+                this.timeToDamage = true;
             }
         }
     }

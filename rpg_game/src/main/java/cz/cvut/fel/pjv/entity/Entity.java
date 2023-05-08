@@ -19,16 +19,17 @@ public class Entity {
     public int speed;
     public String direction;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public BufferedImage attack_up, attack_down, attack_left, attack_right;
     public GamePanel gp;
 
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public boolean timeToDamage = false;
-    public int DamageCounter = 0;
+    public int damageCounter = 0;
 
     public Rectangle solidArea;
     public int heart_count;
-    public boolean collision = false;
+    public boolean collision = true;
     public Type entityType;
 
     public Entity(GamePanel gp) {
@@ -72,12 +73,29 @@ public class Entity {
                         image = right2;
                 }
             }
+
+//            if (timeToDamage) {
+//                AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+//                g2.setComposite(alphaComposite);
+//                g2.setColor(Color.RED);
+//                g2.fillRect(screenX + 10, screenY, gp.tileSize - 20, gp.tileSize);
+//            }
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
         }
     }
 
     public void update() {
         randomAction();
+
+        if (timeToDamage) {
+            damageCounter++;
+            if (damageCounter == 80) { //  каждую секунд 40 олучает удар
+                timeToDamage = false;
+                damageCounter = 0;
+            }
+        }
 
         collision = false;
         gp.checker.CheckCollisionTile(this);
@@ -85,8 +103,10 @@ public class Entity {
 
         boolean fight = gp.checker.CheckCollisionPlayer(this);
         if (this.entityType == Type.PIRATE && fight) {
+//            System.out.println("by pirate");
             if (!gp.player.timeToDamage) {
-                --gp.player.heart_count;
+                if (gp.player.heart_count > 0)
+                    --gp.player.heart_count;
                 gp.player.timeToDamage = true;
             }
         }

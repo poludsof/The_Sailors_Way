@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Objects[] obj_arr = new Objects[50];
     public Boat boat = new Boat();
     public Player player = new Player(this, keyH);
-    public Entity[] monsters = new Entity[1];
+    public Entity[] monsters = new Entity[2];
     private final TitleMenu menu = new TitleMenu(this);
 
     public GamePanel() {
@@ -109,7 +109,8 @@ public class GamePanel extends JPanel implements Runnable{
         if (state == State.GAME) {
             player.update();
             for (Entity monster : monsters) {
-                monster.update();
+                if (monster != null)
+                    monster.update();
             }
         }
         if (state == State.PAUSE) {
@@ -137,7 +138,8 @@ public class GamePanel extends JPanel implements Runnable{
             player.draw(g2);
 
             for (Entity monster : monsters) {
-                monster.draw(g2);
+                if (monster != null)
+                    monster.draw(g2);
             }
 
             if (state == State.PAUSE) {
