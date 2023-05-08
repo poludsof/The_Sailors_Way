@@ -87,7 +87,7 @@ false
 xz_lava3.png
 false
 xz_lava4.png
-false
+true
 xz_rock1.png
 false
 xz_rock2.png

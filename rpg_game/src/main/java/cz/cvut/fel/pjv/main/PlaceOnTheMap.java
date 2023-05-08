@@ -34,7 +34,7 @@ public class PlaceOnTheMap {
         gp.obj_arr[5].worldX = 78 * gp.tileSize;
         gp.obj_arr[5].worldY = 44 * gp.tileSize;
 
-        gp.obj_arr[6] = new Key();
+        gp.obj_arr[6] = new Key(); // key error
         gp.obj_arr[6].worldX = 85 * gp.tileSize;
         gp.obj_arr[6].worldY = 44 * gp.tileSize;
 
@@ -45,6 +45,18 @@ public class PlaceOnTheMap {
         gp.obj_arr[8] = new HellLDoor();
         gp.obj_arr[8].worldX = 89 * gp.tileSize;
         gp.obj_arr[8].worldY = 33 * gp.tileSize;
+
+        gp.obj_arr[9] = new Heart();
+        gp.obj_arr[9].worldX = 9 * gp.tileSize;
+        gp.obj_arr[9].worldY = 90 * gp.tileSize;
+
+        gp.obj_arr[10] = new BushLine();
+        gp.obj_arr[10].worldX = 41 * gp.tileSize;
+        gp.obj_arr[10].worldY = 54 * gp.tileSize;
+
+        gp.obj_arr[11] = new BushLine();
+        gp.obj_arr[11].worldX = 42 * gp.tileSize;
+        gp.obj_arr[11].worldY = 53 * gp.tileSize;
 
         gp.boat = new Boat();
         gp.boat.worldX = 88 * gp.tileSize;

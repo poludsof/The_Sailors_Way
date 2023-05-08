@@ -13,7 +13,7 @@ public class TitleMenu {
     public Rectangle helpButton;
     public Rectangle quitButton;
     public Rectangle reloadButton;
-    private Font Bruno;
+    private final Font Bruno;
 
     public TitleMenu(GamePanel gp) {
         try {
@@ -32,9 +32,14 @@ public class TitleMenu {
         BufferedImage daniil;
         BufferedImage andrej;
 
+        BufferedImage hat;
+        BufferedImage sailor;
+
         try {
             andrej = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/andrej.png"));
             daniil = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/daniil2.png"));
+            hat = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("objects/hat.png"));
+            sailor = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -55,8 +60,10 @@ public class TitleMenu {
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
         g.drawString("QUIT", gp.screen_width / 2 - 73, gp.screen_height / 2 + 287);
 
-        g2.drawImage(andrej, gp.screen_width/2 - 530, gp.screen_height/2 - 70, gp.tileSize*2, gp.tileSize*5,null);
-        g2.drawImage(daniil, gp.screen_width/2 - 453, gp.screen_height/2 - 250, gp.tileSize*4 + 15, gp.tileSize*4 + 10,null);
+//        g2.drawImage(andrej, gp.screen_width/2 - 530, gp.screen_height/2 - 70, gp.tileSize*2, gp.tileSize*5,null);
+//        g2.drawImage(daniil, gp.screen_width/2 - 453, gp.screen_height/2 - 250, gp.tileSize*4 + 15, gp.tileSize*4 + 10,null);
+        g2.drawImage(hat, gp.screen_width/2 - 70, gp.screen_height/2 - 200, gp.tileSize * 2, gp.tileSize * 2,null);
+        g2.drawImage(sailor, 100, gp.screen_height/2, gp.tileSize * 3, gp.tileSize * 3,null);
 
         g2.draw(playButton);
         g2.draw(helpButton);

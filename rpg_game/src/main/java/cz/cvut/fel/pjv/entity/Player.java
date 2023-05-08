@@ -14,6 +14,7 @@ public class Player extends Entity {
     KeyHandler keyH;
     Objects obj = new Objects();
     public int key_count = 0;
+    public int level = 1;
 
     public final int screenX;
     public final int screenY;
@@ -21,6 +22,7 @@ public class Player extends Entity {
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+        heart_count = 6;
 
         screenX = gp.screen_width / 2 - (gp.tileSize / 2);
         screenY = gp.screen_height / 2 - (gp.tileSize / 2);
@@ -102,7 +104,6 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
-
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = null;

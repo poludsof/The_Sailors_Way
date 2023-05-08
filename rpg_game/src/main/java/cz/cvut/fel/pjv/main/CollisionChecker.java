@@ -29,6 +29,9 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
+                    if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
+                        entity.heart_count--;
+                    }
                 }
             }
             case "down" -> {
@@ -37,6 +40,9 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
+                    if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
+                        entity.heart_count--;
+                    }
                 }
             }
             case "left" -> {
@@ -45,6 +51,9 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
+                    if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
+                        entity.heart_count--;
+                    }
                 }
             }
             case "right" -> {
@@ -53,6 +62,9 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
+                    if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
+                        entity.heart_count--;
+                    }
                 }
             }
         }

@@ -24,7 +24,6 @@ public class TileManager {
      */
     public TileManager(GamePanel gp) {
         this.gp = gp;
-//        getMapSize("/maps/map_last.txt");
         mapTileNum = new int[gp.worldCol][gp.worldRow]; // A 2d array storing tile numbers on the map
         loadData("/maps/tile_data_last.txt");
         tile = new Tile[tile_names.size()]; //Tile array
@@ -56,8 +55,8 @@ public class TileManager {
                 tile[i] = new Tile();
 //                tile[i].image = ImageIO.read(TileManager.class.getClassLoader().getResourceAsStream("tiles2/" + tile_names.get(i)));
                 String st = "tiles2/" + tile_names.get(i);
-                System.out.println(st);
                 tile[i].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(st));
+                tile[i].name = tile_names.get(i);
 
                 tile[i].collision = Boolean.parseBoolean(tile_collisions.get(i));
             } catch (IOException e) {

@@ -14,5 +14,6 @@ public class Entity {
     public int spriteNum = 1;
 
     public Rectangle solidArea;
+    public int heart_count;
     public boolean collision = false;
 }
