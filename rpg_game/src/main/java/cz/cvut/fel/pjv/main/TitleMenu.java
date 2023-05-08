@@ -13,6 +13,8 @@ public class TitleMenu {
     public Rectangle helpButton;
     public Rectangle quitButton;
     public Rectangle reloadButton;
+    public Rectangle arrowButton;
+    public Rectangle exitButton;
     private final Font Bruno;
 
     public TitleMenu(GamePanel gp) {
@@ -26,18 +28,20 @@ public class TitleMenu {
         helpButton = new Rectangle(gp.screen_width / 2 - 105, 510, 220, 80);
         quitButton = new Rectangle(gp.screen_width / 2 - 105, 630, 220, 80);
         reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
+        arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
+        exitButton = new Rectangle(gp.screen_width - 110, 20, gp.tileSize, gp.tileSize);
     }
 
     public void show(Graphics g, GamePanel gp) {
-        BufferedImage daniil;
-        BufferedImage andrej;
+//        BufferedImage daniil;
+//        BufferedImage andrej;
 
         BufferedImage hat;
         BufferedImage sailor;
 
         try {
-            andrej = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/andrej.png"));
-            daniil = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/daniil2.png"));
+//            andrej = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/andrej.png"));
+//            daniil = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/daniil2.png"));
             hat = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("objects/hat.png"));
             sailor = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png"));
         } catch (IOException e) {
@@ -54,8 +58,8 @@ public class TitleMenu {
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
         g.drawString("PLAY", gp.screen_width / 2 - 85, gp.screen_height / 2 + 50);
 
-        g.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
-        g.drawString("HELP", gp.screen_width / 2 - 83, gp.screen_height / 2 + 167);
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 46F));
+        g.drawString("RULES", gp.screen_width / 2 - 97, gp.screen_height / 2 + 167);
 
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
         g.drawString("QUIT", gp.screen_width / 2 - 73, gp.screen_height / 2 + 287);
@@ -103,4 +107,100 @@ public class TitleMenu {
         //g2.draw(reloadButton);
     }
 
+    public void drawHelpButton(Graphics g, GamePanel gp) {
+        Graphics2D g2 = (Graphics2D) g;
+
+        BufferedImage hat, arrow;
+        try {
+            hat = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("objects/hat.png"));
+            arrow = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/arrow.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        g2.drawImage(hat, gp.screen_width / 2 - 103, 0, gp.tileSize - 10, gp.tileSize - 10, null);
+        g2.drawImage(arrow, gp.screen_width - 190, gp.screen_height - 150, gp.tileSize * 2 - 10, gp.tileSize * 2 - 10, null);
+
+        int x = 50;
+        int y = 165;
+
+        g.setFont(Bruno);
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
+        g.setColor(Color.white);
+        g.drawString("The Sailor's Way", 50, 100);
+
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 27F));
+        String[] text = new String[14];
+        text[0] = "A sailor named Herbert embarked on a long voyage";
+        text[1] = "on his ship to carry valuable cargo to the other";
+        text[2] = "side of the world. Suddenly, however, the ship was";
+        text[3] = "attacked by pirates who seized Herbert's ship.";
+        text[4] = "";
+        text[5] = "Herbert found himself on an island and realized that";
+        text[6] = "he had to find a way to get his ship back and recover";
+        text[7] = "everything that had been taken from him. Herbert set";
+        text[8] = "out on his journey and many challenges and dangers";
+        text[9] = "awaited him.";
+        text[10] = "";
+        text[11] = "Eventually Herbert found the base of the";
+        text[12] = "pirates who had taken his ship and began his mission";
+        text[13] = "to get his ship back.";
+        for (String s : text) {
+            g.drawString(s, x, y);
+            y += 40;
+        }
+    }
+
+    public void drawNextPage(Graphics g, GamePanel gp) {
+        //Hero Control
+        Graphics2D g2 = (Graphics2D) g;
+        int x = 450, y = 180;
+
+        BufferedImage key_button, hat, exit_button;
+        try {
+            hat = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("objects/hat.png"));
+            key_button = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/wasd.png"));
+            exit_button = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/exit_button.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        g2.drawImage(key_button, 100, 140, gp.tileSize * 3 + 40, gp.tileSize * 2 + 20, null);
+        g2.drawImage(exit_button, gp.screen_width - 110, 20, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(hat, 220, 0, gp.tileSize - 10, gp.tileSize - 10, null);
+//        g2.draw(exitButton);
+
+        g.setFont(Bruno);
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
+        g.setColor(Color.white);
+        g.drawString("Hero Control", 50, 100);
+
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
+        String[] keyboard = new String[4];
+        keyboard[0] = "W - up";
+        keyboard[1] = "A - left";
+        keyboard[2] = "S - down";
+        keyboard[3] = "D - right";
+        for (String s : keyboard) {
+            g.drawString(s, x, y);
+            y += 40;
+        }
+
+        x = 50; y = 460;
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
+        g.drawString("Fight", 50, 410);
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 26F));
+        String[] text = new String[9];
+        text[0] = "If the player meets an enemy, he will be forced to fight.";
+        text[1] = "To attack the enemy, the player must choose a weapon.";
+        text[2] = "";
+        text[3] = "The enemy in turn attacks back and as a result the player ";
+        text[4] = "may lose health or die.";
+        text[5] = "";
+        text[6] = "At the beginning of the game the player will only have a ";
+        text[7] = "sword in his inventory, but the player can find other weapons";
+        text[8] = "on the map.";
+        for (String s : text) {
+            g.drawString(s, x, y);
+            y += 35;
+        }
+    }
 }

@@ -17,7 +17,8 @@ public class GamePanel extends JPanel implements Runnable{
         TITLE,
         GAME,
         HELP,
-        PAUSE
+        PAUSE,
+        NEXT_HELP_PAGE
     }
     public State state;
 
@@ -130,6 +131,12 @@ public class GamePanel extends JPanel implements Runnable{
             } else {
                 menu.showPauseButton(g2, this);
             }
+        }
+        else if (state == State.HELP) {
+            menu.drawHelpButton(g, this);
+        }
+        else if (state == State.NEXT_HELP_PAGE) {
+            menu.drawNextPage(g, this);
         }
         g2.dispose();
     }

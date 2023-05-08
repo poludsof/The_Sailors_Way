@@ -49,6 +49,21 @@ public class MouseHandler implements MouseListener {
                     gp.state = GamePanel.State.GAME;
             }
         }
+        //arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
+        if (mouseX >= gp.screen_width - 180 && mouseX <= gp.screen_width - 180 + gp.tileSize*2-25) {
+            if (mouseY >= gp.screen_height - 115 && mouseY <= gp.screen_height - 115 + gp.tileSize) {
+                if (gp.state == GamePanel.State.HELP){
+                    gp.state = GamePanel.State.NEXT_HELP_PAGE;
+                }
+            }
+        }
+        //(gp.screen_width - 110, 20, gp.tileSize, gp.tileSize);
+        if (mouseX >= gp.screen_width - 110 && mouseX <= gp.screen_width + gp.tileSize) {
+            if (mouseY >= 20 && mouseY <= gp.tileSize + 20) {
+                if (gp.state == GamePanel.State.NEXT_HELP_PAGE)
+                    gp.state = GamePanel.State.TITLE;
+            }
+        }
     }
 
     @Override
