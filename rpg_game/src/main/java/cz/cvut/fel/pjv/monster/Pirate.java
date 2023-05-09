@@ -18,8 +18,8 @@ public class Pirate extends Entity {
     public Pirate(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        heart_count = 4;
-        speed = 2;
+        heart_count = 3;
+        speed = 1;
         entityType = Type.PIRATE;
 
         // Set the player's solid area
@@ -53,27 +53,24 @@ public class Pirate extends Entity {
             time = 0;
             Random num = new Random();
             int i = num.nextInt(4);
-            if (i == 0)
-                direction = "up";
-            if (i == 1)
-                direction = "down";
-            if (i == 2)
-                direction = "left";
-            if (i == 3)
-                direction = "right";
+            if (i == 0) direction = "up";
+            if (i == 1) direction = "down";
+            if (i == 2) direction = "left";
+            if (i == 3) direction = "right";
         }
         ++time;
     }
 
     public void fightMonster(int idx) {
-        if (idx >= 0){
-            if (!this.timeToDamage) {
-                if (this.heart_count != 0) {
-                    --this.heart_count;
+        if (idx >= 0) {
+            if (!gp.monsters[idx].timeToDamage && gp.player.attacking) {
+                if (gp.monsters[idx].heart_count > 0) {
+                    --gp.monsters[idx].heart_count;
                     System.out.println("minus life " + heart_count);
                 } else {
-                    System.out.println("bye");
+                    System.out.println("bye + 1");
                     gp.monsters[idx] = null;
+                    ++gp.player.dead_pirate_count;
                 }
                 this.timeToDamage = true;
             }

@@ -47,6 +47,8 @@ public class MouseHandler implements MouseListener {
             if (mouseY >= gp.screen_height / 2 + 120 && mouseY <= gp.screen_height / 2 + 200) {
                 if (gp.state == GamePanel.State.PAUSE)
                     gp.state = GamePanel.State.GAME;
+                if (gp.state == GamePanel.State.GAME_OVER)
+                    System.exit(1);
             }
         }
         //arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);

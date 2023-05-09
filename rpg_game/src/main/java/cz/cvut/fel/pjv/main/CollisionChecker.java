@@ -115,6 +115,7 @@ public class CollisionChecker {
     }
 
     public int CheckCollisionEntity(Entity entity, Entity[] arrayEntity) {
+//        System.out.println("X:" +  entity.worldX + "  :  " + entity.solidArea.width);
         int idx = -1;
         for (int i = 0; i < arrayEntity.length; ++i) {
             if (arrayEntity[i] != null) {

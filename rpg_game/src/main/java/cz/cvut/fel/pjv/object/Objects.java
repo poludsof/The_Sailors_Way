@@ -30,30 +30,38 @@ public class Objects {
 
     public void pickUpObj(int idx, GamePanel gp, Player player) {
         if (idx != -1) {
+            System.out.println(player.dead_pirate_count + " " + idx + " " + gp.player.key_count);
             if (gp.obj_arr[idx].name_object.equals("Door")) {
                 if (player.key_count >= 1) {
-                    gp.obj_arr[idx] = null;
-                    if (idx == 2) {
+//                    if (idx == 2){
+                    if (idx == 2 && player.dead_pirate_count == 3) {
+                        gp.obj_arr[idx] = null;
                         gp.obj_arr[idx + 1] = null;
                         player.level++;
                         gp.playMusic(5);
-                        gp.playMusic(1); }
-                    if (idx == 3) {
+                        gp.playMusic(1);
+                        --player.key_count;}
+                    if (idx == 3 && player.dead_pirate_count == 3) {
+                        gp.obj_arr[idx] = null;
                         gp.obj_arr[idx - 1] = null;
                         player.level++;
                         gp.playMusic(5);
-                        gp.playMusic(1); }
+                        gp.playMusic(1);
+                        --player.key_count;}
 
                     if (idx == 4) {
+                        gp.obj_arr[idx] = null;
                         gp.obj_arr[idx + 1] = null;
-                        gp.playMusic(1); }
+                        gp.playMusic(1);
+                        --player.key_count;}
                     if (idx == 5) {
+                        gp.obj_arr[idx] = null;
                         gp.obj_arr[idx - 1] = null;
-                        gp.playMusic(1); }
+                        gp.playMusic(1);
+                        --player.key_count;}
 
-                    if (idx == 7) { gp.obj_arr[idx + 1] = null; gp.playMusic(0); }
-                    if (idx == 8) { gp.obj_arr[idx - 1] = null; gp.playMusic(0); }
-                    --player.key_count;
+                    if (idx == 7) { gp.obj_arr[idx] = null; gp.obj_arr[idx + 1] = null; gp.playMusic(0); --player.key_count;}
+                    if (idx == 8) { gp.obj_arr[idx] = null; gp.obj_arr[idx - 1] = null; gp.playMusic(0); --player.key_count;}
                 }
             }
             else if (gp.obj_arr[idx].name_object.equals("Key")) {
@@ -64,6 +72,7 @@ public class Objects {
             }
 
             else if (gp.obj_arr[idx].name_object.equals("BushLine")) {
+                gp.player.speed = 6;
                 gp.obj_arr[idx] = null;
                 ++player.level;
                 gp.playMusic(5);
@@ -77,6 +86,11 @@ public class Objects {
                     ++player.heart_count;
                     gp.playMusic(4);
                 }
+            }
+
+            else if (gp.obj_arr[idx].name_object.equals("Rum")) {
+                gp.obj_arr[idx] = null;
+                gp.player.speed += 4;
             }
         }
     }

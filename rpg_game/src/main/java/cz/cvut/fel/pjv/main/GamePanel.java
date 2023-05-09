@@ -20,7 +20,9 @@ public class GamePanel extends JPanel implements Runnable{
         GAME,
         HELP,
         PAUSE,
-        NEXT_HELP_PAGE
+        NEXT_HELP_PAGE,
+        HAPPY_END,
+        GAME_OVER
     }
     public State state;
 
@@ -50,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Objects[] obj_arr = new Objects[50];
     public Boat boat = new Boat();
     public Player player = new Player(this, keyH);
-    public Entity[] monsters = new Entity[2];
+    public Entity[] monsters = new Entity[20];
     private final TitleMenu menu = new TitleMenu(this);
 
     public GamePanel() {
@@ -125,13 +127,14 @@ public class GamePanel extends JPanel implements Runnable{
         if (state == State.TITLE) {
             menu.show(g, this);
 
-        } else if (state == State.GAME || state == State.PAUSE) {
+        } else if (state == State.GAME || state == State.PAUSE || state == State.GAME_OVER) {
             tileM.draw(g2);
             for (Objects obj : obj_arr) {
                 if (obj != null) {
                     obj.draw(g2, this);
                 }
             }
+
             drawHearts(this, g2);
             drawLevels(g, this);
             boat.draw(g2, this);
@@ -140,6 +143,10 @@ public class GamePanel extends JPanel implements Runnable{
             for (Entity monster : monsters) {
                 if (monster != null)
                     monster.draw(g2);
+            }
+
+            if (state == State.GAME_OVER) {
+                menu.drawGameOver(g, this);
             }
 
             if (state == State.PAUSE) {
@@ -154,6 +161,7 @@ public class GamePanel extends JPanel implements Runnable{
         else if (state == State.NEXT_HELP_PAGE) {
             menu.drawNextPage(g, this);
         }
+
         g2.dispose();
     }
 
@@ -176,15 +184,15 @@ public class GamePanel extends JPanel implements Runnable{
         }
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.drawImage(back_level, 260, 127, gp.tileSize, gp.tileSize,null);
-        g2.drawImage(background, 18, 127, gp.tileSize * 3, gp.tileSize,null);
-        g2.drawImage(hat, 260, 70, gp.tileSize, gp.tileSize,null);
+        g2.drawImage(back_level, 260, 30, gp.tileSize, gp.tileSize,null);
+        g2.drawImage(background, 18, 30, gp.tileSize * 3, gp.tileSize,null);
+        g2.drawImage(hat, 260, -26, gp.tileSize, gp.tileSize,null);
 
         g.setFont(Bruno);
         g.setColor(Color.BLACK);
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 47F));
-        g.drawString("LEVEL: ", 30, 185);
-        g.drawString(Integer.toString(gp.player.level), 285, 185);
+        g.drawString("LEVEL: ", 30, 87);
+        g.drawString(Integer.toString(gp.player.level), 285, 87);
     }
 
     public void drawHearts(GamePanel gp, Graphics2D g2) {
@@ -197,7 +205,7 @@ public class GamePanel extends JPanel implements Runnable{
             throw new RuntimeException(e);
         }
         int heartX = 25;
-        int heartY = 25;
+        int heartY = 115;
         int count = 0;
 
         for (int i = 0; i < 3; ++i) {

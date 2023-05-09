@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed; // Variables to track key presses.
+    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed; // Variables to track key presses.
     @Override
     public void keyTyped(KeyEvent k) {
 
@@ -27,6 +27,9 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_D) {
             rightPressed = true;
         }
+        if (key == KeyEvent.VK_SPACE) {
+            spacePressed = true;
+        }
     }
 
     @Override
@@ -45,6 +48,9 @@ public class KeyHandler implements KeyListener {
         }
         if (key == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if (key == KeyEvent.VK_SPACE) {
+            spacePressed = false;
         }
     }
 }

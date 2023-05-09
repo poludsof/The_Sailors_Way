@@ -14,7 +14,6 @@ public class Entity {
     }
 
     public int worldX, worldY;
-    Objects obj = new Objects();
 
     public int speed;
     public String direction;
@@ -28,9 +27,11 @@ public class Entity {
     public int damageCounter = 0;
 
     public Rectangle solidArea;
+    public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int heart_count;
     public boolean collision = true;
     public Type entityType;
+    public boolean attacking = false;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -74,12 +75,12 @@ public class Entity {
                 }
             }
 
-//            if (timeToDamage) {
-//                AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
-//                g2.setComposite(alphaComposite);
-//                g2.setColor(Color.RED);
-//                g2.fillRect(screenX + 10, screenY, gp.tileSize - 20, gp.tileSize);
-//            }
+            if (timeToDamage) {
+                AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+                g2.setComposite(alphaComposite);
+                g2.setColor(Color.RED);
+                g2.fillRect(screenX + 10, screenY, gp.tileSize - 20, gp.tileSize);
+            }
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 

@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class TitleMenu {
-    public Rectangle playButton;
-    public Rectangle helpButton;
-    public Rectangle quitButton;
-    public Rectangle reloadButton;
-    public Rectangle arrowButton;
+//    public Rectangle playButton;
+//    public Rectangle helpButton;
+//    public Rectangle quitButton;
+//    public Rectangle reloadButton;
+//    public Rectangle arrowButton;
     private final Font Bruno;
 
     public TitleMenu(GamePanel gp) {
@@ -23,11 +23,11 @@ public class TitleMenu {
         } catch (IOException | FontFormatException e) {
             throw new RuntimeException(e);
         }
-        playButton = new Rectangle(gp.screen_width / 2 - 105, 390, 220, 80);
-        helpButton = new Rectangle(gp.screen_width / 2 - 105, 510, 220, 80);
-        quitButton = new Rectangle(gp.screen_width / 2 - 105, 630, 220, 80);
-        reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
-        arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
+//        playButton = new Rectangle(gp.screen_width / 2 - 105, 390, 220, 80);
+//        helpButton = new Rectangle(gp.screen_width / 2 - 105, 510, 220, 80);
+//        quitButton = new Rectangle(gp.screen_width / 2 - 105, 630, 220, 80);
+//        reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
+//        arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
 //        exitButton = new Rectangle(gp.screen_width - 110, 20, gp.tileSize, gp.tileSize);
     }
 
@@ -153,24 +153,29 @@ public class TitleMenu {
     public void drawNextPage(Graphics g, GamePanel gp) {
         //Hero Control
         Graphics2D g2 = (Graphics2D) g;
+        g.setFont(Bruno);
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
+        g.setColor(Color.white);
         int x = 450, y = 180;
 
-        BufferedImage key_button, hat, exit_button;
+        BufferedImage key_button, hat, exit_button, space_button;
         try {
             hat = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("objects/hat.png"));
             key_button = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/wasd.png"));
             exit_button = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/exit_button.png"));
+            space_button = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/space.png"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         g2.drawImage(key_button, 100, 140, gp.tileSize * 3 + 40, gp.tileSize * 2 + 20, null);
         g2.drawImage(exit_button, gp.screen_width - 110, 20, gp.tileSize, gp.tileSize, null);
         g2.drawImage(hat, 220, 0, gp.tileSize - 10, gp.tileSize - 10, null);
-//        g2.draw(exitButton);
 
-        g.setFont(Bruno);
-        g.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
-        g.setColor(Color.white);
+        g2.drawImage(space_button, 700, 160, gp.tileSize * 3 + 40, gp.tileSize, null);
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
+        g.drawString("SPACE - attack", 710, 300);
+
         g.drawString("Hero Control", 50, 100);
 
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
@@ -202,5 +207,27 @@ public class TitleMenu {
             g.drawString(s, x, y);
             y += 35;
         }
+    }
+
+    public void drawGameOver(Graphics g, GamePanel gp) {
+        BufferedImage exit_button;
+
+        Graphics2D g2 = (Graphics2D) g;
+        g.setFont(Bruno);
+        g.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+
+        g.setColor(Color.black);
+        g.drawString("GAME OVER", 285, gp.screen_height / 2 - 145);
+
+        g.setColor(Color.RED);
+        g.drawString("GAME OVER", 280, gp.screen_height / 2 - 150);
+
+        try {
+            exit_button = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/exit_button.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        g2.drawImage(exit_button, gp.screen_width / 2 - 40, gp.screen_height / 2 + 110, gp.tileSize + 15, gp.tileSize + 15,null);
     }
 }
