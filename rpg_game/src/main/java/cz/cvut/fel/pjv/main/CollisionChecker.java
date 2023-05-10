@@ -20,7 +20,7 @@ public class CollisionChecker {
         int entityTopRow = entityTopWorldY / gp.tileSize;
         int entityBottomRow = entityBottomWorldY / gp.tileSize;
 
-        int tileNum1, tileNum2;
+        int tileNum1 = 0, tileNum2 = 0;
 
         switch (entity.direction) {
             case "up" -> {
@@ -29,10 +29,6 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
-                    if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
-                        if (entity.heart_count > 0)
-                            entity.heart_count--;
-                    }
                 }
             }
             case "down" -> {
@@ -41,10 +37,6 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
-                    if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
-                        if (entity.heart_count > 0)
-                            entity.heart_count--;
-                    }
                 }
             }
             case "left" -> {
@@ -53,10 +45,6 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
-                    if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
-                        if (entity.heart_count > 0)
-                            entity.heart_count--;
-                    }
                 }
             }
             case "right" -> {
@@ -65,12 +53,12 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collision = true;
-                    if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
-                        if (entity.heart_count > 0)
-                            entity.heart_count--;
-                    }
                 }
             }
+        }
+        if (gp.tileM.tile[tileNum1].name.equals("xz_lava4.png")) {
+            if (entity.heart_count > 0)
+                entity.heart_count--;
         }
     }
 
@@ -185,5 +173,40 @@ public class CollisionChecker {
             gp.player.solidArea.y = 24;
         }
         return fight;
+    }
+
+    public boolean CheckCollisionBoat(Entity entity) {
+        boolean ret = false;
+        entity.solidArea.x += entity.worldX;  // get position on the map
+        entity.solidArea.y += entity.worldY;
+
+        gp.boat.solidArea.x += gp.boat.worldX;  // get position on the map
+        gp.boat.solidArea.y += gp.boat.worldY;
+
+        switch (entity.direction) {
+            case "up" -> {
+                entity.solidArea.y -= entity.speed;
+            }
+            case "down" -> {
+                entity.solidArea.y += entity.speed;
+            }
+            case "right" -> {
+                entity.solidArea.x += entity.speed;
+            }
+            case "left" -> {
+                entity.solidArea.x -= entity.speed;
+            }
+        }
+        if (gp.boat.solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
+            if (gp.boat.collision_obj) // is solid obj
+                entity.collision = true;
+            ret = true;
+        }
+        entity.solidArea.x = 20;
+        entity.solidArea.y = 24;
+        gp.boat.solidArea.x = 0;  // get position on the map
+        gp.boat.solidArea.y = 0;
+
+        return ret;
     }
 }

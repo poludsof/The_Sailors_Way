@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker checker = new CollisionChecker(this);
     public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
     public GameObjects[] obj_arr = new GameObjects[50];
-    public Boat boat = new Boat();
+    public Boat boat = new Boat(this);
     public Player player = new Player(this, keyH);
     public Entity[] pirates = new Entity[20];
     private final TitleMenu menu = new TitleMenu(this);
@@ -131,7 +131,7 @@ public class GamePanel extends JPanel implements Runnable{
         if (state == State.TITLE) {
             menu.show(g, this);
 
-        } else if (state == State.GAME || state == State.PAUSE || state == State.GAME_OVER) {
+        } else if (state == State.GAME || state == State.PAUSE || state == State.GAME_OVER || state == State.HAPPY_END) {
             tileM.draw(g2);
             for (GameObjects obj : obj_arr) {
                 if (obj != null) {
@@ -145,6 +145,10 @@ public class GamePanel extends JPanel implements Runnable{
             for (Entity monster : pirates) {
                 if (monster != null)
                     monster.draw(g2);
+            }
+
+            if (state == State.HAPPY_END) {
+                menu.drawHappyEnd(g, this);
             }
 
             if (state == State.GAME_OVER) {

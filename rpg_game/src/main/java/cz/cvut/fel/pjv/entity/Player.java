@@ -47,8 +47,8 @@ public class Player extends Entity {
      */
     public void setDefaultValues() {
         // Coordinates of the initial position of the player on the map
-        worldX = 10 * gp.tileSize; //10
-        worldY = 93 * gp.tileSize; //93
+        worldX = 90 * gp.tileSize; //10
+        worldY = 10 * gp.tileSize; //93
         speed = 6;
         direction = "down";
         heart_count = 6;
@@ -83,8 +83,14 @@ public class Player extends Entity {
      * Updates the player's movements and animations based on the user's input.
      */
     public void update() {
-        if (heart_count == 0) {
+        if (heart_count <= 0) {
             gp.state = GamePanel.State.GAME_OVER;
+            return;
+        }
+
+        else if (gp.checker.CheckCollisionBoat(this)) {
+            gp.state = GamePanel.State.HAPPY_END;
+            return;
         }
 
         if (timeToDamage) {

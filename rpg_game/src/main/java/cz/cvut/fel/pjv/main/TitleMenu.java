@@ -219,4 +219,30 @@ public class TitleMenu {
         g.drawString("QUIT", gp.screen_width / 2 - 73, gp.screen_height / 2 + 290);
 
     }
+
+    public void drawHappyEnd(Graphics g, GamePanel gp) {
+
+        Graphics2D g2 = (Graphics2D) g;
+        g.setFont(Bruno);
+        g.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRect(0, 0, gp.screen_width, gp.screen_height);
+
+        g.setColor(Color.black);
+        g.drawString("WELL DONE", 280, gp.screen_height / 2 - 145);
+
+        g.setColor(Color.GREEN);
+        g.drawString("WELL DONE", 275, gp.screen_height / 2 - 150);
+
+        g.setColor(Color.white);
+
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 44F));
+        g.drawString("RESTART", gp.screen_width / 2 - 138, gp.screen_height / 2 + 167);
+//        g2.draw(restartButton);
+
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+        g.drawString("QUIT", gp.screen_width / 2 - 73, gp.screen_height / 2 + 290);
+
+    }
 }
