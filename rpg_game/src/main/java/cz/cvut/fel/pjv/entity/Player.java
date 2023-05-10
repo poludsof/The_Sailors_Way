@@ -35,8 +35,8 @@ public class Player extends Entity {
         solidArea.height = 56;
         solidArea.width = 40;
 
-        attackArea.width = 70;
-        attackArea.height = 70;
+        attackArea.width = 40;
+        attackArea.height = 40;
 
         setDefaultValues();
         getPlayerImage();
@@ -94,7 +94,10 @@ public class Player extends Entity {
         }
 
         if (attacking) {
-            attacking();
+            int idx_m = attacking();
+            if (idx_m >= 0) {
+                gp.monsters[idx_m].fightMonster(idx_m);
+            }
         }
 
         else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.spacePressed) {
@@ -112,11 +115,6 @@ public class Player extends Entity {
 
             collision = false;
             gp.checker.CheckCollisionTile(this);
-
-            int idx_m = gp.checker.CheckCollisionEntity(this, gp.monsters);
-            if (idx_m >= 0) {
-                gp.monsters[idx_m].fightMonster(idx_m);
-            }
 
             int idx_obj = gp.checker.CheckCollisionObj(this);
             obj.pickUpObj(idx_obj, gp, this);
@@ -144,16 +142,10 @@ public class Player extends Entity {
         BufferedImage image = null;
 
         if (timeToDamage) {
-//            if (timeToDamage) {
-                AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
-                g2.setComposite(alphaComposite);
-                g2.setColor(Color.RED);
-                g2.fillRect(screenX + 10, screenY, gp.tileSize - 20, gp.tileSize);
-//            }
-//            if (direction.equals("up"))  g2.drawImage(attack_up, screenX, screenY - gp.tileSize, gp.tileSize, gp.tileSize * 2, null);
-//            if (direction.equals("down")) g2.drawImage(attack_down, screenX, screenY, gp.tileSize, gp.tileSize * 2, null);
-//            if (direction.equals("left")) g2.drawImage(attack_left, screenX - gp.tileSize, screenY, gp.tileSize * 2, gp.tileSize, null);
-//            if (direction.equals("right")) g2.drawImage(attack_right, screenX, screenY, gp.tileSize * 2, gp.tileSize, null);
+            AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+            g2.setComposite(alphaComposite);
+            g2.setColor(Color.RED);
+            g2.fillRect(screenX + 10, screenY, gp.tileSize - 20, gp.tileSize);
         }
 
         switch (direction) {
@@ -187,7 +179,6 @@ public class Player extends Entity {
             }
         }
 
-        //if (!timeToDamage) {
         if (image == attack_up) g2.drawImage(attack_up, screenX, screenY - gp.tileSize, gp.tileSize, gp.tileSize * 2, null);
         else if (image == attack_down) g2.drawImage(attack_down, screenX, screenY, gp.tileSize, gp.tileSize * 2, null);
         else if (image == attack_left) g2.drawImage(attack_left, screenX - gp.tileSize, screenY, gp.tileSize * 2, gp.tileSize, null);
@@ -196,7 +187,8 @@ public class Player extends Entity {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 
-    private void attacking(){
+    private int attacking(){
+        int idx_pirate = -1;
         spriteCounter++;
         if (spriteCounter <= 25) {
             int currWorldX = worldX;
@@ -216,8 +208,8 @@ public class Player extends Entity {
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
 
-            int idx_pirate = gp.checker.CheckCollisionEntity(this, gp.monsters);
-            fightMonster(idx_pirate);
+            idx_pirate = gp.checker.CheckCollisionEntity(this, gp.monsters);
+//            fightMonster(idx_pirate);
 
             worldX = currWorldX;
             worldY = currWorldY;
@@ -229,6 +221,7 @@ public class Player extends Entity {
             spriteCounter = 0;
             attacking = false;
         }
+        return idx_pirate;
     }
 
 }

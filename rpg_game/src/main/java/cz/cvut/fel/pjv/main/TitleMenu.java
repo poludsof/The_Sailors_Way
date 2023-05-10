@@ -117,8 +117,6 @@ public class TitleMenu {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        g2.drawImage(hat, gp.screen_width / 2 - 103, 0, gp.tileSize - 10, gp.tileSize - 10, null);
-        g2.drawImage(arrow, gp.screen_width - 190, gp.screen_height - 150, gp.tileSize * 2 - 10, gp.tileSize * 2 - 10, null);
 
         int x = 50;
         int y = 165;
@@ -148,6 +146,9 @@ public class TitleMenu {
             g.drawString(s, x, y);
             y += 40;
         }
+
+        g2.drawImage(hat, gp.screen_width / 2 - 103, 0, gp.tileSize - 10, gp.tileSize - 10, null);
+        g2.drawImage(arrow, gp.screen_width - 190, gp.screen_height - 150, gp.tileSize * 2 - 10, gp.tileSize * 2 - 10, null);
     }
 
     public void drawNextPage(Graphics g, GamePanel gp) {
@@ -168,6 +169,10 @@ public class TitleMenu {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
+        g.drawString("Hero Control", 50, 100);
+
         g2.drawImage(key_button, 100, 140, gp.tileSize * 3 + 40, gp.tileSize * 2 + 20, null);
         g2.drawImage(exit_button, gp.screen_width - 110, 20, gp.tileSize, gp.tileSize, null);
         g2.drawImage(hat, 220, 0, gp.tileSize - 10, gp.tileSize - 10, null);
@@ -175,8 +180,6 @@ public class TitleMenu {
         g2.drawImage(space_button, 700, 160, gp.tileSize * 3 + 40, gp.tileSize, null);
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
         g.drawString("SPACE - attack", 710, 300);
-
-        g.drawString("Hero Control", 50, 100);
 
         g.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
         String[] keyboard = new String[4];
@@ -187,25 +190,6 @@ public class TitleMenu {
         for (String s : keyboard) {
             g.drawString(s, x, y);
             y += 40;
-        }
-
-        x = 50; y = 460;
-        g.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
-        g.drawString("Fight", 50, 410);
-        g.setFont(g2.getFont().deriveFont(Font.BOLD, 26F));
-        String[] text = new String[9];
-        text[0] = "If the player meets an enemy, he will be forced to fight.";
-        text[1] = "To attack the enemy, the player must choose a weapon.";
-        text[2] = "";
-        text[3] = "The enemy in turn attacks back and as a result the player ";
-        text[4] = "may lose health or die.";
-        text[5] = "";
-        text[6] = "At the beginning of the game the player will only have a ";
-        text[7] = "sword in his inventory, but the player can find other weapons";
-        text[8] = "on the map.";
-        for (String s : text) {
-            g.drawString(s, x, y);
-            y += 35;
         }
     }
 
