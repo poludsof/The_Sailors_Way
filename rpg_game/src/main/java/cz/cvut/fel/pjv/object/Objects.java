@@ -81,8 +81,8 @@ public class Objects {
             }
 
             else if (gp.obj_arr[idx].name_object.equals("Heart")) {
+                gp.obj_arr[idx] = null;
                 if (player.heart_count < 6) {
-                    gp.obj_arr[idx] = null;
                     ++player.heart_count;
                     gp.playMusic(4);
                 }

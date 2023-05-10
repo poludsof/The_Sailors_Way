@@ -32,6 +32,7 @@ public class Entity {
     public boolean collision = true;
     public Type entityType;
     public boolean attacking = false;
+    public boolean showHealth = false;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -73,6 +74,15 @@ public class Entity {
                     if (spriteNum == 2)
                         image = right2;
                 }
+            }
+
+            if (showHealth) {
+                g2.setColor(Color.black);
+                g2.fillRect(screenX, screenY - 20, gp.tileSize, 12);
+
+                int fill_health = (gp.tileSize - 4) / 3;
+                g2.setColor(Color.red);
+                g2.fillRect(screenX + 2, screenY - 18, fill_health * heart_count + 10, 8);
             }
 
             if (timeToDamage) {
@@ -131,10 +141,8 @@ public class Entity {
         }
     }
 
-    public void randomAction() {
-    }
+    public void randomAction() {}
 
-    public void fightMonster(int idx) {
+    public void fightMonster(int idx) {}
 
-    }
 }

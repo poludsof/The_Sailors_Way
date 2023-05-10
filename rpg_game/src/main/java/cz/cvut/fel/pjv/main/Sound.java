@@ -13,6 +13,8 @@ public class Sound {
         url[3] = this.getClass().getClassLoader().getResource("sound/SabatonBismark.wav");
         url[4] = this.getClass().getClassLoader().getResource("sound/pick_up_heart.wav");
         url[5] = this.getClass().getClassLoader().getResource("sound/levelUp.wav");
+        url[6] = this.getClass().getClassLoader().getResource("sound/sword_attack.wav");
+        url[7] = this.getClass().getClassLoader().getResource("sound/sword_miss.wav");
     }
 
     public void setMusic(int idx) {

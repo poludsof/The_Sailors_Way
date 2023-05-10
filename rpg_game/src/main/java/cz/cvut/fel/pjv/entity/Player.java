@@ -210,7 +210,6 @@ public class Player extends Entity {
 
             idx_pirate = gp.checker.CheckCollisionEntity(this, gp.monsters);
 //            fightMonster(idx_pirate);
-
             worldX = currWorldX;
             worldY = currWorldY;
             solidArea.width = solidAreaWidth;
@@ -218,6 +217,7 @@ public class Player extends Entity {
 
         }
         if (spriteCounter > 25){
+            gp.playMusic(7);
             spriteCounter = 0;
             attacking = false;
         }

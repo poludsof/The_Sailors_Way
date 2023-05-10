@@ -66,7 +66,8 @@ public class Pirate extends Entity {
             if (!gp.monsters[idx].timeToDamage && gp.player.attacking) {
                 if (gp.monsters[idx].heart_count > 0) {
                     --gp.monsters[idx].heart_count;
-                    System.out.println("minus life " + heart_count);
+                    gp.monsters[idx].showHealth = true;
+                    gp.playMusic(6);
                 } else {
                     System.out.println("bye + 1");
                     gp.monsters[idx] = null;
