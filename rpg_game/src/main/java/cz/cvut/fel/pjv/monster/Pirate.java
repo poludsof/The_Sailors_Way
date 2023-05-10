@@ -3,11 +3,9 @@ package cz.cvut.fel.pjv.monster;
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.main.GamePanel;
-import cz.cvut.fel.pjv.object.Objects;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
@@ -63,14 +61,13 @@ public class Pirate extends Entity {
 
     public void fightMonster(int idx) {
         if (idx >= 0) {
-            if (!gp.monsters[idx].timeToDamage && gp.player.attacking) {
-                if (gp.monsters[idx].heart_count > 0) {
-                    --gp.monsters[idx].heart_count;
-                    gp.monsters[idx].showHealth = true;
+            if (!gp.pirates[idx].timeToDamage && gp.player.attacking) {
+                if (gp.pirates[idx].heart_count > 0) {
+                    --gp.pirates[idx].heart_count;
+                    gp.pirates[idx].showHealth = true;
                     gp.playMusic(6);
                 } else {
-                    System.out.println("bye + 1");
-                    gp.monsters[idx] = null;
+                    gp.pirates[idx] = null;
                     ++gp.player.dead_pirate_count;
                 }
                 this.timeToDamage = true;

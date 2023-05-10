@@ -3,7 +3,7 @@ package cz.cvut.fel.pjv.object;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class RDoor extends Objects {
+public class RDoor extends GameObjects {
     public RDoor() {
         name_object = "Door";
         collision_obj = true;

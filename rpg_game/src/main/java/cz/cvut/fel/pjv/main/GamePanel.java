@@ -2,8 +2,7 @@ package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
-import cz.cvut.fel.pjv.monster.Pirate;
-import cz.cvut.fel.pjv.object.Objects;
+import cz.cvut.fel.pjv.object.GameObjects;
 import cz.cvut.fel.pjv.object.RDoor;
 import cz.cvut.fel.pjv.tile.TileManager;
 
@@ -49,10 +48,10 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     public CollisionChecker checker = new CollisionChecker(this);
     public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
-    public Objects[] obj_arr = new Objects[50];
+    public GameObjects[] obj_arr = new GameObjects[50];
     public Boat boat = new Boat();
     public Player player = new Player(this, keyH);
-    public Entity[] monsters = new Entity[20];
+    public Entity[] pirates = new Entity[20];
     private final TitleMenu menu = new TitleMenu(this);
 
     public GamePanel() {
@@ -68,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
         ASetter.PlaceObject();
         ASetter.PlaceMonster();
         state = State.TITLE;
+        playMusic(3);
         //sound.setMusic(3);
     }
 
@@ -75,6 +75,13 @@ public class GamePanel extends JPanel implements Runnable{
         gameThread = new Thread(this); // passing GamePanel class to this thread's constructor
         gameThread.start(); // automatically call run() method
 //        run();
+    }
+
+    public void restart() {
+        player.setDefaultValues();
+        ASetter.PlaceObject();
+        ASetter.PlaceMonster();
+        state = GamePanel.State.GAME;
     }
 
     double drawInterval = 1000000000 / (double) FPS;
@@ -110,13 +117,10 @@ public class GamePanel extends JPanel implements Runnable{
 
         if (state == State.GAME) {
             player.update();
-            for (Entity monster : monsters) {
+            for (Entity monster : pirates) {
                 if (monster != null)
                     monster.update();
             }
-        }
-        if (state == State.PAUSE) {
-
         }
     }
 
@@ -129,18 +133,16 @@ public class GamePanel extends JPanel implements Runnable{
 
         } else if (state == State.GAME || state == State.PAUSE || state == State.GAME_OVER) {
             tileM.draw(g2);
-            for (Objects obj : obj_arr) {
+            for (GameObjects obj : obj_arr) {
                 if (obj != null) {
                     obj.draw(g2, this);
                 }
             }
 
-            drawHearts(this, g2);
-            drawLevels(g, this);
             boat.draw(g2, this);
             player.draw(g2);
 
-            for (Entity monster : monsters) {
+            for (Entity monster : pirates) {
                 if (monster != null)
                     monster.draw(g2);
             }
@@ -154,6 +156,10 @@ public class GamePanel extends JPanel implements Runnable{
             } else {
                 menu.showPauseButton(g2, this);
             }
+
+            drawHearts(this, g2);
+            drawLevels(g, this);
+
         }
         else if (state == State.HELP) {
             menu.drawHelpButton(g, this);

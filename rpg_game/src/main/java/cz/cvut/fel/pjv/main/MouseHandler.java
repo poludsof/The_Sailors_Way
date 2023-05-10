@@ -24,15 +24,18 @@ public class MouseHandler implements MouseListener {
 
         if (mouseX >= gp.screen_width / 2 - 105 && mouseX <= gp.screen_width / 2 + 115) {
             if (mouseY >= 390 && mouseY <= 470) {
-                if (gp.state == GamePanel.State.TITLE)
+                if (gp.state == GamePanel.State.TITLE) {
                     gp.state = GamePanel.State.GAME;
+                    gp.stopMusic();
+                }
             }
             else if (mouseY >= 510 && mouseY <= 590) {
-                if (gp.state == GamePanel.State.TITLE)
+                if (gp.state == GamePanel.State.TITLE) {
                     gp.state = GamePanel.State.HELP;
+                }
             }
             else if (mouseY >= 630 && mouseY <= 710) {
-                if (gp.state == GamePanel.State.TITLE)
+                if (gp.state == GamePanel.State.TITLE || gp.state == GamePanel.State.GAME_OVER)
                     System.exit(1);
             }
         }
@@ -47,10 +50,9 @@ public class MouseHandler implements MouseListener {
             if (mouseY >= gp.screen_height / 2 + 120 && mouseY <= gp.screen_height / 2 + 200) {
                 if (gp.state == GamePanel.State.PAUSE)
                     gp.state = GamePanel.State.GAME;
-                if (gp.state == GamePanel.State.GAME_OVER)
-                    System.exit(1);
             }
         }
+
         //arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
         if (mouseX >= gp.screen_width - 180 && mouseX <= gp.screen_width - 180 + gp.tileSize*2-25) {
             if (mouseY >= gp.screen_height - 115 && mouseY <= gp.screen_height - 115 + gp.tileSize) {
@@ -59,11 +61,21 @@ public class MouseHandler implements MouseListener {
                 }
             }
         }
+
         //(gp.screen_width - 110, 20, gp.tileSize, gp.tileSize);
         if (mouseX >= gp.screen_width - 110 && mouseX <= gp.screen_width + gp.tileSize) {
             if (mouseY >= 20 && mouseY <= gp.tileSize + 20) {
                 if (gp.state == GamePanel.State.NEXT_HELP_PAGE)
                     gp.state = GamePanel.State.TITLE;
+            }
+        }
+
+        //Rectangle(gp.screen_width / 2 - 145, gp.screen_height / 2 + 115, 295, 70);
+        if (mouseX >= gp.screen_width / 2 - 145 && mouseX <= gp.screen_width / 2 + 150) {
+            if (mouseY >= gp.screen_height / 2 + 115 && mouseY <= gp.screen_height / 2 + 185) {
+                if (gp.state == GamePanel.State.GAME_OVER) {
+                    gp.restart();
+                }
             }
         }
     }

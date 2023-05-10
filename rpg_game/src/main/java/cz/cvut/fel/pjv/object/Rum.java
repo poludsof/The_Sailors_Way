@@ -3,7 +3,7 @@ package cz.cvut.fel.pjv.object;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class Rum extends Objects {
+public class Rum extends GameObjects {
     public Rum() {
         name_object = "Rum";
         collision_obj = true;

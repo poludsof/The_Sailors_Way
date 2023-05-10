@@ -3,13 +3,10 @@ package cz.cvut.fel.pjv.object;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.main.GamePanel;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-public class Objects {
+public class GameObjects {
     public BufferedImage image;
     public String name_object;
     public boolean collision_obj = false;
@@ -33,7 +30,6 @@ public class Objects {
             System.out.println(player.dead_pirate_count + " " + idx + " " + gp.player.key_count);
             if (gp.obj_arr[idx].name_object.equals("Door")) {
                 if (player.key_count >= 1) {
-//                    if (idx == 2){
                     if (idx == 2 && player.dead_pirate_count == 3) {
                         gp.obj_arr[idx] = null;
                         gp.obj_arr[idx + 1] = null;
@@ -50,11 +46,13 @@ public class Objects {
                         --player.key_count;}
 
                     if (idx == 4) {
+                        player.level++;
                         gp.obj_arr[idx] = null;
                         gp.obj_arr[idx + 1] = null;
                         gp.playMusic(1);
                         --player.key_count;}
                     if (idx == 5) {
+                        player.level++;
                         gp.obj_arr[idx] = null;
                         gp.obj_arr[idx - 1] = null;
                         gp.playMusic(1);

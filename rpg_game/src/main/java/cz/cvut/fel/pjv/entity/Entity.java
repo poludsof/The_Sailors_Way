@@ -1,7 +1,6 @@
 package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.main.GamePanel;
-import cz.cvut.fel.pjv.object.Objects;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -51,28 +50,20 @@ public class Entity {
 
             switch (direction) {
                 case "up" -> {
-                    if (spriteNum == 1)
-                        image = up1;
-                    if (spriteNum == 2)
-                        image = up2;
+                    if (spriteNum == 1) image = up1;
+                    if (spriteNum == 2) image = up2;
                 }
                 case "down" -> {
-                    if (spriteNum == 1)
-                        image = down1;
-                    if (spriteNum == 2)
-                        image = down2;
+                    if (spriteNum == 1) image = down1;
+                    if (spriteNum == 2) image = down2;
                 }
                 case "left" -> {
-                    if (spriteNum == 1)
-                        image = left1;
-                    if (spriteNum == 2)
-                        image = left2;
+                    if (spriteNum == 1) image = left1;
+                    if (spriteNum == 2) image = left2;
                 }
                 case "right" -> {
-                    if (spriteNum == 1)
-                        image = right1;
-                    if (spriteNum == 2)
-                        image = right2;
+                    if (spriteNum == 1) image = right1;
+                    if (spriteNum == 2) image = right2;
                 }
             }
 
@@ -114,10 +105,11 @@ public class Entity {
 
         boolean fight = gp.checker.CheckCollisionPlayer(this);
         if (this.entityType == Type.PIRATE && fight) {
-//            System.out.println("by pirate");
             if (!gp.player.timeToDamage) {
-                if (gp.player.heart_count > 0)
+                if (gp.player.heart_count > 0) {
                     --gp.player.heart_count;
+                    gp.playMusic(8);
+                }
                 gp.player.timeToDamage = true;
             }
         }

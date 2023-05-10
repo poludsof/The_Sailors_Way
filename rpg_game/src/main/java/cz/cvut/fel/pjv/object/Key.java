@@ -3,7 +3,7 @@ package cz.cvut.fel.pjv.object;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class Key extends Objects {
+public class Key extends GameObjects {
     public Key() {
         name_object = "Key";
         try {

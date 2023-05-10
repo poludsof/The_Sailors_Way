@@ -14,6 +14,7 @@ public class TitleMenu {
 //    public Rectangle quitButton;
 //    public Rectangle reloadButton;
 //    public Rectangle arrowButton;
+    public Rectangle restartButton;
     private final Font Bruno;
 
     public TitleMenu(GamePanel gp) {
@@ -28,7 +29,7 @@ public class TitleMenu {
 //        quitButton = new Rectangle(gp.screen_width / 2 - 105, 630, 220, 80);
 //        reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
 //        arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
-//        exitButton = new Rectangle(gp.screen_width - 110, 20, gp.tileSize, gp.tileSize);
+        restartButton = new Rectangle(gp.screen_width / 2 - 145, gp.screen_height / 2 + 115, 295, 70);
     }
 
     public void show(Graphics g, GamePanel gp) {
@@ -194,11 +195,13 @@ public class TitleMenu {
     }
 
     public void drawGameOver(Graphics g, GamePanel gp) {
-        BufferedImage exit_button;
 
         Graphics2D g2 = (Graphics2D) g;
         g.setFont(Bruno);
         g.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRect(0, 0, gp.screen_width, gp.screen_height);
 
         g.setColor(Color.black);
         g.drawString("GAME OVER", 285, gp.screen_height / 2 - 145);
@@ -206,12 +209,14 @@ public class TitleMenu {
         g.setColor(Color.RED);
         g.drawString("GAME OVER", 280, gp.screen_height / 2 - 150);
 
-        try {
-            exit_button = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/exit_button.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        g.setColor(Color.white);
 
-        g2.drawImage(exit_button, gp.screen_width / 2 - 40, gp.screen_height / 2 + 110, gp.tileSize + 15, gp.tileSize + 15,null);
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 44F));
+        g.drawString("RESTART", gp.screen_width / 2 - 138, gp.screen_height / 2 + 167);
+//        g2.draw(restartButton);
+
+        g.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+        g.drawString("QUIT", gp.screen_width / 2 - 73, gp.screen_height / 2 + 290);
+
     }
 }

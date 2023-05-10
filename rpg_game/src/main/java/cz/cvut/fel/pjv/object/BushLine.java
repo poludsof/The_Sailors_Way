@@ -3,7 +3,7 @@ package cz.cvut.fel.pjv.object;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class BushLine extends Objects {
+public class BushLine extends GameObjects {
     public BushLine() {
         name_object = "BushLine";
         collision_obj = true;

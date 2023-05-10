@@ -1,7 +1,6 @@
 package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.object.Key;
-import cz.cvut.fel.pjv.object.Objects;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

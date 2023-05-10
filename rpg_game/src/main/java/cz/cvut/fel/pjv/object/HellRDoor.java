@@ -3,7 +3,7 @@ package cz.cvut.fel.pjv.object;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class HellRDoor extends Objects {
+public class HellRDoor extends GameObjects {
     public HellRDoor() {
         name_object = "Door";
         collision_obj = true;

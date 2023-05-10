@@ -2,7 +2,7 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.main.KeyHandler;
-import cz.cvut.fel.pjv.object.Objects;
+import cz.cvut.fel.pjv.object.GameObjects;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.io.*;
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
-    Objects obj = new Objects();
+    GameObjects obj = new GameObjects();
     public int key_count = 0, dead_pirate_count = 0;
     public int level = 1;
 
@@ -23,7 +23,7 @@ public class Player extends Entity {
         super(gp);
         this.gp = gp;
         this.keyH = keyH;
-        heart_count = 6;
+        //heart_count = 6;
 
         screenX = gp.screen_width / 2 - (gp.tileSize / 2);
         screenY = gp.screen_height / 2 - (gp.tileSize / 2);
@@ -51,6 +51,8 @@ public class Player extends Entity {
         worldY = 93 * gp.tileSize; //93
         speed = 6;
         direction = "down";
+        heart_count = 6;
+        timeToDamage = false;
     }
 
     /**
@@ -96,7 +98,7 @@ public class Player extends Entity {
         if (attacking) {
             int idx_m = attacking();
             if (idx_m >= 0) {
-                gp.monsters[idx_m].fightMonster(idx_m);
+                gp.pirates[idx_m].fightMonster(idx_m);
             }
         }
 
@@ -208,7 +210,7 @@ public class Player extends Entity {
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
 
-            idx_pirate = gp.checker.CheckCollisionEntity(this, gp.monsters);
+            idx_pirate = gp.checker.CheckCollisionEntity(this, gp.pirates);
 //            fightMonster(idx_pirate);
             worldX = currWorldX;
             worldY = currWorldY;

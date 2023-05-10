@@ -15,6 +15,7 @@ public class Sound {
         url[5] = this.getClass().getClassLoader().getResource("sound/levelUp.wav");
         url[6] = this.getClass().getClassLoader().getResource("sound/sword_attack.wav");
         url[7] = this.getClass().getClassLoader().getResource("sound/sword_miss.wav");
+        url[8] = this.getClass().getClassLoader().getResource("sound/oup.wav");
     }
 
     public void setMusic(int idx) {

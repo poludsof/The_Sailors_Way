@@ -97,49 +97,49 @@ public class PlaceOnTheMap {
     }
 
     public void PlaceMonster() {
-        gp.monsters[0] = new Pirate(gp);
-        gp.monsters[0].worldX = 14 * gp.tileSize;
-        gp.monsters[0].worldY = 93 * gp.tileSize;
+        gp.pirates[0] = new Pirate(gp);
+        gp.pirates[0].worldX = 14 * gp.tileSize;
+        gp.pirates[0].worldY = 93 * gp.tileSize;
 
-        gp.monsters[1] = new Pirate(gp);
-        gp.monsters[1].worldX = 5 * gp.tileSize;
-        gp.monsters[1].worldY = 93 * gp.tileSize;
+        gp.pirates[1] = new Pirate(gp);
+        gp.pirates[1].worldX = 5 * gp.tileSize;
+        gp.pirates[1].worldY = 93 * gp.tileSize;
 
-        gp.monsters[2] = new Pirate(gp);
-        gp.monsters[2].worldX = 10 * gp.tileSize;
-        gp.monsters[2].worldY = 89 * gp.tileSize;
+        gp.pirates[2] = new Pirate(gp);
+        gp.pirates[2].worldX = 10 * gp.tileSize;
+        gp.pirates[2].worldY = 89 * gp.tileSize;
 
-        gp.monsters[3] = new Pirate(gp);
-        gp.monsters[3].worldX = 3 * gp.tileSize;
-        gp.monsters[3].worldY = 54 * gp.tileSize;
+        gp.pirates[3] = new Pirate(gp);
+        gp.pirates[3].worldX = 3 * gp.tileSize;
+        gp.pirates[3].worldY = 54 * gp.tileSize;
 
-        gp.monsters[4] = new Pirate(gp);
-        gp.monsters[4].worldX = 8 * gp.tileSize;
-        gp.monsters[4].worldY = 49 * gp.tileSize;
+        gp.pirates[4] = new Pirate(gp);
+        gp.pirates[4].worldX = 8 * gp.tileSize;
+        gp.pirates[4].worldY = 49 * gp.tileSize;
 
-        gp.monsters[5] = new Pirate(gp);
-        gp.monsters[5].worldX = 16 * gp.tileSize;
-        gp.monsters[5].worldY = 56 * gp.tileSize;
+        gp.pirates[5] = new Pirate(gp);
+        gp.pirates[5].worldX = 16 * gp.tileSize;
+        gp.pirates[5].worldY = 56 * gp.tileSize;
 
-        gp.monsters[6] = new Pirate(gp);
-        gp.monsters[6].worldX = 10 * gp.tileSize;
-        gp.monsters[6].worldY = 40 * gp.tileSize;
+        gp.pirates[6] = new Pirate(gp);
+        gp.pirates[6].worldX = 10 * gp.tileSize;
+        gp.pirates[6].worldY = 40 * gp.tileSize;
 
-        gp.monsters[7] = new Pirate(gp);
-        gp.monsters[7].worldX = 28 * gp.tileSize;
-        gp.monsters[7].worldY = 44 * gp.tileSize;
+        gp.pirates[7] = new Pirate(gp);
+        gp.pirates[7].worldX = 28 * gp.tileSize;
+        gp.pirates[7].worldY = 44 * gp.tileSize;
 
-        gp.monsters[8] = new Pirate(gp);
-        gp.monsters[8].worldX = 28 * gp.tileSize;
-        gp.monsters[8].worldY = 58 * gp.tileSize;
+        gp.pirates[8] = new Pirate(gp);
+        gp.pirates[8].worldX = 28 * gp.tileSize;
+        gp.pirates[8].worldY = 58 * gp.tileSize;
 
-        gp.monsters[9] = new Pirate(gp);
-        gp.monsters[9].worldX = 33 * gp.tileSize;
-        gp.monsters[9].worldY = 55 * gp.tileSize;
+        gp.pirates[9] = new Pirate(gp);
+        gp.pirates[9].worldX = 33 * gp.tileSize;
+        gp.pirates[9].worldY = 55 * gp.tileSize;
 
-        gp.monsters[10] = new Pirate(gp);
-        gp.monsters[10].worldX = 22 * gp.tileSize;
-        gp.monsters[10].worldY = 39 * gp.tileSize;
+        gp.pirates[10] = new Pirate(gp);
+        gp.pirates[10].worldX = 22 * gp.tileSize;
+        gp.pirates[10].worldY = 39 * gp.tileSize;
 
     }
 
