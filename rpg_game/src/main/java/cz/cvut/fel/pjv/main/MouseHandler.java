@@ -35,7 +35,7 @@ public class MouseHandler implements MouseListener {
                 }
             }
             else if (mouseY >= 630 && mouseY <= 710) {
-                if (gp.state == GamePanel.State.TITLE || gp.state == GamePanel.State.GAME_OVER)
+                if (gp.state == GamePanel.State.TITLE || gp.state == GamePanel.State.GAME_OVER || gp.state == GamePanel.State.HAPPY_END)
                     System.exit(1);
             }
         }
@@ -73,7 +73,7 @@ public class MouseHandler implements MouseListener {
         //Rectangle(gp.screen_width / 2 - 145, gp.screen_height / 2 + 115, 295, 70);
         if (mouseX >= gp.screen_width / 2 - 145 && mouseX <= gp.screen_width / 2 + 150) {
             if (mouseY >= gp.screen_height / 2 + 115 && mouseY <= gp.screen_height / 2 + 185) {
-                if (gp.state == GamePanel.State.GAME_OVER) {
+                if (gp.state == GamePanel.State.GAME_OVER || gp.state == GamePanel.State.HAPPY_END) {
                     gp.restart();
                 }
             }

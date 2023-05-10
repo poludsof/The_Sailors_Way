@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker checker = new CollisionChecker(this);
     public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
     public GameObjects[] obj_arr = new GameObjects[50];
-    public Boat boat = new Boat(this);
+    public Boat boat = new Boat();
     public Player player = new Player(this, keyH);
     public Entity[] pirates = new Entity[20];
     private final TitleMenu menu = new TitleMenu(this);

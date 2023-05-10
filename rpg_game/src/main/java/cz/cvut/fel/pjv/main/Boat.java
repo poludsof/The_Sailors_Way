@@ -13,8 +13,8 @@ public class Boat{
     public boolean collision_obj = false;
     public int worldX, worldY;
     public Rectangle solidArea;
-    public Boat(GamePanel gp) {
-        solidArea = new Rectangle(0, 0, 390, 600);
+    public Boat() {
+        solidArea = new Rectangle(0, 0, 350, 600);
         name_object = "Boat";
         try {
             image = ImageIO.read(Key.class.getClassLoader().getResourceAsStream("objects/starship_no_shadow.png"));
