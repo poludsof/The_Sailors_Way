@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv.main;
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.object.GameObjects;
+import cz.cvut.fel.pjv.object.House;
 import cz.cvut.fel.pjv.object.RDoor;
 import cz.cvut.fel.pjv.tile.TileManager;
 
@@ -49,7 +50,8 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker checker = new CollisionChecker(this);
     public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
     public GameObjects[] obj_arr = new GameObjects[50];
-    public Boat boat = new Boat();
+    public Boat boat = new Boat(this);
+    public House house = new House(this);
     public Player player = new Player(this, keyH);
     public Entity[] pirates = new Entity[20];
     private final TitleMenu menu = new TitleMenu(this);
@@ -140,6 +142,7 @@ public class GamePanel extends JPanel implements Runnable{
             }
 
             boat.draw(g2, this);
+            house.draw(g2, this);
             player.draw(g2);
 
             for (Entity monster : pirates) {

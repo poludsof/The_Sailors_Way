@@ -47,7 +47,7 @@ public class Player extends Entity {
      */
     public void setDefaultValues() {
         // Coordinates of the initial position of the player on the map
-        worldX = 90 * gp.tileSize; //10
+        worldX = 40 * gp.tileSize; //10
         worldY = 10 * gp.tileSize; //93
         speed = 6;
         direction = "down";
@@ -85,12 +85,10 @@ public class Player extends Entity {
     public void update() {
         if (heart_count <= 0) {
             gp.state = GamePanel.State.GAME_OVER;
-            return;
         }
 
         else if (gp.checker.CheckCollisionBoat(this)) {
             gp.state = GamePanel.State.HAPPY_END;
-            return;
         }
 
         if (timeToDamage) {
@@ -123,6 +121,8 @@ public class Player extends Entity {
 
             collision = false;
             gp.checker.CheckCollisionTile(this);
+
+            gp.checker.CheckCollisionHouse(this);
 
             int idx_obj = gp.checker.CheckCollisionObj(this);
             obj.pickUpObj(idx_obj, gp, this);

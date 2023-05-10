@@ -10,10 +10,12 @@ import java.io.IOException;
 public class Boat{
     public BufferedImage image, enter_arrow;
     public String name_object;
-    public boolean collision_obj = false;
-    public int worldX, worldY;
+    public int worldX ;
+    public int worldY;
     public Rectangle solidArea;
-    public Boat() {
+    public Boat(GamePanel gp) {
+        worldX = 88 * gp.tileSize;
+        worldY = 2 * gp.tileSize;
         solidArea = new Rectangle(0, 0, 350, 600);
         name_object = "Boat";
         try {

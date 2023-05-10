@@ -184,22 +184,12 @@ public class CollisionChecker {
         gp.boat.solidArea.y += gp.boat.worldY;
 
         switch (entity.direction) {
-            case "up" -> {
-                entity.solidArea.y -= entity.speed;
-            }
-            case "down" -> {
-                entity.solidArea.y += entity.speed;
-            }
-            case "right" -> {
-                entity.solidArea.x += entity.speed;
-            }
-            case "left" -> {
-                entity.solidArea.x -= entity.speed;
-            }
+            case "up" -> entity.solidArea.y -= entity.speed;
+            case "down" -> entity.solidArea.y += entity.speed;
+            case "right" -> entity.solidArea.x += entity.speed;
+            case "left" -> entity.solidArea.x -= entity.speed;
         }
         if (gp.boat.solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
-            if (gp.boat.collision_obj) // is solid obj
-                entity.collision = true;
             ret = true;
         }
         entity.solidArea.x = 20;
@@ -208,5 +198,27 @@ public class CollisionChecker {
         gp.boat.solidArea.y = 0;
 
         return ret;
+    }
+
+    public void CheckCollisionHouse(Entity entity) {
+        entity.solidArea.x += entity.worldX;  // get position on the map
+        entity.solidArea.y += entity.worldY;
+
+        gp.house.solidArea.x += gp.house.worldX;  // get position on the map
+        gp.house.solidArea.y += gp.house.worldY;
+
+        switch (entity.direction) {
+            case "up" -> entity.solidArea.y -= entity.speed;
+            case "down" -> entity.solidArea.y += entity.speed;
+            case "right" -> entity.solidArea.x += entity.speed;
+            case "left" -> entity.solidArea.x -= entity.speed;
+        }
+        if (gp.house.solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
+            entity.collision = true;
+        }
+        entity.solidArea.x = 20;
+        entity.solidArea.y = 24;
+        gp.house.solidArea.x = gp.tileSize;  // get position on the map
+        gp.house.solidArea.y = 0;
     }
 }

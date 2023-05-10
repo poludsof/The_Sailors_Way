@@ -91,9 +91,6 @@ public class PlaceOnTheMap {
         gp.obj_arr[19].worldX = 19 * gp.tileSize;
         gp.obj_arr[19].worldY = 42 * gp.tileSize;
 
-        gp.boat = new Boat();
-        gp.boat.worldX = 88 * gp.tileSize;
-        gp.boat.worldY = 2 * gp.tileSize;
     }
 
     public void PlaceMonster() {
