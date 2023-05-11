@@ -59,7 +59,7 @@ public class Pirate extends Entity {
         ++time;
     }
 
-    public void fightMonster(int idx) {
+    public void fightPirate(int idx) {
         if (idx >= 0) {
             if (!gp.pirates[idx].timeToDamage && gp.player.attacking) {
                 if (gp.pirates[idx].heart_count > 0) {

@@ -23,7 +23,6 @@ public class Player extends Entity {
         super(gp);
         this.gp = gp;
         this.keyH = keyH;
-        //heart_count = 6;
 
         screenX = gp.screen_width / 2 - (gp.tileSize / 2);
         screenY = gp.screen_height / 2 - (gp.tileSize / 2);
@@ -47,12 +46,13 @@ public class Player extends Entity {
      */
     public void setDefaultValues() {
         // Coordinates of the initial position of the player on the map
-        worldX = 40 * gp.tileSize; //10
-        worldY = 10 * gp.tileSize; //93
+        worldX = 85 * gp.tileSize; //10
+        worldY = 37 * gp.tileSize; //93
         speed = 6;
         direction = "down";
         heart_count = 6;
         timeToDamage = false;
+        key_count = 0; //todo
     }
 
     /**
@@ -102,7 +102,10 @@ public class Player extends Entity {
         if (attacking) {
             int idx_m = attacking();
             if (idx_m >= 0) {
-                gp.pirates[idx_m].fightMonster(idx_m);
+                gp.pirates[idx_m].fightPirate(idx_m);
+            }
+            if (idx_m == -100) {
+                gp.boss.fightBoss();
             }
         }
 
@@ -197,6 +200,7 @@ public class Player extends Entity {
 
     private int attacking(){
         int idx_pirate = -1;
+        boolean fight_boss = false;
         spriteCounter++;
         if (spriteCounter <= 25) {
             int currWorldX = worldX;
@@ -217,6 +221,8 @@ public class Player extends Entity {
             solidArea.height = attackArea.height;
 
             idx_pirate = gp.checker.CheckCollisionEntity(this, gp.pirates);
+            fight_boss = gp.checker.CheckCollisionBoss(this);
+
 //            fightMonster(idx_pirate);
             worldX = currWorldX;
             worldY = currWorldY;
@@ -229,6 +235,9 @@ public class Player extends Entity {
             spriteCounter = 0;
             attacking = false;
         }
+
+        if (fight_boss)
+            return -100;
         return idx_pirate;
     }
 

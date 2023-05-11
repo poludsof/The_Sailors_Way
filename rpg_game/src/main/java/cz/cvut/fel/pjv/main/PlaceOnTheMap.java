@@ -35,10 +35,6 @@ public class PlaceOnTheMap {
         gp.obj_arr[5].worldX = 78 * gp.tileSize;
         gp.obj_arr[5].worldY = 44 * gp.tileSize;
 
-        gp.obj_arr[6] = new Key(); // key error
-        gp.obj_arr[6].worldX = 85 * gp.tileSize;
-        gp.obj_arr[6].worldY = 44 * gp.tileSize;
-
         gp.obj_arr[7] = new HellRDoor();
         gp.obj_arr[7].worldX = 90 * gp.tileSize;
         gp.obj_arr[7].worldY = 33 * gp.tileSize;
@@ -91,6 +87,26 @@ public class PlaceOnTheMap {
         gp.obj_arr[19].worldX = 19 * gp.tileSize;
         gp.obj_arr[19].worldY = 42 * gp.tileSize;
 
+        // on the island
+        gp.obj_arr[20] = new Heart();
+        gp.obj_arr[20].worldX = 49 * gp.tileSize;
+        gp.obj_arr[20].worldY = 7 * gp.tileSize;
+
+        gp.obj_arr[21] = new Heart();
+        gp.obj_arr[21].worldX = 48 * gp.tileSize;
+        gp.obj_arr[21].worldY = 8 * gp.tileSize;
+
+        gp.obj_arr[22] = new Heart();
+        gp.obj_arr[22].worldX = 46 * gp.tileSize;
+        gp.obj_arr[22].worldY = 7 * gp.tileSize;
+
+        gp.obj_arr[23] = new Heart();
+        gp.obj_arr[23].worldX = 45 * gp.tileSize;
+        gp.obj_arr[23].worldY = 8 * gp.tileSize;
+
+        gp.obj_arr[24] = new Heart();
+        gp.obj_arr[24].worldX = 47 * gp.tileSize;
+        gp.obj_arr[24].worldY = 9 * gp.tileSize;
     }
 
     public void PlaceMonster() {
@@ -138,6 +154,12 @@ public class PlaceOnTheMap {
         gp.pirates[10].worldX = 22 * gp.tileSize;
         gp.pirates[10].worldY = 39 * gp.tileSize;
 
+    }
+
+    public void PlaceGoldKey(int x, int y) {
+        gp.obj_arr[6] = new Key(); // key error
+        gp.obj_arr[6].worldX = x * gp.tileSize;
+        gp.obj_arr[6].worldY = y * gp.tileSize;
     }
 
 }

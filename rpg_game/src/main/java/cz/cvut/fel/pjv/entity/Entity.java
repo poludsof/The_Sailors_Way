@@ -9,7 +9,8 @@ public class Entity {
 
     public enum Type{
         PLAYER,
-        PIRATE
+        PIRATE,
+        BOSS
     }
 
     public int worldX, worldY;
@@ -37,7 +38,7 @@ public class Entity {
         this.gp = gp;
     }
 
-    public void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2, int scale) {
         int screenX = worldX - gp.player.worldX + gp.player.screenX; // where obj on the screen
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
@@ -69,20 +70,21 @@ public class Entity {
 
             if (showHealth) {
                 g2.setColor(Color.black);
-                g2.fillRect(screenX, screenY - 20, gp.tileSize, 12);
+                g2.fillRect(screenX, screenY - 20, gp.tileSize * scale, 12);
 
-                int fill_health = (gp.tileSize - 4) / 3;
+                int fill_health = (gp.tileSize - 4) / (3 * scale);
                 g2.setColor(Color.red);
-                g2.fillRect(screenX + 2, screenY - 18, fill_health * heart_count + 10, 8);
+                g2.fillRect(screenX + 2, screenY - 18, (fill_health * heart_count + 10) * scale, 8);
             }
 
             if (timeToDamage) {
                 AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
                 g2.setComposite(alphaComposite);
                 g2.setColor(Color.RED);
-                g2.fillRect(screenX + 10, screenY, gp.tileSize - 20, gp.tileSize);
+                g2.fillRect(screenX + (10 * scale), screenY, (gp.tileSize - 20) * scale, gp.tileSize * scale);
             }
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+            g2.drawImage(image, screenX, screenY, gp.tileSize * scale, gp.tileSize * scale, null);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
         }
@@ -90,6 +92,7 @@ public class Entity {
 
     public void update() {
         randomAction();
+        randomBossAction();
 
         if (timeToDamage) {
             damageCounter++;
@@ -104,9 +107,12 @@ public class Entity {
         gp.checker.CheckCollisionObj(this);
 
         boolean fight = gp.checker.CheckCollisionPlayer(this);
-        if (this.entityType == Type.PIRATE && fight) {
+
+        if ((this.entityType == Type.PIRATE || this.entityType == Type.BOSS) && fight) {
             if (!gp.player.timeToDamage) {
                 if (gp.player.heart_count > 0) {
+                    if (this.entityType == Type.BOSS)
+                        --gp.player.heart_count;
                     --gp.player.heart_count;
                     gp.playMusic(8);
                 }
@@ -135,6 +141,8 @@ public class Entity {
 
     public void randomAction() {}
 
-    public void fightMonster(int idx) {}
+    public void fightPirate(int idx) {}
+
+    public void randomBossAction() {}
 
 }

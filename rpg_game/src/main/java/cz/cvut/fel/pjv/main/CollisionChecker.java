@@ -221,4 +221,41 @@ public class CollisionChecker {
         gp.house.solidArea.x = gp.tileSize;  // get position on the map
         gp.house.solidArea.y = 0;
     }
+
+    public boolean CheckCollisionBoss(Entity entity) {
+        boolean fight = false;
+        if (gp.boss != null) {
+            entity.solidArea.x += entity.worldX;  // get position on the map
+            entity.solidArea.y += entity.worldY;
+
+            gp.boss.solidArea.x += gp.boss.worldX;  // get position on the map
+            gp.boss.solidArea.y += gp.boss.worldY;
+
+            switch (entity.direction) {
+                case "up" -> {
+                    entity.solidArea.y -= entity.speed;
+                }
+                case "down" -> {
+                    entity.solidArea.y += entity.speed;
+                }
+                case "right" -> {
+                    entity.solidArea.x += entity.speed;
+                }
+                case "left" -> {
+                    entity.solidArea.x -= entity.speed;
+                }
+            }
+            if (gp.boss.solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
+                entity.collision = true;
+                fight = true;
+            }
+
+            entity.solidArea.x = 20;
+            entity.solidArea.y = 24;
+
+            gp.boss.solidArea.x = 60;  // get position on the map
+            gp.boss.solidArea.y = 48;
+        }
+        return fight;
+    }
 }

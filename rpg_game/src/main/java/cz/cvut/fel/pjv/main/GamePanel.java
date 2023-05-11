@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
+import cz.cvut.fel.pjv.monster.Boss;
 import cz.cvut.fel.pjv.object.GameObjects;
 import cz.cvut.fel.pjv.object.House;
 import cz.cvut.fel.pjv.object.RDoor;
@@ -53,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Boat boat = new Boat(this);
     public House house = new House(this);
     public Player player = new Player(this, keyH);
+    public Boss boss = new Boss(this);
     public Entity[] pirates = new Entity[20];
     private final TitleMenu menu = new TitleMenu(this);
 
@@ -83,6 +85,7 @@ public class GamePanel extends JPanel implements Runnable{
         player.setDefaultValues();
         ASetter.PlaceObject();
         ASetter.PlaceMonster();
+        boss.setDefaultValues();
         state = GamePanel.State.GAME;
     }
 
@@ -123,6 +126,8 @@ public class GamePanel extends JPanel implements Runnable{
                 if (monster != null)
                     monster.update();
             }
+            if (boss != null)
+                boss.update();
         }
     }
 
@@ -144,10 +149,12 @@ public class GamePanel extends JPanel implements Runnable{
             boat.draw(g2, this);
             house.draw(g2, this);
             player.draw(g2);
+            if (boss != null)
+                boss.draw(g2, 2);
 
             for (Entity monster : pirates) {
                 if (monster != null)
-                    monster.draw(g2);
+                    monster.draw(g2, 1);
             }
 
             if (state == State.HAPPY_END) {
