@@ -3,17 +3,22 @@ package cz.cvut.fel.pjv.entity;
 import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.main.KeyHandler;
 import cz.cvut.fel.pjv.object.GameObjects;
+import cz.cvut.fel.pjv.object.Key;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     GameObjects obj = new GameObjects();
-    public int key_count = 0, dead_pirate_count = 0;
+    public Dictionary<String, Integer> inventory = new Hashtable<>();
+    public int key_count, dead_pirate_count, rum_count, rum_time, map_count, sword_count;
     public int level = 1;
 
     public final int screenX;
@@ -46,14 +51,25 @@ public class Player extends Entity {
      */
     public void setDefaultValues() {
         // Coordinates of the initial position of the player on the map
-        worldX = 90 * gp.tileSize; //10
-        worldY = 10 * gp.tileSize; //93
+        worldX = 10 * gp.tileSize; //10
+        worldY = 93 * gp.tileSize; //93
         speed = 6;
         direction = "down";
         heart_count = 6;
         timeToDamage = false;
         key_count = 0; //todo
         dead_pirate_count = 0;
+        rum_count = 0;
+        map_count = 0;
+        sword_count = 0;
+        fillInventory();
+    }
+
+    public void fillInventory() {
+        inventory.put("Key", key_count);
+        inventory.put("Map", map_count);
+        inventory.put("Rum", rum_count);
+        inventory.put("Sword", sword_count);
     }
 
     /**

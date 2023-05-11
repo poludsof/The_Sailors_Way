@@ -27,7 +27,6 @@ public class GameObjects {
 
     public void pickUpObj(int idx, GamePanel gp, Player player) {
         if (idx != -1) {
-            System.out.println(player.dead_pirate_count + " " + idx + " " + gp.player.key_count);
             if (gp.obj_arr[idx].name_object.equals("Door")) {
                 if (player.key_count >= 1) {
                     if (idx == 2) {
@@ -36,36 +35,57 @@ public class GameObjects {
                         player.level++;
                         gp.playMusic(5);
                         gp.playMusic(1);
-                        --player.key_count;}
+                        --player.key_count;
+                        gp.player.inventory.put("Key", player.key_count);
+                    }
                     if (idx == 3 ) {
                         gp.obj_arr[idx] = null;
                         gp.obj_arr[idx - 1] = null;
                         player.level++;
                         gp.playMusic(5);
                         gp.playMusic(1);
-                        --player.key_count;}
+                        --player.key_count;
+                        gp.player.inventory.put("Key", player.key_count);
+                    }
 
                     if (idx == 4) {
                         player.level++;
                         gp.obj_arr[idx] = null;
                         gp.obj_arr[idx + 1] = null;
                         gp.playMusic(1);
-                        --player.key_count;}
+                        --player.key_count;
+                        gp.player.inventory.put("Key", player.key_count);
+                    }
                     if (idx == 5) {
                         player.level++;
                         gp.obj_arr[idx] = null;
                         gp.obj_arr[idx - 1] = null;
                         gp.playMusic(1);
-                        --player.key_count;}
+                        --player.key_count;
+                        gp.player.inventory.put("Key", player.key_count);
+                    }
 
-                    if (idx == 7) { gp.obj_arr[idx] = null; gp.obj_arr[idx + 1] = null; gp.playMusic(0); --player.key_count;}
-                    if (idx == 8) { gp.obj_arr[idx] = null; gp.obj_arr[idx - 1] = null; gp.playMusic(0); --player.key_count;}
+                    if (idx == 7) {
+                        gp.obj_arr[idx] = null;
+                        gp.obj_arr[idx + 1] = null;
+                        gp.playMusic(0);
+                        --player.key_count;
+                        gp.player.inventory.put("Key", player.key_count);
+                    }
+                    if (idx == 8) {
+                        gp.obj_arr[idx] = null;
+                        gp.obj_arr[idx - 1] = null;
+                        gp.playMusic(0);
+                        --player.key_count;
+                        gp.player.inventory.put("Key", player.key_count);
+                    }
                 }
             }
             else if (gp.obj_arr[idx].name_object.equals("Key")) {
                 if (idx == 0) { player.level++; gp.playMusic(5); }
                 gp.obj_arr[idx] = null;
                 ++player.key_count;
+                gp.player.inventory.put("Key", player.key_count);
                 gp.playMusic(2);
             }
 
@@ -88,7 +108,9 @@ public class GameObjects {
 
             else if (gp.obj_arr[idx].name_object.equals("Rum")) {
                 gp.obj_arr[idx] = null;
-                gp.player.speed += 4;
+                gp.player.rum_count += 1;
+                gp.player.inventory.put("Rum", player.rum_count);
+
             }
         }
     }

@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Dictionary;
 
 public class GamePanel extends JPanel implements Runnable{
     public static enum State {
@@ -23,7 +24,8 @@ public class GamePanel extends JPanel implements Runnable{
         PAUSE,
         NEXT_HELP_PAGE,
         HAPPY_END,
-        GAME_OVER
+        GAME_OVER,
+        INVENTORY
     }
     public State state;
 
@@ -51,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker checker = new CollisionChecker(this);
     public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
     public GameObjects[] obj_arr = new GameObjects[50];
+    private Inventory inventory = new Inventory();
     public Boat boat = new Boat(this);
     public House house = new House(this);
     public Player player = new Player(this, keyH);
@@ -138,7 +141,7 @@ public class GamePanel extends JPanel implements Runnable{
         if (state == State.TITLE) {
             menu.show(g, this);
 
-        } else if (state == State.GAME || state == State.PAUSE || state == State.GAME_OVER || state == State.HAPPY_END) {
+        } else if (state == State.GAME || state == State.PAUSE || state == State.GAME_OVER || state == State.HAPPY_END || state == State.INVENTORY) {
             tileM.draw(g2);
             for (GameObjects obj : obj_arr) {
                 if (obj != null) {
@@ -170,6 +173,10 @@ public class GamePanel extends JPanel implements Runnable{
                 menu.drawPauseScreen(g, this);
             } else {
                 menu.showPauseButton(g2, this);
+            }
+
+            if (state == State.INVENTORY) {
+                inventory.drawInventory(g2, this);
             }
 
             drawHearts(this, g2);

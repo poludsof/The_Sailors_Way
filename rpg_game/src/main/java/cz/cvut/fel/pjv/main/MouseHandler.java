@@ -39,10 +39,18 @@ public class MouseHandler implements MouseListener {
                     System.exit(1);
             }
         }
+
         if (mouseX >= gp.screen_width - 100 && mouseX <= gp.screen_width - 20) {
             if (mouseY >= 20 && mouseY <= 100) {
                 if (gp.state == GamePanel.State.GAME)
                     gp.state = GamePanel.State.PAUSE;
+            }
+            //(gp.screen_width - 100, gp.tileSize * 2 - 25, gp.tileSize, gp.tileSize);
+            if (mouseY >= gp.tileSize * 2 - 25 && mouseY <= gp.tileSize * 3 - 25) {
+                if (gp.state == GamePanel.State.GAME)
+                    gp.state = GamePanel.State.INVENTORY;
+                else if (gp.state == GamePanel.State.INVENTORY)
+                    gp.state = GamePanel.State.GAME;
             }
         }
         //reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);

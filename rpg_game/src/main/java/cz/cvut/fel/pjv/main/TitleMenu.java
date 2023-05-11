@@ -14,6 +14,7 @@ public class TitleMenu {
 //    public Rectangle quitButton;
 //    public Rectangle reloadButton;
 //    public Rectangle arrowButton;
+    public Rectangle inventoryButton;
     public Rectangle restartButton;
     private final Font Bruno;
 
@@ -30,6 +31,8 @@ public class TitleMenu {
 //        reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
 //        arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
         restartButton = new Rectangle(gp.screen_width / 2 - 145, gp.screen_height / 2 + 115, 295, 70);
+        inventoryButton = new Rectangle(gp.screen_width - 100, gp.tileSize * 2 - 25, gp.tileSize, gp.tileSize);
+
     }
 
     public void show(Graphics g, GamePanel gp) {
@@ -83,6 +86,8 @@ public class TitleMenu {
             throw new RuntimeException(e);
         }
         g2.drawImage(pause_button, gp.screen_width - 100, 20, gp.tileSize, gp.tileSize,null);
+
+        g2.draw(inventoryButton);
     }
 
     public void drawPauseScreen(Graphics g, GamePanel gp) {
