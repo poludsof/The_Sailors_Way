@@ -173,10 +173,15 @@ public class GamePanel extends JPanel implements Runnable{
                 menu.drawPauseScreen(g, this);
             } else {
                 menu.showPauseButton(g2, this);
+                menu.showChestButton(g2, this);
             }
 
             if (state == State.INVENTORY) {
                 inventory.drawInventory(g2, this);
+            }
+
+            if (keyH.mapButton && player.map_count >= 1) {
+                showMap(g2, this);
             }
 
             drawHearts(this, g2);
@@ -250,6 +255,18 @@ public class GamePanel extends JPanel implements Runnable{
             ++count;
             heartX += gp.tileSize + 10;
         }
+
+    }
+
+    private void showMap(Graphics2D g2, GamePanel gp) {
+        BufferedImage open_map;
+        try {
+            open_map = ImageIO.read(RDoor.class.getClassLoader().getResourceAsStream("objects/open_map.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        g2.drawImage(open_map, 350, 150, gp.tileSize * 6, gp.tileSize * 6, null);
 
     }
 

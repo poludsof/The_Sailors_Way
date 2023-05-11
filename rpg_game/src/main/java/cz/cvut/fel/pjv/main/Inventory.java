@@ -30,13 +30,17 @@ public class Inventory {
             throw new RuntimeException(e);
         }
 
-        g2.setColor(Color.DARK_GRAY);
+        g2.setColor(new Color(154, 229, 255, 80));
         g2.fillRect((int) inventoryList.getX(),
                 (int) inventoryList.getY(),
                 (int) inventoryList.getWidth(),
                 (int) inventoryList.getHeight());
 
         g2.draw(inventoryList);
+        g2.setColor(Color.black);
+        g2.setStroke(new BasicStroke(20));
+        g2.drawRoundRect( (int) inventoryList.getX() - 10,  (int) inventoryList.getY() - 10, (int) inventoryList.getWidth() + 20, (int) inventoryList.getHeight() + 20, 20, 20);
+
 
         itemX = (int) inventoryList.getX() + 15;
         itemY = (int) inventoryList.getY() + 15;

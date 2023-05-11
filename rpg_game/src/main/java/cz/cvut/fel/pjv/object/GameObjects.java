@@ -110,7 +110,12 @@ public class GameObjects {
                 gp.obj_arr[idx] = null;
                 gp.player.rum_count += 1;
                 gp.player.inventory.put("Rum", player.rum_count);
+            }
 
+            else if (gp.obj_arr[idx].name_object.equals("Map")) {
+                gp.obj_arr[idx] = null;
+                gp.player.map_count += 1;
+                gp.player.inventory.put("Map", player.map_count);
             }
         }
     }

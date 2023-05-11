@@ -86,8 +86,17 @@ public class TitleMenu {
             throw new RuntimeException(e);
         }
         g2.drawImage(pause_button, gp.screen_width - 100, 20, gp.tileSize, gp.tileSize,null);
+    }
 
-        g2.draw(inventoryButton);
+    public void showChestButton(Graphics2D g2, GamePanel gp) {
+        BufferedImage chest_button;
+        try {
+            chest_button = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("buttons/chest.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //inventoryButton = new Rectangle(gp.screen_width - 100, gp.tileSize * 2 - 25, gp.tileSize, gp.tileSize);
+        g2.drawImage(chest_button, gp.screen_width - 100, gp.tileSize * 2 - 25, gp.tileSize, gp.tileSize,null);
     }
 
     public void drawPauseScreen(Graphics g, GamePanel gp) {

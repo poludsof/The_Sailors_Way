@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed; // Variables to track key presses.
+    public boolean mapButton, rumButton;
     @Override
     public void keyTyped(KeyEvent k) {
 
@@ -15,41 +16,25 @@ public class KeyHandler implements KeyListener {
         int key = k.getKeyCode();
 
         // Detect the pressed key and set the appropriate variable.
-        if (key == KeyEvent.VK_W) {
-            upPressed = true;
-        }
-        if (key == KeyEvent.VK_S) {
-            downPressed = true;
-        }
-        if (key == KeyEvent.VK_A) {
-            leftPressed = true;
-        }
-        if (key == KeyEvent.VK_D) {
-            rightPressed = true;
-        }
-        if (key == KeyEvent.VK_SPACE) {
-            spacePressed = true;
-        }
+        if (key == KeyEvent.VK_W) { upPressed = true; }
+        if (key == KeyEvent.VK_S) { downPressed = true; }
+        if (key == KeyEvent.VK_A) { leftPressed = true; }
+        if (key == KeyEvent.VK_D) { rightPressed = true; }
+        if (key == KeyEvent.VK_SPACE) { spacePressed = true; }
+
+        if (key == KeyEvent.VK_J) { rumButton = true; }
+        if (key == KeyEvent.VK_L) { mapButton = true; }
     }
 
     @Override
     public void keyReleased(KeyEvent k) { // Override the keyReleased method of the KeyListener interface.
         int key = k.getKeyCode();
         // Detect the released key and set the corresponding variable.
-        if (key == KeyEvent.VK_W) {
-            upPressed = false;
-        }
-        if (key == KeyEvent.VK_S) {
-            downPressed = false;
-        }
-        if (key == KeyEvent.VK_A) {
-            leftPressed = false;
-        }
-        if (key == KeyEvent.VK_D) {
-            rightPressed = false;
-        }
-        if (key == KeyEvent.VK_SPACE) {
-            spacePressed = false;
-        }
+        if (key == KeyEvent.VK_W) { upPressed = false; }
+        if (key == KeyEvent.VK_S) { downPressed = false; }
+        if (key == KeyEvent.VK_A) { leftPressed = false; }
+        if (key == KeyEvent.VK_D) { rightPressed = false; }
+        if (key == KeyEvent.VK_SPACE) { spacePressed = false; }
+        if (key == KeyEvent.VK_L) { mapButton = false; }
     }
 }

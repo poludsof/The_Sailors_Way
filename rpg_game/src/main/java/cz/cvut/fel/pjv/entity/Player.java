@@ -4,6 +4,7 @@ import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.main.KeyHandler;
 import cz.cvut.fel.pjv.object.GameObjects;
 import cz.cvut.fel.pjv.object.Key;
+import cz.cvut.fel.pjv.object.RDoor;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -19,6 +20,7 @@ public class Player extends Entity {
     GameObjects obj = new GameObjects();
     public Dictionary<String, Integer> inventory = new Hashtable<>();
     public int key_count, dead_pirate_count, rum_count, rum_time, map_count, sword_count;
+    private boolean rum_time_start = false;
     public int level = 1;
 
     public final int screenX;
@@ -139,6 +141,20 @@ public class Player extends Entity {
             if (keyH.spacePressed)
                 attacking = true;
 
+            if (keyH.rumButton && rum_count >= 1) {
+                --rum_count;
+                inventory.put("Rum", rum_count);
+                speed += 4;
+                rum_time_start = true;
+                rum_time = 0;
+            }
+
+            //end of RUM
+            if (rum_time_start && rum_time > 5 * 60) { // the effect of the rum lasts for 5 seconds
+                speed -= 4;
+                rum_time_start = false;
+            } rum_time++;
+
             collision = false;
             gp.checker.CheckCollisionTile(this);
 
@@ -166,6 +182,7 @@ public class Player extends Entity {
             }
         }
     }
+
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
 
@@ -257,5 +274,4 @@ public class Player extends Entity {
             return -100;
         return idx_pirate;
     }
-
 }

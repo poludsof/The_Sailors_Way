@@ -103,6 +103,11 @@ public class PlaceOnTheMap {
         gp.obj_arr[24] = new Heart();
         gp.obj_arr[24].worldX = 47 * gp.tileSize;
         gp.obj_arr[24].worldY = 9 * gp.tileSize;
+
+        // place Map
+        gp.obj_arr[25] = new Map();
+        gp.obj_arr[25].worldX = 5 * gp.tileSize;
+        gp.obj_arr[25].worldY = 30 * gp.tileSize;
     }
 
     public void PlaceMonster() {
