@@ -148,7 +148,8 @@ public class GamePanel extends JPanel implements Runnable{
 
             boat.draw(g2, this);
             house.draw(g2, this);
-            player.draw(g2);
+            if (state != State.HAPPY_END)
+                player.draw(g2);
             if (boss != null)
                 boss.draw(g2, 2);
 

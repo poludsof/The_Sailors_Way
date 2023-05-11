@@ -30,14 +30,14 @@ public class GameObjects {
             System.out.println(player.dead_pirate_count + " " + idx + " " + gp.player.key_count);
             if (gp.obj_arr[idx].name_object.equals("Door")) {
                 if (player.key_count >= 1) {
-                    if (idx == 2 && player.dead_pirate_count == 3) {
+                    if (idx == 2) {
                         gp.obj_arr[idx] = null;
                         gp.obj_arr[idx + 1] = null;
                         player.level++;
                         gp.playMusic(5);
                         gp.playMusic(1);
                         --player.key_count;}
-                    if (idx == 3 && player.dead_pirate_count == 3) {
+                    if (idx == 3 ) {
                         gp.obj_arr[idx] = null;
                         gp.obj_arr[idx - 1] = null;
                         player.level++;

@@ -11,13 +11,9 @@ public class PlaceOnTheMap {
     }
 
     public void PlaceObject() {
-        gp.obj_arr[0] = new BlackKey();
+        gp.obj_arr[0] = new BlackKey(); // key on the beach
         gp.obj_arr[0].worldX = 66 * gp.tileSize;
         gp.obj_arr[0].worldY = 97 * gp.tileSize;
-
-        gp.obj_arr[1] = new BlackKey();
-        gp.obj_arr[1].worldX = 15 * gp.tileSize;
-        gp.obj_arr[1].worldY = 90 * gp.tileSize;
 
         gp.obj_arr[2] = new RDoor();
         gp.obj_arr[2].worldX = 10 * gp.tileSize;
@@ -157,9 +153,15 @@ public class PlaceOnTheMap {
     }
 
     public void PlaceGoldKey(int x, int y) {
-        gp.obj_arr[6] = new Key(); // key error
+        gp.obj_arr[6] = new Key();
         gp.obj_arr[6].worldX = x * gp.tileSize;
         gp.obj_arr[6].worldY = y * gp.tileSize;
+    }
+
+    public void PlaceFirstKey() {
+        gp.obj_arr[1] = new BlackKey();
+        gp.obj_arr[1].worldX = 14 * gp.tileSize;
+        gp.obj_arr[1].worldY = 92 * gp.tileSize;
     }
 
 }

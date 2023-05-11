@@ -194,7 +194,7 @@ public class CollisionChecker {
         }
         entity.solidArea.x = 20;
         entity.solidArea.y = 24;
-        gp.boat.solidArea.x = 0;  // get position on the map
+        gp.boat.solidArea.x = 100;  // get position on the map
         gp.boat.solidArea.y = 0;
 
         return ret;
