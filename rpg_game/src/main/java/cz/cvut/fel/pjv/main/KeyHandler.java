@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed; // Variables to track key presses.
-    public boolean mapButton, rumButton;
+    public boolean mapButton, rumButton, swordButton;
     @Override
     public void keyTyped(KeyEvent k) {
 
@@ -24,6 +24,7 @@ public class KeyHandler implements KeyListener {
 
         if (key == KeyEvent.VK_J) { rumButton = true; }
         if (key == KeyEvent.VK_L) { mapButton = true; }
+        if (key == KeyEvent.VK_K) { swordButton = true; }
     }
 
     @Override

@@ -25,6 +25,9 @@ public class MouseHandler implements MouseListener {
         if (mouseX >= gp.screen_width / 2 - 105 && mouseX <= gp.screen_width / 2 + 115) {
             if (mouseY >= 390 && mouseY <= 470) {
                 if (gp.state == GamePanel.State.TITLE) {
+                    gp.state = GamePanel.State.LOAD;
+                }
+                else if (gp.state == GamePanel.State.LOAD) {
                     gp.state = GamePanel.State.GAME;
                     gp.stopMusic();
                 }
@@ -32,6 +35,10 @@ public class MouseHandler implements MouseListener {
             else if (mouseY >= 510 && mouseY <= 590) {
                 if (gp.state == GamePanel.State.TITLE) {
                     gp.state = GamePanel.State.HELP;
+                }
+                else if (gp.state == GamePanel.State.LOAD) {
+                    gp.jsonfile = "load_game.json";
+                    gp.restart();
                 }
             }
             else if (mouseY >= 630 && mouseY <= 710) {
@@ -52,7 +59,13 @@ public class MouseHandler implements MouseListener {
                 else if (gp.state == GamePanel.State.INVENTORY)
                     gp.state = GamePanel.State.GAME;
             }
+            //loadButton = new Rectangle(gp.screen_width - 100, gp.tileSize * 3, gp.tileSize, gp.tileSize);
+            if (mouseY >= gp.tileSize * 3 && mouseY <= gp.tileSize * 4) {
+                gp.loadCurrentData();
+                System.exit(1);
+            }
         }
+
         //reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
         if (mouseX >= gp.screen_width / 2 - 40 && mouseX <= gp.screen_width / 2 + 40) {
             if (mouseY >= gp.screen_height / 2 + 120 && mouseY <= gp.screen_height / 2 + 200) {
@@ -82,6 +95,7 @@ public class MouseHandler implements MouseListener {
         if (mouseX >= gp.screen_width / 2 - 145 && mouseX <= gp.screen_width / 2 + 150) {
             if (mouseY >= gp.screen_height / 2 + 115 && mouseY <= gp.screen_height / 2 + 185) {
                 if (gp.state == GamePanel.State.GAME_OVER || gp.state == GamePanel.State.HAPPY_END) {
+                    gp.jsonfile = "new_game.json";
                     gp.restart();
                 }
             }

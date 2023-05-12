@@ -27,6 +27,7 @@ public class GameObjects {
 
     public void pickUpObj(int idx, GamePanel gp, Player player) {
         if (idx != -1) {
+            gp.stopMusic();
             if (gp.obj_arr[idx].name_object.equals("Door")) {
                 if (player.key_count >= 1) {
                     if (idx == 2) {
@@ -116,6 +117,12 @@ public class GameObjects {
                 gp.obj_arr[idx] = null;
                 gp.player.map_count += 1;
                 gp.player.inventory.put("Map", player.map_count);
+            }
+
+            else if (gp.obj_arr[idx].name_object.equals("Sword")) {
+                gp.obj_arr[idx] = null;
+                gp.player.sword_count += 1;
+                gp.player.inventory.put("Sword", player.sword_count);
             }
         }
     }

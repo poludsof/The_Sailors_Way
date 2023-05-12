@@ -7,14 +7,15 @@ import cz.cvut.fel.pjv.object.GameObjects;
 import cz.cvut.fel.pjv.object.House;
 import cz.cvut.fel.pjv.object.RDoor;
 import cz.cvut.fel.pjv.tile.TileManager;
+import org.json.simple.JSONObject;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Dictionary;
 
 public class GamePanel extends JPanel implements Runnable{
     public static enum State {
@@ -25,7 +26,8 @@ public class GamePanel extends JPanel implements Runnable{
         NEXT_HELP_PAGE,
         HAPPY_END,
         GAME_OVER,
-        INVENTORY
+        INVENTORY,
+        LOAD
     }
     public State state;
 
@@ -60,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Boss boss = new Boss(this);
     public Entity[] pirates = new Entity[20];
     private final TitleMenu menu = new TitleMenu(this);
+    public String jsonfile = "";
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screen_width, screen_height));
@@ -85,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void restart() {
-        player.setDefaultValues();
+        player.setDefaultValues(jsonfile);
         ASetter.PlaceObject();
         ASetter.PlaceMonster();
         boss.setDefaultValues();
@@ -138,6 +141,9 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
+        if (state == State.LOAD)
+            menu.drawLoad(g, this);
+
         if (state == State.TITLE) {
             menu.show(g, this);
 
@@ -174,6 +180,7 @@ public class GamePanel extends JPanel implements Runnable{
             } else {
                 menu.showPauseButton(g2, this);
                 menu.showChestButton(g2, this);
+                menu.showLoadButton(g2, this);
             }
 
             if (state == State.INVENTORY) {
@@ -276,5 +283,26 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void stopMusic() {
         sound.pauseTrack();
+    }
+
+    public void loadCurrentData() {
+        JSONObject playerDetails = new JSONObject();
+        playerDetails.put("worldX", Integer.toString(player.worldX / tileSize));
+        playerDetails.put("worldY", Integer.toString(player.worldY / tileSize));
+        playerDetails.put("speed", Integer.toString(player.speed));
+        playerDetails.put("heart_count", Integer.toString(player.heart_count));
+        playerDetails.put("key_count", Integer.toString(player.key_count));
+        playerDetails.put("rum_count", Integer.toString(player.rum_count));
+        playerDetails.put("map_count", Integer.toString(player.map_count));
+        playerDetails.put("sword_count", Integer.toString(player.sword_count));
+        playerDetails.put("level", Integer.toString(player.level));
+
+        try (FileWriter file = new FileWriter("load_game.json")) {
+            file.write(playerDetails.toJSONString());
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

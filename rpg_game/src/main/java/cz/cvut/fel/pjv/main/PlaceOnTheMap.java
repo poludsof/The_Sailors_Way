@@ -108,6 +108,11 @@ public class PlaceOnTheMap {
         gp.obj_arr[25] = new Map();
         gp.obj_arr[25].worldX = 5 * gp.tileSize;
         gp.obj_arr[25].worldY = 30 * gp.tileSize;
+
+        // place Sword
+        gp.obj_arr[26] = new Sword();
+        gp.obj_arr[26].worldX = 15 * gp.tileSize;
+        gp.obj_arr[26].worldY = 10 * gp.tileSize;
     }
 
     public void PlaceMonster() {

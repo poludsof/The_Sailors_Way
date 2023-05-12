@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
@@ -41,29 +46,37 @@ public class Player extends Entity {
         solidArea.height = 56;
         solidArea.width = 40;
 
-        attackArea.width = 40;
-        attackArea.height = 40;
-
-        setDefaultValues();
+        setDefaultValues("new_game.json");
         getPlayerImage();
     }
 
     /**
      * Sets default values for the player's properties, such as coordinates and movement speed.
      */
-    public void setDefaultValues() {
+    public void setDefaultValues(String jsonname) {
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader(jsonname))  {
+            //Read JSON file
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
+            worldX = Integer.parseInt((String) jsonObject.get("worldX")) * gp.tileSize; // 10
+            worldY = Integer.parseInt((String) jsonObject.get("worldY")) * gp.tileSize; // 93
+            speed = Integer.parseInt((String) jsonObject.get("speed"));
+            heart_count = Integer.parseInt((String) jsonObject.get("heart_count"));
+            key_count = Integer.parseInt((String) jsonObject.get("key_count"));
+            rum_count = Integer.parseInt((String) jsonObject.get("rum_count"));
+            map_count = Integer.parseInt((String) jsonObject.get("map_count"));
+            sword_count = Integer.parseInt((String) jsonObject.get("sword_count"));
+            level = Integer.parseInt((String) jsonObject.get("level"));
+
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
         // Coordinates of the initial position of the player on the map
-        worldX = 10 * gp.tileSize; //10
-        worldY = 93 * gp.tileSize; //93
-        speed = 6;
         direction = "down";
-        heart_count = 6;
         timeToDamage = false;
-        key_count = 0; //todo
         dead_pirate_count = 0;
-        rum_count = 0;
-        map_count = 0;
-        sword_count = 0;
+        attackArea.width = 40;
+        attackArea.height = 40;
         fillInventory();
     }
 
@@ -147,6 +160,11 @@ public class Player extends Entity {
                 speed += 4;
                 rum_time_start = true;
                 rum_time = 0;
+            }
+
+            if (keyH.swordButton && sword_count >= 1) {
+                attackArea.width = 60;
+                attackArea.height = 60;
             }
 
             //end of RUM
@@ -264,6 +282,7 @@ public class Player extends Entity {
             solidArea.height = solidAreaHeight;
 
         }
+
         if (spriteCounter > 25){
             gp.playMusic(7);
             spriteCounter = 0;
