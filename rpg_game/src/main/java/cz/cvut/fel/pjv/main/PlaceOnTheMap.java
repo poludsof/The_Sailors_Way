@@ -2,6 +2,14 @@ package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.monster.Pirate;
 import cz.cvut.fel.pjv.object.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
 
 public class PlaceOnTheMap {
     GamePanel gp;
@@ -11,109 +19,79 @@ public class PlaceOnTheMap {
     }
 
     public void PlaceObject() {
-        gp.obj_arr[0] = new BlackKey(); // key on the beach
-        gp.obj_arr[0].worldX = 66 * gp.tileSize;
-        gp.obj_arr[0].worldY = 97 * gp.tileSize;
+        JSONParser jsonParser = new JSONParser();
 
-        gp.obj_arr[2] = new RDoor();
-        gp.obj_arr[2].worldX = 10 * gp.tileSize;
-        gp.obj_arr[2].worldY = 88 * gp.tileSize;
+        try {
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("object_data.json"));
 
-        gp.obj_arr[3] = new LDoor();
-        gp.obj_arr[3].worldX = 9 * gp.tileSize;
-        gp.obj_arr[3].worldY = 88 * gp.tileSize;
+            JSONArray jArray = (JSONArray) jsonObject.get("Array");
+            System.out.println(jArray.size());
 
-        gp.obj_arr[4] = new RotatedLDoor();
-        gp.obj_arr[4].worldX = 78 * gp.tileSize;
-        gp.obj_arr[4].worldY = 43 * gp.tileSize;
+            for (int i = 0; i < jArray.size(); ++i) {
 
-        gp.obj_arr[5] = new RotatedRDoor();
-        gp.obj_arr[5].worldX = 78 * gp.tileSize;
-        gp.obj_arr[5].worldY = 44 * gp.tileSize;
+                JSONObject obj = (JSONObject) jArray.get(i);
+                JSONArray jsonArray = (JSONArray) obj.get("coordinates");
 
-        gp.obj_arr[7] = new HellRDoor();
-        gp.obj_arr[7].worldX = 90 * gp.tileSize;
-        gp.obj_arr[7].worldY = 33 * gp.tileSize;
+                String name = (String) obj.get("Name");
 
-        gp.obj_arr[8] = new HellLDoor();
-        gp.obj_arr[8].worldX = 89 * gp.tileSize;
-        gp.obj_arr[8].worldY = 33 * gp.tileSize;
+                if (name.equals("Key")) gp.obj_arr[i + 10] = new Key();
+                if (name.equals("Heart")) gp.obj_arr[i + 10] = new Heart();
+                if (name.equals("Rum")) gp.obj_arr[i + 10] = new Rum();
+                if (name.equals("Sword")) gp.obj_arr[i + 10] = new Sword();
+                if (name.equals("BlackKey")) gp.obj_arr[i + 10] = new BlackKey();
+                if (name.equals("Map")) gp.obj_arr[i + 10] = new Map();
 
-        gp.obj_arr[9] = new Heart();
-        gp.obj_arr[9].worldX = 4 * gp.tileSize;
-        gp.obj_arr[9].worldY = 95 * gp.tileSize;
+                gp.obj_arr[i + 10].worldX = (int) ((long) jsonArray.get(0)) * gp.tileSize;
+                gp.obj_arr[i + 10].worldY = (int) ((long) jsonArray.get(1)) * gp.tileSize;
+            }
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
 
-        gp.obj_arr[10] = new BushLine();
-        gp.obj_arr[10].worldX = 41 * gp.tileSize;
-        gp.obj_arr[10].worldY = 54 * gp.tileSize;
+        gp.obj_arr[0] = new RDoor();
+        gp.obj_arr[0].worldX = 10 * gp.tileSize;
+        gp.obj_arr[0].worldY = 88 * gp.tileSize;
 
-        gp.obj_arr[11] = new BushLine();
-        gp.obj_arr[11].worldX = 42 * gp.tileSize;
-        gp.obj_arr[11].worldY = 53 * gp.tileSize;
+        gp.obj_arr[1] = new LDoor();
+        gp.obj_arr[1].worldX = 9 * gp.tileSize;
+        gp.obj_arr[1].worldY = 88 * gp.tileSize;
 
-        gp.obj_arr[12] = new Heart();
-        gp.obj_arr[12].worldX = 15 * gp.tileSize;
-        gp.obj_arr[12].worldY = 81 * gp.tileSize;
+        gp.obj_arr[2] = new RotatedLDoor();
+        gp.obj_arr[2].worldX = 78 * gp.tileSize;
+        gp.obj_arr[2].worldY = 43 * gp.tileSize;
 
-        gp.obj_arr[13] = new Heart();
-        gp.obj_arr[13].worldX = 9 * gp.tileSize;
-        gp.obj_arr[13].worldY = 70 * gp.tileSize;
+        gp.obj_arr[3] = new RotatedRDoor();
+        gp.obj_arr[3].worldX = 78 * gp.tileSize;
+        gp.obj_arr[3].worldY = 44 * gp.tileSize;
 
-        gp.obj_arr[14] = new Rum();
-        gp.obj_arr[14].worldX = 6 * gp.tileSize;
-        gp.obj_arr[14].worldY = 41 * gp.tileSize;
+        gp.obj_arr[4] = new HellRDoor();
+        gp.obj_arr[4].worldX = 90 * gp.tileSize;
+        gp.obj_arr[4].worldY = 33 * gp.tileSize;
 
-        gp.obj_arr[15] = new Heart();
-        gp.obj_arr[15].worldX = 4 * gp.tileSize;
-        gp.obj_arr[15].worldY = 34 * gp.tileSize;
+        gp.obj_arr[5] = new HellLDoor();
+        gp.obj_arr[5].worldX = 89 * gp.tileSize;
+        gp.obj_arr[5].worldY = 33 * gp.tileSize;
 
-        gp.obj_arr[16] = new Heart();
-        gp.obj_arr[16].worldX = 29 * gp.tileSize;
-        gp.obj_arr[16].worldY = 61 * gp.tileSize;
+        gp.obj_arr[6] = new BushLine();
+        gp.obj_arr[6].worldX = 41 * gp.tileSize;
+        gp.obj_arr[6].worldY = 54 * gp.tileSize;
 
-        gp.obj_arr[17] = new Heart();
-        gp.obj_arr[17].worldX = 26 * gp.tileSize;
-        gp.obj_arr[17].worldY = 54 * gp.tileSize;
-
-        gp.obj_arr[18] = new Heart();
-        gp.obj_arr[18].worldX = 40 * gp.tileSize;
-        gp.obj_arr[18].worldY = 49 * gp.tileSize;
-
-        gp.obj_arr[19] = new Heart();
-        gp.obj_arr[19].worldX = 19 * gp.tileSize;
-        gp.obj_arr[19].worldY = 42 * gp.tileSize;
-
-        // on the island
-        gp.obj_arr[20] = new Heart();
-        gp.obj_arr[20].worldX = 49 * gp.tileSize;
-        gp.obj_arr[20].worldY = 7 * gp.tileSize;
-
-        gp.obj_arr[21] = new Heart();
-        gp.obj_arr[21].worldX = 48 * gp.tileSize;
-        gp.obj_arr[21].worldY = 8 * gp.tileSize;
-
-        gp.obj_arr[22] = new Heart();
-        gp.obj_arr[22].worldX = 46 * gp.tileSize;
-        gp.obj_arr[22].worldY = 7 * gp.tileSize;
-
-        gp.obj_arr[23] = new Heart();
-        gp.obj_arr[23].worldX = 45 * gp.tileSize;
-        gp.obj_arr[23].worldY = 8 * gp.tileSize;
-
-        gp.obj_arr[24] = new Heart();
-        gp.obj_arr[24].worldX = 47 * gp.tileSize;
-        gp.obj_arr[24].worldY = 9 * gp.tileSize;
-
-        // place Map
-        gp.obj_arr[25] = new Map();
-        gp.obj_arr[25].worldX = 5 * gp.tileSize;
-        gp.obj_arr[25].worldY = 30 * gp.tileSize;
-
-        // place Sword
-        gp.obj_arr[26] = new Sword();
-        gp.obj_arr[26].worldX = 15 * gp.tileSize;
-        gp.obj_arr[26].worldY = 10 * gp.tileSize;
+        gp.obj_arr[7] = new BushLine();
+        gp.obj_arr[7].worldX = 42 * gp.tileSize;
+        gp.obj_arr[7].worldY = 53 * gp.tileSize;
     }
+    public void PlaceGoldKey(int x, int y) {
+        gp.obj_arr[8] = new Key();
+        gp.obj_arr[8].worldX = x * gp.tileSize;
+        gp.obj_arr[8].worldY = y * gp.tileSize;
+    }
+
+    public void PlaceFirstKey() {
+        gp.obj_arr[9] = new BlackKey();
+        gp.obj_arr[9].worldX = 14 * gp.tileSize;
+        gp.obj_arr[9].worldY = 92 * gp.tileSize;
+    }
+
 
     public void PlaceMonster() {
         gp.pirates[0] = new Pirate(gp);
@@ -161,17 +139,4 @@ public class PlaceOnTheMap {
         gp.pirates[10].worldY = 39 * gp.tileSize;
 
     }
-
-    public void PlaceGoldKey(int x, int y) {
-        gp.obj_arr[6] = new Key();
-        gp.obj_arr[6].worldX = x * gp.tileSize;
-        gp.obj_arr[6].worldY = y * gp.tileSize;
-    }
-
-    public void PlaceFirstKey() {
-        gp.obj_arr[1] = new BlackKey();
-        gp.obj_arr[1].worldX = 14 * gp.tileSize;
-        gp.obj_arr[1].worldY = 92 * gp.tileSize;
-    }
-
 }

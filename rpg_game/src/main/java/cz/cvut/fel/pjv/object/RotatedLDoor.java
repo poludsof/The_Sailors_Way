@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class RotatedLDoor extends GameObjects {
     public RotatedLDoor() {
-        name_object = "Door";
+        name_object = "RotatedLDoor";
         collision_obj = true;
         try {
             image = ImageIO.read(RDoor.class.getClassLoader().getResourceAsStream("objects/x___door_closed_lef_rotated.png"));

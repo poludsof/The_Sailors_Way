@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class HellRDoor extends GameObjects {
     public HellRDoor() {
-        name_object = "Door";
+        name_object = "HellRDoor";
         collision_obj = true;
         try {
             image = ImageIO.read(RDoor.class.getClassLoader().getResourceAsStream("objects/x___xhell_closed_right_door.png"));

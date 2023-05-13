@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     public CollisionChecker checker = new CollisionChecker(this);
     public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
-    public GameObjects[] obj_arr = new GameObjects[50];
+    public GameObjects[] obj_arr = new GameObjects[100];
     private Inventory inventory = new Inventory();
     public Boat boat = new Boat(this);
     public House house = new House(this);
@@ -303,6 +303,5 @@ public class GamePanel extends JPanel implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

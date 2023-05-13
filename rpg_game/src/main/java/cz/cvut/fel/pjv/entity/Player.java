@@ -250,7 +250,7 @@ public class Player extends Entity {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 
-    private int attacking(){
+    private int attacking() {
         int idx_pirate = -1;
         boolean fight_boss = false;
         spriteCounter++;

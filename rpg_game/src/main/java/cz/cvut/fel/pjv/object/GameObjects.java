@@ -28,61 +28,7 @@ public class GameObjects {
     public void pickUpObj(int idx, GamePanel gp, Player player) {
         if (idx != -1) {
             gp.stopMusic();
-            if (gp.obj_arr[idx].name_object.equals("Door")) {
-                if (player.key_count >= 1) {
-                    if (idx == 2) {
-                        gp.obj_arr[idx] = null;
-                        gp.obj_arr[idx + 1] = null;
-                        player.level++;
-                        gp.playMusic(5);
-                        gp.playMusic(1);
-                        --player.key_count;
-                        gp.player.inventory.put("Key", player.key_count);
-                    }
-                    if (idx == 3 ) {
-                        gp.obj_arr[idx] = null;
-                        gp.obj_arr[idx - 1] = null;
-                        player.level++;
-                        gp.playMusic(5);
-                        gp.playMusic(1);
-                        --player.key_count;
-                        gp.player.inventory.put("Key", player.key_count);
-                    }
-
-                    if (idx == 4) {
-                        player.level++;
-                        gp.obj_arr[idx] = null;
-                        gp.obj_arr[idx + 1] = null;
-                        gp.playMusic(1);
-                        --player.key_count;
-                        gp.player.inventory.put("Key", player.key_count);
-                    }
-                    if (idx == 5) {
-                        player.level++;
-                        gp.obj_arr[idx] = null;
-                        gp.obj_arr[idx - 1] = null;
-                        gp.playMusic(1);
-                        --player.key_count;
-                        gp.player.inventory.put("Key", player.key_count);
-                    }
-
-                    if (idx == 7) {
-                        gp.obj_arr[idx] = null;
-                        gp.obj_arr[idx + 1] = null;
-                        gp.playMusic(0);
-                        --player.key_count;
-                        gp.player.inventory.put("Key", player.key_count);
-                    }
-                    if (idx == 8) {
-                        gp.obj_arr[idx] = null;
-                        gp.obj_arr[idx - 1] = null;
-                        gp.playMusic(0);
-                        --player.key_count;
-                        gp.player.inventory.put("Key", player.key_count);
-                    }
-                }
-            }
-            else if (gp.obj_arr[idx].name_object.equals("Key")) {
+             if (gp.obj_arr[idx].name_object.equals("Key")) {
                 if (idx == 0) { player.level++; gp.playMusic(5); }
                 gp.obj_arr[idx] = null;
                 ++player.key_count;
@@ -91,12 +37,11 @@ public class GameObjects {
             }
 
             else if (gp.obj_arr[idx].name_object.equals("BushLine")) {
-                gp.player.speed = 6;
                 gp.obj_arr[idx] = null;
                 ++player.level;
                 gp.playMusic(5);
-                if (idx == 10) { gp.obj_arr[idx + 1] = null; }
-                if (idx == 11) { gp.obj_arr[idx - 1] = null; }
+                if (idx == 6) { gp.obj_arr[idx + 1] = null; }
+                if (idx == 7) { gp.obj_arr[idx - 1] = null; }
             }
 
             else if (gp.obj_arr[idx].name_object.equals("Heart")) {
@@ -124,6 +69,51 @@ public class GameObjects {
                 gp.player.sword_count += 1;
                 gp.player.inventory.put("Sword", player.sword_count);
             }
+            else if (player.key_count >= 1) {
+                 if (idx == 0 && gp.obj_arr[idx].name_object.equals("RDoor")) {
+                     gp.obj_arr[idx] = null;
+                     gp.obj_arr[idx + 1] = null;
+                     player.level++;
+                     gp.playMusic(5);
+                     gp.playMusic(1);
+                     --player.key_count;
+                 }
+                 if (idx == 1 && gp.obj_arr[idx].name_object.equals("LDoor")) {
+                     gp.obj_arr[idx] = null;
+                     gp.obj_arr[idx - 1] = null;
+                     player.level++;
+                     gp.playMusic(5);
+                     gp.playMusic(1);
+                     --player.key_count;
+                 }
+                 if (idx == 2 && gp.obj_arr[idx].name_object.equals("RotatedLDoor")) {
+                     player.level++;
+                     gp.obj_arr[idx] = null;
+                     gp.obj_arr[idx + 1] = null;
+                     gp.playMusic(1);
+                     --player.key_count;
+                 }
+                 if (idx == 3 && gp.obj_arr[idx].name_object.equals("RotatedRDoor")) {
+                     player.level++;
+                     gp.obj_arr[idx] = null;
+                     gp.obj_arr[idx - 1] = null;
+                     gp.playMusic(1);
+                     --player.key_count;
+                 }
+                 if (idx == 4 && gp.obj_arr[idx].name_object.equals("HellRDoor")) {
+                     gp.obj_arr[idx] = null;
+                     gp.obj_arr[idx + 1] = null;
+                     gp.playMusic(0);
+                     --player.key_count;
+                 }
+                 if (idx == 5 && gp.obj_arr[idx].name_object.equals("HellLDoor")) {
+                     gp.obj_arr[idx] = null;
+                     gp.obj_arr[idx - 1] = null;
+                     gp.playMusic(0);
+                     --player.key_count;
+                 }
+                 gp.player.inventory.put("Key", player.key_count);
+             }
         }
     }
 }
