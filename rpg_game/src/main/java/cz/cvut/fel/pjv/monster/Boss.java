@@ -50,7 +50,7 @@ public class Boss extends Entity {
         }
     }
 
-    public void getBossImage() {
+    private void getBossImage() {
         try {
             up1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_up1.png"));
             up2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_up2.png"));
@@ -87,7 +87,7 @@ public class Boss extends Entity {
                 gp.boss.showHealth = true;
                 gp.playMusic(6);
             } else {
-                System.out.println(tmp_y);
+                System.out.println("hi");
                 gp.ASetter.PlaceGoldKey(tmp_x, tmp_y);
                 gp.boss = null;
             }

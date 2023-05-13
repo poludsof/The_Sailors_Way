@@ -26,7 +26,7 @@ public class TryJson {
             big_obj.add(obj);
             bigger_obj.put("array", big_obj);
         }
-        try (FileWriter file = new FileWriter("rpg_game/target/new_boss.json")) {
+        try (FileWriter file = new FileWriter("rpg_game/target/test_boss.json")) {
             file.write(bigger_obj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
