@@ -17,7 +17,7 @@ public class PlaceOnTheMap {
         this.gp = gp;
     }
 
-    public void PlaceObject(String filename) {
+    public void PlaceObject(String filename) { // todo test
         JSONParser jsonParser = new JSONParser();
 
         try {

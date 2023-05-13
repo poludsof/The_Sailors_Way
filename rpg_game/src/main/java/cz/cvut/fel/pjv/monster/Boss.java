@@ -33,19 +33,21 @@ public class Boss extends Entity {
     }
 
     public void setDefaultValues(String filename) {
-        JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(filename))  {
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
-            worldX = Integer.parseInt((String) jsonObject.get("worldX")) * gp.tileSize; // 87
-            worldY = Integer.parseInt((String) jsonObject.get("worldY")) * gp.tileSize; // 40
-            speed = Integer.parseInt((String) jsonObject.get("speed"));
-            heart_count = Integer.parseInt((String) jsonObject.get("heart_count"));
-        } catch (ParseException | IOException e) {
-            e.printStackTrace();
+        if (gp.boss != null) {
+            JSONParser jsonParser = new JSONParser();
+            try (FileReader reader = new FileReader(filename)) {
+                JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
+                worldX = Integer.parseInt((String) jsonObject.get("worldX")) * gp.tileSize; // 87
+                worldY = Integer.parseInt((String) jsonObject.get("worldY")) * gp.tileSize; // 40
+                speed = Integer.parseInt((String) jsonObject.get("speed"));
+                heart_count = Integer.parseInt((String) jsonObject.get("heart_count"));
+            } catch (ParseException | IOException e) {
+                e.printStackTrace();
+            }
+            direction = "down";
+            showHealth = false;
+            timeToDamage = false;
         }
-        direction = "down";
-        showHealth = false;
-        timeToDamage = false;
     }
 
     public void getBossImage() {
@@ -63,7 +65,7 @@ public class Boss extends Entity {
         }
     }
 
-    public void randomBossAction() {
+    public void randomBossAction() { // todo test
         if (time == 80) {
             time = 0;
             Random num = new Random();
@@ -76,7 +78,7 @@ public class Boss extends Entity {
         ++time;
     }
 
-    public void fightBoss() {
+    public void fightBoss() { // todo test
         int tmp_x = gp.boss.worldX / gp.tileSize;
         int tmp_y = gp.boss.worldY / gp.tileSize;
         if (!gp.boss.timeToDamage && gp.player.attacking) {

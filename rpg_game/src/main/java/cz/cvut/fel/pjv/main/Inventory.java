@@ -81,7 +81,7 @@ public class Inventory {
         }
     }
 
-    private void checkCounter(GamePanel gp, Rectangle inventoryList) {
+    public void checkCounter(GamePanel gp, Rectangle inventoryList) {
         itemX += gp.tileSize + 10;
         ++count_col;
         if (count_col >= 4) {

@@ -30,6 +30,7 @@ public class Sound {
     }
 
     public void pauseTrack() {
-        clip.stop();
+        if (clip != null)
+            clip.stop();
     }
 }

@@ -93,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable{
         player.setDefaultValues(fileName);
         ASetter.PlaceObject("rpg_game/target/load_object_data.json");
         ASetter.PlacePirate("rpg_game/target/load_pirate_data.json");
-        boss.setDefaultValues("rpg_game/target/load_boss_data.json");
+        boss.setDefaultValues("rpg_game/target/load_boss_data.json"); // xzxz todo
         state = GamePanel.State.GAME;
     }
 

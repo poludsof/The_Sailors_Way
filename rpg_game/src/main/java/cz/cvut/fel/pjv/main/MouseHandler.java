@@ -97,7 +97,8 @@ public class MouseHandler implements MouseListener {
         if (mouseX >= gp.screen_width / 2 - 145 && mouseX <= gp.screen_width / 2 + 150) {
             if (mouseY >= gp.screen_height / 2 + 115 && mouseY <= gp.screen_height / 2 + 185) {
                 if (gp.state == GamePanel.State.GAME_OVER || gp.state == GamePanel.State.HAPPY_END) {
-                    gp.fileName = "rpg_game/target/new_game.json";
+                    gp.fileName = "rpg_game/target/new_game.json"; // update boss todo
+                    gp.stopMusic();
                     gp.restart();
                 }
             }

@@ -46,16 +46,18 @@ public class Player extends Entity {
         solidArea.height = 56;
         solidArea.width = 40;
 
-        setDefaultValues("rpg_game/target/new_game.json");
+        String projPath = System.getProperty("user.dir").replace("rpg_game", "");
+
+        setDefaultValues(projPath + "/rpg_game/target/new_game.json");
         getPlayerImage();
     }
 
     /**
      * Sets default values for the player's properties, such as coordinates and movement speed.
      */
-    public void setDefaultValues(String jsonname) {
+    public void setDefaultValues(String filename) { // todo test
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(jsonname))  {
+        try (FileReader reader = new FileReader(filename))  {
             //Read JSON file
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
             worldX = Integer.parseInt((String) jsonObject.get("worldX")) * gp.tileSize; // 10
@@ -80,7 +82,7 @@ public class Player extends Entity {
         fillInventory();
     }
 
-    public void fillInventory() {
+    public void fillInventory() { // todo test
         inventory.put("Key", key_count);
         inventory.put("Map", map_count);
         inventory.put("Rum", rum_count);
@@ -141,6 +143,7 @@ public class Player extends Entity {
             }
         }
 
+        // todo func
         else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.spacePressed) {
             if (keyH.upPressed) {
                 direction = "up";
@@ -181,6 +184,7 @@ public class Player extends Entity {
             int idx_obj = gp.checker.CheckCollisionObj(this);
             obj.pickUpObj(idx_obj, gp, this);
 
+            //todo func
             if (!collision) {
                 switch (direction) {
                     case "up" -> worldY -= speed;
@@ -250,7 +254,7 @@ public class Player extends Entity {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 
-    private int attacking() {
+    private int attacking() { // todo test isPrivate
         int idx_pirate = -1;
         boolean fight_boss = false;
         spriteCounter++;
