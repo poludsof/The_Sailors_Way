@@ -21,7 +21,7 @@ public class Player extends Entity {
     GameObjects obj = new GameObjects();
     public Dictionary<String, Integer> inventory = new Hashtable<>();
     public int key_count, dead_pirate_count, rum_count, rum_time, map_count, sword_count;
-    private boolean rum_time_start = false;
+    public boolean rum_time_start = false;
     public int level = 1;
 
     public final int screenX;
@@ -135,8 +135,7 @@ public class Player extends Entity {
                 gp.boss.fightBoss();
         }
 
-        // todo func
-        else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.spacePressed) {
+        else if (keyIsPressed()) {
             if (keyH.upPressed) {
                 direction = "up";
             } else if (keyH.downPressed) {
@@ -176,10 +175,8 @@ public class Player extends Entity {
             int idx_obj = gp.checker.CheckCollisionObj(this);
             obj.pickUpObj(idx_obj, gp, this);
 
-            //todo func
-            if (!collision) {
+            if (!collision)
                 doMove();
-            }
 
             spriteCounter++;
             if (spriteCounter > 10) {
@@ -290,4 +287,9 @@ public class Player extends Entity {
             case "right" -> worldX += speed;
         }
     }
+
+    private boolean keyIsPressed() {
+        return keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.spacePressed;
+    }
 }
+

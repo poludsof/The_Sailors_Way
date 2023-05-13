@@ -33,6 +33,48 @@ public class PlayerTest extends TestCase {
     }
 
     public void testUpdate() {
+        gp.player.heart_count = 0; // check end of game state
+        gp.player.update();
+        assertEquals(GamePanel.State.GAME_OVER, gp.state);
+
+        gp.player.timeToDamage = true; // check damage timer
+        gp.player.damageCounter = 59;
+        gp.player.update();
+        assertFalse(gp.player.timeToDamage);
+
+        gp.player.keyH.spacePressed = true; // check attack after press space
+        gp.player.update();
+        assertTrue(gp.player.attacking);
+
+        gp.player.keyH.swordButton = true; // check the changes of the attacking area when the Sword is applied
+        gp.player.attacking = false;
+        gp.player.sword_count = 1;
+        gp.player.update();
+        assertEquals(60, gp.player.attackArea.width);
+        assertEquals(60, gp.player.attackArea.height);
+
+        gp.player.rum_time_start = false; // check if the data has not changed when the rum_key_button is not pressed
+        int past_speed = gp.player.speed;
+        assertEquals(past_speed, gp.player.speed);
+
+        gp.player.keyH.upPressed = true;
+        gp.player.attacking = false;
+        gp.player.keyH.rumButton = true;
+        gp.player.rum_count = 1;
+        past_speed = gp.player.speed;
+        gp.player.update();
+        assertTrue(gp.player.rum_time_start);
+        assertEquals(past_speed + 4, gp.player.speed);
+        assertEquals(0, gp.player.rum_count);
+
+        gp.player.keyH.upPressed = true;
+        gp.player.attacking = false;
+        gp.player.rum_time_start = true;
+        gp.player.rum_time = 5 * 60 + 1;
+        past_speed = gp.player.speed;
+        gp.player.update();
+        assertFalse(gp.player.rum_time_start);
+        assertEquals(past_speed - 4, gp.player.speed);
     }
 
     public void testDoMove() {
