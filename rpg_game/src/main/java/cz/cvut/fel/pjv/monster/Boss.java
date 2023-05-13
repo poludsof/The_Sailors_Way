@@ -4,10 +4,14 @@ import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.object.Key;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
@@ -16,9 +20,7 @@ public class Boss extends Entity {
 
     public Boss(GamePanel gp) {
         super(gp);
-        speed = 1;
         entityType = Type.BOSS;
-
 
         // Set the boss's solid area
         solidArea = new Rectangle();
@@ -28,13 +30,19 @@ public class Boss extends Entity {
         solidArea.width = 110;
 
         getBossImage();
-        setDefaultValues();
     }
 
-    public void setDefaultValues() {
-        heart_count = 6;
-        worldX = 87 * gp.tileSize;
-        worldY = 40 * gp.tileSize;
+    public void setDefaultValues(String filename) {
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader(filename))  {
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
+            worldX = Integer.parseInt((String) jsonObject.get("worldX")) * gp.tileSize; // 87
+            worldY = Integer.parseInt((String) jsonObject.get("worldY")) * gp.tileSize; // 40
+            speed = Integer.parseInt((String) jsonObject.get("speed"));
+            heart_count = Integer.parseInt((String) jsonObject.get("heart_count"));
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
         direction = "down";
         showHealth = false;
         timeToDamage = false;

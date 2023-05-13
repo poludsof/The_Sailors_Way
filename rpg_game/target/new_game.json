@@ -1,10 +1,11 @@
-{ "worldX": "10",
-      "worldY": "93",
+{ "worldX": "85",
+      "worldY": "45",
       "speed": "6",
       "heart_count" : "6",
-      "key_count" : "1",
+      "key_count" : "0",
       "rum_count": "0",
       "map_count": "0",
       "sword_count": "0",
-      "level": "1"
+      "level": "1",
+      "dead_pirate_count" : "0"
 }

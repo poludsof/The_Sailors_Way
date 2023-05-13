@@ -24,12 +24,10 @@ public class PlaceOnTheMap {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(filename));
 
             JSONArray jArray = (JSONArray) jsonObject.get("Array");
-            System.out.println(jArray);
             for (int i = 0; i < jArray.size(); ++i) {
 
                 JSONObject obj = (JSONObject) jArray.get(i);
                 JSONArray jsonArray = (JSONArray) obj.get("coordinates");
-//                System.out.println(jsonArray);
                 String name = (String) obj.get("Name");
 
                 if (name.equals("Key")) gp.obj_arr[i + 10] = new Key();
@@ -98,7 +96,6 @@ public class PlaceOnTheMap {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(filename));
 
             JSONArray jArray = (JSONArray) jsonObject.get("Pirates");
-            System.out.println(jArray.size());
 
             for (int i = 0; i < jArray.size(); ++i) {
 

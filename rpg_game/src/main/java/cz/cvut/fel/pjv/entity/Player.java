@@ -46,7 +46,7 @@ public class Player extends Entity {
         solidArea.height = 56;
         solidArea.width = 40;
 
-        setDefaultValues("new_game.json");
+        setDefaultValues("rpg_game/target/new_game.json");
         getPlayerImage();
     }
 
@@ -67,6 +67,7 @@ public class Player extends Entity {
             map_count = Integer.parseInt((String) jsonObject.get("map_count"));
             sword_count = Integer.parseInt((String) jsonObject.get("sword_count"));
             level = Integer.parseInt((String) jsonObject.get("level"));
+            dead_pirate_count = Integer.parseInt((String) jsonObject.get("dead_pirate_count"));
 
         } catch (ParseException | IOException e) {
             e.printStackTrace();
@@ -74,7 +75,6 @@ public class Player extends Entity {
         // Coordinates of the initial position of the player on the map
         direction = "down";
         timeToDamage = false;
-        dead_pirate_count = 0;
         attackArea.width = 40;
         attackArea.height = 40;
         fillInventory();

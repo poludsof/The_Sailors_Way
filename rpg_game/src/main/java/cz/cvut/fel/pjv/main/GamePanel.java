@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Boss boss = new Boss(this);
     public Entity[] pirates = new Entity[20];
     private final TitleMenu menu = new TitleMenu(this);
-    public String jsonfile = "";
+    public String fileName = "";
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screen_width, screen_height));
@@ -75,8 +75,9 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void setupGame() {
-        ASetter.PlaceObject("new_object_data.json");
-        ASetter.PlacePirate("new_pirate_data.json");
+        ASetter.PlaceObject("rpg_game/target/new_object_data.json");
+        ASetter.PlacePirate("rpg_game/target/new_pirate_data.json");
+        boss.setDefaultValues("rpg_game/target/new_boss_data.json");
         state = State.TITLE;
         playMusic(3);
         //sound.setMusic(3);
@@ -89,10 +90,10 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void restart() {
-        player.setDefaultValues(jsonfile);
-        ASetter.PlaceObject("load_object_data.json");
-        ASetter.PlacePirate("load_pirate_data.json");
-        boss.setDefaultValues();
+        player.setDefaultValues(fileName);
+        ASetter.PlaceObject("rpg_game/target/load_object_data.json");
+        ASetter.PlacePirate("rpg_game/target/load_pirate_data.json");
+        boss.setDefaultValues("rpg_game/target/load_boss_data.json");
         state = GamePanel.State.GAME;
     }
 
@@ -286,7 +287,7 @@ public class GamePanel extends JPanel implements Runnable{
         sound.pauseTrack();
     }
 
-    public void loadCurrentData() {
+    public void loadPlayerData() {
         JSONObject playerDetails = new JSONObject();
         playerDetails.put("worldX", Integer.toString(player.worldX / tileSize));
         playerDetails.put("worldY", Integer.toString(player.worldY / tileSize));
@@ -297,8 +298,9 @@ public class GamePanel extends JPanel implements Runnable{
         playerDetails.put("map_count", Integer.toString(player.map_count));
         playerDetails.put("sword_count", Integer.toString(player.sword_count));
         playerDetails.put("level", Integer.toString(player.level));
+        playerDetails.put("dead_pirate_count", Integer.toString(player.dead_pirate_count));
 
-        try (FileWriter file = new FileWriter("load_game.json")) {
+        try (FileWriter file = new FileWriter("rpg_game/target/load_game.json")) {
             file.write(playerDetails.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -328,7 +330,7 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
         bigger_obj.put("Array", big_obj);
-        try (FileWriter file = new FileWriter("load_object_data.json")) {
+        try (FileWriter file = new FileWriter("rpg_game/target/load_object_data.json")) {
             file.write(bigger_obj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -352,8 +354,23 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
         bigger_obj.put("Pirates", big_obj);
-        try (FileWriter file = new FileWriter("load_pirate_data.json")) {
+        try (FileWriter file = new FileWriter("rpg_game/target/load_pirate_data.json")) {
             file.write(bigger_obj.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadBossData() {
+        JSONObject bossDetails = new JSONObject();
+        bossDetails.put("worldX", Integer.toString(boss.worldX / tileSize));
+        bossDetails.put("worldY", Integer.toString(boss.worldY / tileSize));
+        bossDetails.put("speed", Integer.toString(boss.speed));
+        bossDetails.put("heart_count", Integer.toString(boss.heart_count));
+
+        try (FileWriter file = new FileWriter("rpg_game/target/load_boss_data.json")) {
+            file.write(bossDetails.toJSONString());
+            file.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
