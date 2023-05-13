@@ -65,7 +65,7 @@ public class Boss extends Entity {
         }
     }
 
-    public void randomBossAction() { // todo test
+    public void randomBossAction() {
         if (time == 80) {
             time = 0;
             Random num = new Random();
@@ -78,7 +78,7 @@ public class Boss extends Entity {
         ++time;
     }
 
-    public void fightBoss() { // todo test
+    public void fightBoss() {
         int tmp_x = gp.boss.worldX / gp.tileSize;
         int tmp_y = gp.boss.worldY / gp.tileSize;
         if (!gp.boss.timeToDamage && gp.player.attacking) {

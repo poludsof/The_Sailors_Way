@@ -3,18 +3,14 @@ package cz.cvut.fel.pjv.entity;
 import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.main.KeyHandler;
 import cz.cvut.fel.pjv.object.GameObjects;
-import cz.cvut.fel.pjv.object.Key;
-import cz.cvut.fel.pjv.object.RDoor;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -55,7 +51,7 @@ public class Player extends Entity {
     /**
      * Sets default values for the player's properties, such as coordinates and movement speed.
      */
-    public void setDefaultValues(String filename) { // todo test
+    public void setDefaultValues(String filename) {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(filename))  {
             //Read JSON file
@@ -82,7 +78,7 @@ public class Player extends Entity {
         fillInventory();
     }
 
-    public void fillInventory() { // todo test
+    public void fillInventory() {
         inventory.put("Key", key_count);
         inventory.put("Map", map_count);
         inventory.put("Rum", rum_count);
@@ -92,7 +88,7 @@ public class Player extends Entity {
     /**
      * Loads the player's image from the resource folder.
      */
-    public void getPlayerImage(){
+    private void getPlayerImage(){
         try {
             up1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up1.png"));
             up2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up2.png"));
@@ -117,13 +113,11 @@ public class Player extends Entity {
      * Updates the player's movements and animations based on the user's input.
      */
     public void update() {
-        if (heart_count <= 0) {
+        if (heart_count <= 0)
             gp.state = GamePanel.State.GAME_OVER;
-        }
 
-        else if (gp.checker.CheckCollisionBoat(this)) {
+        else if (gp.checker.CheckCollisionBoat(this))
             gp.state = GamePanel.State.HAPPY_END;
-        }
 
         if (timeToDamage) {
             damageCounter++;
@@ -135,12 +129,10 @@ public class Player extends Entity {
 
         if (attacking) {
             int idx_m = attacking();
-            if (idx_m >= 0) {
+            if (idx_m >= 0)
                 gp.pirates[idx_m].fightPirate(idx_m);
-            }
-            if (idx_m == -100) {
+            if (idx_m == -100)
                 gp.boss.fightBoss();
-            }
         }
 
         // todo func
@@ -186,12 +178,7 @@ public class Player extends Entity {
 
             //todo func
             if (!collision) {
-                switch (direction) {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
-                }
+                doMove();
             }
 
             spriteCounter++;
@@ -264,14 +251,12 @@ public class Player extends Entity {
             int solidAreaWidth = solidArea.width;
             int solidAreaHeight = solidArea.height;
 
-//            System.out.println("before " + worldX);
             switch (direction) {
                 case "up" -> { worldY -= attackArea.height; }
                 case "down" -> { worldY += attackArea.height; }
                 case "left" -> { worldX -= attackArea.width; }
                 case "right" -> { worldX += attackArea.width; }
             }
-//            System.out.println("after " + worldX);
 
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
@@ -279,7 +264,6 @@ public class Player extends Entity {
             idx_pirate = gp.checker.CheckCollisionEntity(this, gp.pirates);
             fight_boss = gp.checker.CheckCollisionBoss(this);
 
-//            fightMonster(idx_pirate);
             worldX = currWorldX;
             worldY = currWorldY;
             solidArea.width = solidAreaWidth;
@@ -296,5 +280,14 @@ public class Player extends Entity {
         if (fight_boss)
             return -100;
         return idx_pirate;
+    }
+
+    public void doMove() { //change coordinates relative to the direction
+        switch (direction) {
+            case "up" -> worldY -= speed;
+            case "down" -> worldY += speed;
+            case "left" -> worldX -= speed;
+            case "right" -> worldX += speed;
+        }
     }
 }

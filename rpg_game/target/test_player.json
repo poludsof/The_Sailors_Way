@@ -1,0 +1,11 @@
+{ "worldX": "999",
+  "worldY": "666",
+  "speed": "6",
+  "heart_count" : "6",
+  "key_count" : "2",
+  "rum_count": "3",
+  "map_count": "4",
+  "sword_count": "5",
+  "level": "10",
+  "dead_pirate_count" : "9"
+}
