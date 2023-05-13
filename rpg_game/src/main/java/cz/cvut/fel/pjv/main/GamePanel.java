@@ -7,6 +7,7 @@ import cz.cvut.fel.pjv.object.GameObjects;
 import cz.cvut.fel.pjv.object.House;
 import cz.cvut.fel.pjv.object.RDoor;
 import cz.cvut.fel.pjv.tile.TileManager;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.imageio.ImageIO;
@@ -74,8 +75,8 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void setupGame() {
-        ASetter.PlaceObject();
-        ASetter.PlaceMonster();
+        ASetter.PlaceObject("new_object_data.json");
+        ASetter.PlacePirate("new_pirate_data.json");
         state = State.TITLE;
         playMusic(3);
         //sound.setMusic(3);
@@ -89,8 +90,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void restart() {
         player.setDefaultValues(jsonfile);
-        ASetter.PlaceObject();
-        ASetter.PlaceMonster();
+        ASetter.PlaceObject("load_object_data.json");
+        ASetter.PlacePirate("load_pirate_data.json");
         boss.setDefaultValues();
         state = GamePanel.State.GAME;
     }
@@ -300,6 +301,59 @@ public class GamePanel extends JPanel implements Runnable{
         try (FileWriter file = new FileWriter("load_game.json")) {
             file.write(playerDetails.toJSONString());
             file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadObjectData() {
+        JSONArray big_obj = new JSONArray();
+        JSONObject bigger_obj = new JSONObject();
+
+        for (int i = 10; i < obj_arr.length; ++i) {
+            if (obj_arr[i] != null) {
+                JSONObject obj = new JSONObject();
+                JSONArray subjects = new JSONArray();
+                subjects.add(obj_arr[i].worldX / tileSize);
+                subjects.add(obj_arr[i].worldY / tileSize);
+                obj.put("coordinates", subjects);
+                if (obj_arr[i].name_object.equals("Key")) obj.put("Name", "Key");
+                if (obj_arr[i].name_object.equals("Map")) obj.put("Name", "Map");
+                if (obj_arr[i].name_object.equals("Sword")) obj.put("Name", "Sword");
+                if (obj_arr[i].name_object.equals("Heart")) obj.put("Name", "Heart");
+                if (obj_arr[i].name_object.equals("BlackKey")) obj.put("Name", "BlackKey");
+                if (obj_arr[i].name_object.equals("Rum")) obj.put("Name", "Rum");
+
+                big_obj.add(obj);
+            }
+        }
+        bigger_obj.put("Array", big_obj);
+        try (FileWriter file = new FileWriter("load_object_data.json")) {
+            file.write(bigger_obj.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadPirateData() {
+        JSONArray big_obj = new JSONArray();
+        JSONObject bigger_obj = new JSONObject();
+
+        for (int i = 0; i < pirates.length; ++i) {
+            if (pirates[i] != null) {
+                JSONObject obj = new JSONObject();
+                JSONArray subjects = new JSONArray();
+                subjects.add(pirates[i].worldX / tileSize);
+                subjects.add(pirates[i].worldY / tileSize);
+                obj.put("coordinates", subjects);
+                obj.put("health", pirates[i].heart_count);
+
+                big_obj.add(obj);
+            }
+        }
+        bigger_obj.put("Pirates", big_obj);
+        try (FileWriter file = new FileWriter("load_pirate_data.json")) {
+            file.write(bigger_obj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }

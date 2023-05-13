@@ -16,7 +16,6 @@ public class Pirate extends Entity {
     public Pirate(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        heart_count = 3;
         speed = 1;
         entityType = Type.PIRATE;
 

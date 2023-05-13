@@ -37,6 +37,7 @@ public class MouseHandler implements MouseListener {
                     gp.state = GamePanel.State.HELP;
                 }
                 else if (gp.state == GamePanel.State.LOAD) {
+                    gp.stopMusic();
                     gp.jsonfile = "load_game.json";
                     gp.restart();
                 }
@@ -62,6 +63,8 @@ public class MouseHandler implements MouseListener {
             //loadButton = new Rectangle(gp.screen_width - 100, gp.tileSize * 3, gp.tileSize, gp.tileSize);
             if (mouseY >= gp.tileSize * 3 && mouseY <= gp.tileSize * 4) {
                 gp.loadCurrentData();
+                gp.loadObjectData();
+                gp.loadPirateData();
                 System.exit(1);
             }
         }

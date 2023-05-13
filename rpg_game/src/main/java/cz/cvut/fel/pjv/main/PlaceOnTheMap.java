@@ -9,7 +9,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 
 public class PlaceOnTheMap {
     GamePanel gp;
@@ -18,20 +17,19 @@ public class PlaceOnTheMap {
         this.gp = gp;
     }
 
-    public void PlaceObject() {
+    public void PlaceObject(String filename) {
         JSONParser jsonParser = new JSONParser();
 
         try {
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("object_data.json"));
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(filename));
 
             JSONArray jArray = (JSONArray) jsonObject.get("Array");
-            System.out.println(jArray.size());
-
+            System.out.println(jArray);
             for (int i = 0; i < jArray.size(); ++i) {
 
                 JSONObject obj = (JSONObject) jArray.get(i);
                 JSONArray jsonArray = (JSONArray) obj.get("coordinates");
-
+//                System.out.println(jsonArray);
                 String name = (String) obj.get("Name");
 
                 if (name.equals("Key")) gp.obj_arr[i + 10] = new Key();
@@ -93,50 +91,28 @@ public class PlaceOnTheMap {
     }
 
 
-    public void PlaceMonster() {
-        gp.pirates[0] = new Pirate(gp);
-        gp.pirates[0].worldX = 14 * gp.tileSize;
-        gp.pirates[0].worldY = 93 * gp.tileSize;
+    public void PlacePirate(String filename) {
+        JSONParser jsonParser = new JSONParser();
 
-        gp.pirates[1] = new Pirate(gp);
-        gp.pirates[1].worldX = 5 * gp.tileSize;
-        gp.pirates[1].worldY = 93 * gp.tileSize;
+        try {
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(filename));
 
-        gp.pirates[2] = new Pirate(gp);
-        gp.pirates[2].worldX = 10 * gp.tileSize;
-        gp.pirates[2].worldY = 89 * gp.tileSize;
+            JSONArray jArray = (JSONArray) jsonObject.get("Pirates");
+            System.out.println(jArray.size());
 
-        gp.pirates[3] = new Pirate(gp);
-        gp.pirates[3].worldX = 3 * gp.tileSize;
-        gp.pirates[3].worldY = 54 * gp.tileSize;
+            for (int i = 0; i < jArray.size(); ++i) {
 
-        gp.pirates[4] = new Pirate(gp);
-        gp.pirates[4].worldX = 8 * gp.tileSize;
-        gp.pirates[4].worldY = 49 * gp.tileSize;
+                JSONObject obj = (JSONObject) jArray.get(i);
+                JSONArray jsonArray = (JSONArray) obj.get("coordinates");
 
-        gp.pirates[5] = new Pirate(gp);
-        gp.pirates[5].worldX = 16 * gp.tileSize;
-        gp.pirates[5].worldY = 56 * gp.tileSize;
+                gp.pirates[i] = new Pirate(gp);
 
-        gp.pirates[6] = new Pirate(gp);
-        gp.pirates[6].worldX = 10 * gp.tileSize;
-        gp.pirates[6].worldY = 40 * gp.tileSize;
-
-        gp.pirates[7] = new Pirate(gp);
-        gp.pirates[7].worldX = 28 * gp.tileSize;
-        gp.pirates[7].worldY = 44 * gp.tileSize;
-
-        gp.pirates[8] = new Pirate(gp);
-        gp.pirates[8].worldX = 28 * gp.tileSize;
-        gp.pirates[8].worldY = 58 * gp.tileSize;
-
-        gp.pirates[9] = new Pirate(gp);
-        gp.pirates[9].worldX = 33 * gp.tileSize;
-        gp.pirates[9].worldY = 55 * gp.tileSize;
-
-        gp.pirates[10] = new Pirate(gp);
-        gp.pirates[10].worldX = 22 * gp.tileSize;
-        gp.pirates[10].worldY = 39 * gp.tileSize;
-
+                gp.pirates[i].heart_count = (int) ((long) obj.get("health"));
+                gp.pirates[i].worldX = (int) ((long) jsonArray.get(0)) * gp.tileSize;
+                gp.pirates[i].worldY = (int) ((long) jsonArray.get(1)) * gp.tileSize;
+            }
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }
