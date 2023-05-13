@@ -103,7 +103,6 @@ public class CollisionChecker {
     }
 
     public int CheckCollisionEntity(Entity entity, Entity[] arrayEntity) { // todo test
-//        System.out.println("X:" +  entity.worldX + "  :  " + entity.solidArea.width);
         int idx = -1;
         for (int i = 0; i < arrayEntity.length; ++i) {
             if (arrayEntity[i] != null) {
@@ -114,18 +113,10 @@ public class CollisionChecker {
                 arrayEntity[i].solidArea.y += arrayEntity[i].worldY;
 
                 switch (entity.direction) {
-                    case "up" -> {
-                        entity.solidArea.y -= entity.speed;
-                    }
-                    case "down" -> {
-                        entity.solidArea.y += entity.speed;
-                    }
-                    case "right" -> {
-                        entity.solidArea.x += entity.speed;
-                    }
-                    case "left" -> {
-                        entity.solidArea.x -= entity.speed;
-                    }
+                    case "up" -> entity.solidArea.y -= entity.speed;
+                    case "down" -> entity.solidArea.y += entity.speed;
+                    case "right" -> entity.solidArea.x += entity.speed;
+                    case "left" -> entity.solidArea.x -= entity.speed;
                 }
                 if (arrayEntity[i].solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
                     entity.collision = true;
@@ -150,18 +141,10 @@ public class CollisionChecker {
             gp.player.solidArea.x += gp.player.worldX;  // get position on the map
             gp.player.solidArea.y += gp.player.worldY;
             switch (entity.direction) {
-                case "up" -> {
-                    entity.solidArea.y -= entity.speed;
-                }
-                case "down" -> {
-                    entity.solidArea.y += entity.speed;
-                }
-                case "right" -> {
-                    entity.solidArea.x += entity.speed;
-                }
-                case "left" -> {
-                    entity.solidArea.x -= entity.speed;
-                }
+                case "up" -> entity.solidArea.y -= entity.speed;
+                case "down" -> entity.solidArea.y += entity.speed;
+                case "right" -> entity.solidArea.x += entity.speed;
+                case "left" -> entity.solidArea.x -= entity.speed;
             }
             if (entity.solidArea.intersects(gp.player.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
                 entity.collision = true;
@@ -232,19 +215,12 @@ public class CollisionChecker {
             gp.boss.solidArea.y += gp.boss.worldY;
 
             switch (entity.direction) {
-                case "up" -> {
-                    entity.solidArea.y -= entity.speed;
-                }
-                case "down" -> {
-                    entity.solidArea.y += entity.speed;
-                }
-                case "right" -> {
-                    entity.solidArea.x += entity.speed;
-                }
-                case "left" -> {
-                    entity.solidArea.x -= entity.speed;
-                }
+                case "up" -> entity.solidArea.y -= entity.speed;
+                case "down" -> entity.solidArea.y += entity.speed;
+                case "right" -> entity.solidArea.x += entity.speed;
+                case "left" -> entity.solidArea.x -= entity.speed;
             }
+
             if (gp.boss.solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
                 entity.collision = true;
                 fight = true;
