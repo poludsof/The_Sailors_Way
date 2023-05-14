@@ -3,7 +3,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} %msg%n"/>
         </Console>
-        <File name="File" fileName="sailor.log">
+        <File name="File" fileName="rpg_game/src/sailor.log">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} %msg%n"/>
         </File>
     </Appenders>
