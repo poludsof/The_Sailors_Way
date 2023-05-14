@@ -102,7 +102,7 @@ public class CollisionChecker {
         return idx;
     }
 
-    public int CheckCollisionEntity(Entity entity, Entity[] arrayEntity) { // todo test
+    public int CheckCollisionEntity(Entity entity, Entity[] arrayEntity) {
         int idx = -1;
         for (int i = 0; i < arrayEntity.length; ++i) {
             if (arrayEntity[i] != null) {

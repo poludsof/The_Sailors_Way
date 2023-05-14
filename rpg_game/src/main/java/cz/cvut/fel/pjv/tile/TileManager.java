@@ -11,7 +11,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class TileManager {
+    private static final Logger LOGGER = LogManager.getLogger(TileManager.class);
     GamePanel gp;
     public Tile[] tile; // array with tiles
 
@@ -60,6 +64,7 @@ public class TileManager {
 
                 tile[i].collision = Boolean.parseBoolean(tile_collisions.get(i));
             } catch (IOException e) {
+                LOGGER.error("Error: {}", e.getMessage()); // todo
                 throw new RuntimeException(e);
             }
         }
