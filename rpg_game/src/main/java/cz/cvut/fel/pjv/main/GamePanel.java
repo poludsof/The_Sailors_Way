@@ -79,8 +79,11 @@ public class GamePanel extends JPanel {
         this.setFocusable(true);
     }
 
+    /**
+     Initializes the game by setting default values for the player, objects, pirates, boss and sound.
+     Sets the state of the game to TITLE.
+     */
     public void setupGame() {
-        System.out.println("new");
         player.setDefaultValues(filenamePlayer);
         objPlacer.PlaceObject(filenameObjects);
         objPlacer.PlacePirate(filenamePirates);
@@ -89,6 +92,10 @@ public class GamePanel extends JPanel {
         sound.setMusic(3);
     }
 
+    /**
+     Starts the game by creating a Timer with a delay of 16 milliseconds
+     to update the game state and repaint the graphics.
+     */
     public void startGame() {
         Timer timer = new Timer(16, (e) -> {
             update();  // Functions are called every 16 milliseconds -> about 60 times per second (fps == 60).
@@ -97,6 +104,10 @@ public class GamePanel extends JPanel {
         timer.start();
     }
 
+    /**
+     Restarts the game, reloading the player, objects, pirates and boss
+     based on the downloaded files, and sets the game state to "GAME".
+     */
     public void restart() {
         player.setDefaultValues(filenameLoadPlayer);
         objPlacer.PlaceObject(filenameLoadObjects);
@@ -105,6 +116,9 @@ public class GamePanel extends JPanel {
         state = GamePanel.State.GAME;
     }
 
+    /**
+     Updates the game by calling the update method for the player, pirates and boss.
+     */
     private void update() {
         if (state == State.GAME) {
             player.update();
@@ -117,6 +131,12 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * This method overrides the paintComponent method of JPanel
+     * and is responsible for painting the components of the game
+     * and releases the resources occupied by the Graphics2D object after use.
+     * Depending on the state of the game, it draws different menus, objects, and buttons.
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);  // Clear the panel's surface.
@@ -183,7 +203,12 @@ public class GamePanel extends JPanel {
         g2.dispose(); // Releasing resources occupied by g2
     }
 
+    /**
+     The method is called to display player's level on the screen.
+     It loads necessary fonts and images, and displays the current level number.
+     */
     private void drawLevels(Graphics2D g2, GamePanel gp) {
+        // Setting the font for text.
         final Font Bruno;
         try {
             InputStream is = getClass().getResourceAsStream("/fonts/Bruno.ttf");
@@ -193,6 +218,7 @@ public class GamePanel extends JPanel {
             throw new RuntimeException(e);
         }
 
+        // Reading images from resources.
         BufferedImage hat, back_level, background;
         try {
             hat = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("level/hat_sailor.png")));
@@ -202,10 +228,12 @@ public class GamePanel extends JPanel {
             throw new RuntimeException(e);
         }
 
+        // Draw images on the screen.
         g2.drawImage(back_level, 260, 30, gp.tileSize, gp.tileSize,null);
         g2.drawImage(background, 18, 30, gp.tileSize * 3, gp.tileSize,null);
         g2.drawImage(hat, 260, -26, gp.tileSize, gp.tileSize,null);
 
+        // Displaying text on the screen.
         g2.setFont(Bruno);
         g2.setColor(Color.BLACK);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 47F));
@@ -213,7 +241,11 @@ public class GamePanel extends JPanel {
         g2.drawString(Integer.toString(gp.player.level), 285, 87);
     }
 
+    /**
+     * The method is called to display the player's health in the form of hearts on the screen.
+     */
     public void drawHearts(Graphics2D g2, GamePanel gp) {
+        // Reading images from resources.
         BufferedImage full_heart, half_heart, empty_heart;
         try {
             empty_heart = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("heart/empty_heart.png")));
@@ -232,7 +264,7 @@ public class GamePanel extends JPanel {
             heartX += gp.tileSize + 10;
         } heartX = 25;
 
-        // Start filling hearts with health.
+        // Filling hearts with health.
         int count = 0;
         while (count < gp.player.heart_count) {
             // Draw one half of the heart.
@@ -247,16 +279,27 @@ public class GamePanel extends JPanel {
 
     }
 
+    /**
+     Displays a map image on the game panel.
+     @throws RuntimeException if the map image file is not found or cannot be read.
+     */
     private void showMap(Graphics2D g2, GamePanel gp) {
+        // Reading images from resources.
         BufferedImage open_map;
         try {
             open_map = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("objects/open_map.jpg")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        // Draw images on the screen.
         g2.drawImage(open_map, 350, 150, gp.tileSize * 6, gp.tileSize * 6, null);
     }
 
+    /**
+     Loads the player's data and writes it into a JSON file.
+     @throws RuntimeException if there is an IOException while writing to the file.
+     */
     public void loadPlayerData() {
         JSONObject playerDetails = new JSONObject();
         playerDetails.put("worldX", player.worldX / tileSize);
@@ -278,19 +321,23 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     Loads object data and writes it as a JSON file.
+     The coordinates of each object and its type (name) are saved.
+     */
     public void loadObjectData() {
-        JSONArray big_obj = new JSONArray();
-        JSONObject bigger_obj = new JSONObject();
+        JSONArray arrObj = new JSONArray();
+        JSONObject jsonObj = new JSONObject();
 
         for (int i = 10; i < objArray.length; ++i) {
             if (objArray[i] != null) {
-                System.out.println("obj num: " + i);
+                JSONObject obj = new JSONObject();  // Create a JSON object for each item.
+                JSONArray arrItems = new JSONArray();
 
-                JSONObject obj = new JSONObject();
-                JSONArray subjects = new JSONArray();
-                subjects.add(objArray[i].worldX / tileSize);
-                subjects.add(objArray[i].worldY / tileSize);
-                obj.put("coordinates", subjects);
+                arrItems.add(objArray[i].worldX / tileSize);  // Store coordinates on the map in the JSON array.
+                arrItems.add(objArray[i].worldY / tileSize);
+                obj.put("coordinates", arrItems);
+
                 if (objArray[i].name_object.equals("Key")) obj.put("Name", "Key");
                 if (objArray[i].name_object.equals("Map")) obj.put("Name", "Map");
                 if (objArray[i].name_object.equals("Sword")) obj.put("Name", "Sword");
@@ -298,41 +345,50 @@ public class GamePanel extends JPanel {
                 if (objArray[i].name_object.equals("BlackKey")) obj.put("Name", "BlackKey");
                 if (objArray[i].name_object.equals("Rum")) obj.put("Name", "Rum");
 
-                big_obj.add(obj);
+                arrObj.add(obj);  // Add an object with its coordinates and name to the array.
             }
         }
-        bigger_obj.put("Array", big_obj);
+        jsonObj.put("Objects", arrObj);
         try (FileWriter file = new FileWriter(filenameLoadObjects)) {
-            file.write(bigger_obj.toJSONString());
+            file.write(jsonObj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     Saves pirate data to a JSON file.
+     */
     public void loadPirateData() {
-        JSONArray big_obj = new JSONArray();
-        JSONObject bigger_obj = new JSONObject();
+        JSONArray arrObj = new JSONArray();
+        JSONObject jsonObj = new JSONObject();
 
         for (Entity pirate : pirates) {
             if (pirate != null) {
-                JSONObject obj = new JSONObject();
-                JSONArray subjects = new JSONArray();
-                subjects.add(pirate.worldX / tileSize);
-                subjects.add(pirate.worldY / tileSize);
-                obj.put("coordinates", subjects);
+                JSONObject obj = new JSONObject();  // Create a JSON object for each pirate.
+                JSONArray arrPirates = new JSONArray();
+
+                arrPirates.add(pirate.worldX / tileSize);  // Store coordinates in the JSON array.
+                arrPirates.add(pirate.worldY / tileSize);
+
+                obj.put("coordinates", arrPirates);  // Store coordinates and health in the JSON object.
                 obj.put("health", pirate.heart_count);
 
-                big_obj.add(obj);
+                arrObj.add(obj);  // All the JSON objects (pirate) are added to a JSON array.
             }
         }
-        bigger_obj.put("Pirates", big_obj);
+        jsonObj.put("Pirates", arrObj);
         try (FileWriter file = new FileWriter(filenameLoadPirates)) {
-            file.write(bigger_obj.toJSONString());
+            file.write(jsonObj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     Loads boss data and writes it to a file in JSON format.
+     @throws RuntimeException if an error occurs while writing the file.
+     */
     public void loadBossData() {
         JSONObject bossDetails = new JSONObject();
         bossDetails.put("worldX", boss.worldX / tileSize);

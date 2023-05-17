@@ -23,7 +23,7 @@ public class MapObjectPlacer {
         try {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(filename));
 
-            JSONArray jArray = (JSONArray) jsonObject.get("Array");
+            JSONArray jArray = (JSONArray) jsonObject.get("Objects");
             for (int i = 0; i < jArray.size(); ++i) {
 
                 JSONObject obj = (JSONObject) jArray.get(i);
