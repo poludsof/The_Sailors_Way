@@ -7,6 +7,7 @@ import cz.cvut.fel.pjv.main.GamePanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 
 public class Pirate extends Entity {
@@ -32,14 +33,14 @@ public class Pirate extends Entity {
 
     public void getPirateImage() {
         try {
-            up1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("pirate/pirate_up1.png"));
-            up2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("pirate/pirate_up2.png"));
-            left1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("pirate/pirate_left1.png"));
-            left2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("pirate/pirate_left2.png"));
-            right1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("pirate/pirate_right1.png"));
-            right2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("pirate/pirate_right2.png"));
-            down1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("pirate/pirate_down1.png"));
-            down2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("pirate/pirate_down2.png"));
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_up1.png")));
+            up2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_up2.png")));
+            left1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_left1.png")));
+            left2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_left2.png")));
+            right1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_right1.png")));
+            right2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_right2.png")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_down1.png")));
+            down2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_down2.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -64,7 +65,7 @@ public class Pirate extends Entity {
                 if (gp.pirates[idx].heart_count > 0) {
                     --gp.pirates[idx].heart_count;
                     gp.pirates[idx].showHealth = true;
-                    gp.playMusic(6);
+                    gp.sound.setMusic(6);
                 } else {
                     gp.pirates[idx] = null;
                     ++gp.player.dead_pirate_count;

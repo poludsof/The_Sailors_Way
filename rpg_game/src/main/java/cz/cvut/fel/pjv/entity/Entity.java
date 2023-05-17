@@ -7,14 +7,12 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
 
-    public enum Type{
-        PLAYER,
+    public enum Type {
         PIRATE,
         BOSS
     }
 
     public int worldX, worldY;
-
     public int speed;
     public String direction;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
@@ -114,7 +112,7 @@ public class Entity {
                     if (this.entityType == Type.BOSS)
                         --gp.player.heart_count;
                     --gp.player.heart_count;
-                    gp.playMusic(8);
+                    gp.sound.setMusic(8);
                 }
                 gp.player.timeToDamage = true;
             }

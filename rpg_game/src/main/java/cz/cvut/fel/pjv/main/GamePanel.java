@@ -222,19 +222,23 @@ public class GamePanel extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        int heartX = 25;
-        int heartY = 115;
-        int count = 0;
 
+        int heartX = 25; // Initial positions for starting to draw the player's health.
+        int heartY = 115;
+
+        // Draw empty hearts of health.
         for (int i = 0; i < 3; ++i) {
             g2.drawImage(empty_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
             heartX += gp.tileSize + 10;
         } heartX = 25;
 
+        // Start filling hearts with health.
+        int count = 0;
         while (count < gp.player.heart_count) {
+            // Draw one half of the heart.
             g2.drawImage(half_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
             ++count;
-            if (count < gp.player.heart_count) {
+            if (count < gp.player.heart_count) {  // Draw the other half of the heart.
                 g2.drawImage(full_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
             }
             ++count;
@@ -255,17 +259,17 @@ public class GamePanel extends JPanel {
 
     public void loadPlayerData() {
         JSONObject playerDetails = new JSONObject();
-        playerDetails.put("worldX", Integer.toString(player.worldX / tileSize));
-        playerDetails.put("worldY", Integer.toString(player.worldY / tileSize));
-        playerDetails.put("speed", Integer.toString(player.speed));
-        playerDetails.put("heart_count", Integer.toString(player.heart_count));
-        playerDetails.put("key_count", Integer.toString(player.key_count));
-        playerDetails.put("rum_count", Integer.toString(player.rum_count));
-        playerDetails.put("map_count", Integer.toString(player.map_count));
-        playerDetails.put("sword_count", Integer.toString(player.sword_count));
-        playerDetails.put("level", Integer.toString(player.level));
-        playerDetails.put("dead_pirate_count", Integer.toString(player.dead_pirate_count));
-        playerDetails.put("max_health", Integer.toString(player.max_health));
+        playerDetails.put("worldX", player.worldX / tileSize);
+        playerDetails.put("worldY", player.worldY / tileSize);
+        playerDetails.put("speed", player.speed);
+        playerDetails.put("heart_count", player.heart_count);
+        playerDetails.put("key_count", player.key_count);
+        playerDetails.put("rum_count", player.rum_count);
+        playerDetails.put("map_count", player.map_count);
+        playerDetails.put("sword_count",player.sword_count);
+        playerDetails.put("level", player.level);
+        playerDetails.put("dead_pirate_count", player.dead_pirate_count);
+        playerDetails.put("max_health", player.max_health);
         try (FileWriter file = new FileWriter(filenameLoadPlayer)) {
             file.write(playerDetails.toJSONString());
             file.flush();
@@ -275,7 +279,6 @@ public class GamePanel extends JPanel {
     }
 
     public void loadObjectData() {
-        System.out.println("save obj");
         JSONArray big_obj = new JSONArray();
         JSONObject bigger_obj = new JSONObject();
 
@@ -332,10 +335,10 @@ public class GamePanel extends JPanel {
 
     public void loadBossData() {
         JSONObject bossDetails = new JSONObject();
-        bossDetails.put("worldX", Integer.toString(boss.worldX / tileSize));
-        bossDetails.put("worldY", Integer.toString(boss.worldY / tileSize));
-        bossDetails.put("speed", Integer.toString(boss.speed));
-        bossDetails.put("heart_count", Integer.toString(boss.heart_count));
+        bossDetails.put("worldX", boss.worldX / tileSize);
+        bossDetails.put("worldY", boss.worldY / tileSize);
+        bossDetails.put("speed", boss.speed);
+        bossDetails.put("heart_count", boss.heart_count);
 
         try (FileWriter file = new FileWriter(filenameLoadBoss)) {
             file.write(bossDetails.toJSONString());

@@ -43,7 +43,7 @@ public class Player extends Entity {
         solidArea.height = 56;
         solidArea.width = 40;
 
-        setDefaultValues("rpg_game/src/dataJson/new_game.json");
+//        setDefaultValues("rpg_game/src/dataJson/new_game.json");
         getPlayerImage();
     }
 
@@ -55,17 +55,17 @@ public class Player extends Entity {
         try (FileReader reader = new FileReader(filename))  {
             //Read JSON file
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
-            worldX = Integer.parseInt((String) jsonObject.get("worldX")) * gp.tileSize; // 10
-            worldY = Integer.parseInt((String) jsonObject.get("worldY")) * gp.tileSize; // 93
-            speed = Integer.parseInt((String) jsonObject.get("speed"));
-            heart_count = Integer.parseInt((String) jsonObject.get("heart_count"));
-            key_count = Integer.parseInt((String) jsonObject.get("key_count"));
-            rum_count = Integer.parseInt((String) jsonObject.get("rum_count"));
-            map_count = Integer.parseInt((String) jsonObject.get("map_count"));
-            sword_count = Integer.parseInt((String) jsonObject.get("sword_count"));
-            level = Integer.parseInt((String) jsonObject.get("level"));
-            dead_pirate_count = Integer.parseInt((String) jsonObject.get("dead_pirate_count"));
-            max_health = Integer.parseInt((String) jsonObject.get("max_health"));
+            worldX = ((Long) jsonObject.get("worldX")).intValue() * gp.tileSize; // 10
+            worldY = ((Long) jsonObject.get("worldY")).intValue() * gp.tileSize; // 93
+            speed = ((Long) jsonObject.get("speed")).intValue();
+            heart_count = ((Long) jsonObject.get("heart_count")).intValue();
+            key_count = ((Long) jsonObject.get("key_count")).intValue();
+            rum_count = ((Long) jsonObject.get("rum_count")).intValue();
+            map_count = ((Long) jsonObject.get("map_count")).intValue();
+            sword_count = ((Long) jsonObject.get("sword_count")).intValue();
+            level = ((Long) jsonObject.get("level")).intValue();
+            dead_pirate_count = ((Long) jsonObject.get("dead_pirate_count")).intValue();
+            max_health = ((Long) jsonObject.get("max_health")).intValue();
 
         } catch (ParseException | IOException e) {
             e.printStackTrace();
@@ -271,7 +271,7 @@ public class Player extends Entity {
         }
 
         if (spriteCounter > 25){
-            gp.playMusic(7);
+            gp.sound.setMusic(7);
             spriteCounter = 0;
             attacking = false;
         }

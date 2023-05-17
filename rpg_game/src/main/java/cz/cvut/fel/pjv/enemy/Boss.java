@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 
 import static cz.cvut.fel.pjv.main.Main.LOGGER;
@@ -37,10 +38,10 @@ public class Boss extends Entity {
             JSONParser jsonParser = new JSONParser();
             try (FileReader reader = new FileReader(filename)) {
                 JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
-                worldX = Integer.parseInt((String) jsonObject.get("worldX")) * gp.tileSize; // 87
-                worldY = Integer.parseInt((String) jsonObject.get("worldY")) * gp.tileSize; // 40
-                speed = Integer.parseInt((String) jsonObject.get("speed"));
-                heart_count = Integer.parseInt((String) jsonObject.get("heart_count"));
+                worldX = ((Long) jsonObject.get("worldX")).intValue() * gp.tileSize; // 87
+                worldY = ((Long) jsonObject.get("worldY")).intValue() * gp.tileSize; // 40
+                speed = ((Long) jsonObject.get("speed")).intValue();
+                heart_count = ((Long) jsonObject.get("heart_count")).intValue();
             } catch (ParseException | IOException e) {
                 e.printStackTrace();
             }
@@ -52,14 +53,14 @@ public class Boss extends Entity {
 
     private void getBossImage() {
         try {
-            up1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_up1.png"));
-            up2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_up2.png"));
-            left1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_left1.png"));
-            left2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_left2.png"));
-            right1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_right1.png"));
-            right2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_right2.png"));
-            down1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_down1.png"));
-            down2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("boss/boss_down2.png"));
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_up1.png")));
+            up2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_up2.png")));
+            left1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_left1.png")));
+            left2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_left2.png")));
+            right1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_right1.png")));
+            right2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_right2.png")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_down1.png")));
+            down2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_down2.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -86,7 +87,7 @@ public class Boss extends Entity {
                 --gp.boss.heart_count;
                 LOGGER.info("Boss loses 1 health.");
                 gp.boss.showHealth = true;
-                gp.playMusic(6);
+                gp.sound.setMusic(6);
             } else {
                 LOGGER.info("You won the boss. The boss is dead..");
                 gp.objPlacer.PlaceGoldKey(tmp_x, tmp_y);

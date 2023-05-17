@@ -27,7 +27,7 @@ public class MouseHandler implements MouseListener {
                 }
                 else if (gp.state == GamePanel.State.LOAD) {
                     gp.state = GamePanel.State.GAME;
-                    gp.stopMusic();
+                    gp.sound.pauseTrack();
                 }
             }
             else if (mouseY >= 510 && mouseY <= 590) {
@@ -35,7 +35,7 @@ public class MouseHandler implements MouseListener {
                     gp.state = GamePanel.State.HELP;
                 }
                 else if (gp.state == GamePanel.State.LOAD) {
-                    gp.stopMusic();
+                    gp.sound.pauseTrack();
 //                    gp.state = GamePanel.State.GAME;
                     gp.restart();
                 }
@@ -94,7 +94,7 @@ public class MouseHandler implements MouseListener {
             if (mouseY >= gp.screenHeight / 2 + 115 && mouseY <= gp.screenHeight / 2 + 185) {
                 if (gp.state == GamePanel.State.GAME_OVER || gp.state == GamePanel.State.HAPPY_END) {
 //                    gp.filenameObjects = "rpg_game/src/dataJson/new_game.json"; // update boss todo
-                    gp.stopMusic();
+                    gp.sound.pauseTrack();
 //                    gp.state = GamePanel.State.GAME;
                     gp.setupGame();
                 }
