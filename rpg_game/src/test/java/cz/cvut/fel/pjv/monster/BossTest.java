@@ -7,7 +7,7 @@ public class BossTest extends TestCase {
     GamePanel gp = new GamePanel();
 
     public void testSetDefaultValues() {
-        gp.boss.setDefaultValues("target/test_boss.json");
+        gp.boss.setDefaultValues("rpg_game/src/dataJson/test_boss.json");
         assertEquals(666 * gp.tileSize, gp.boss.worldX); // Проверяем, что количество ключей не уменьшилось
         assertEquals(4 * gp.tileSize, gp.boss.worldY); // Проверяем, что количество ключей не уменьшилось
         assertEquals(1, gp.boss.speed); // Проверяем, что количество ключей не уменьшилось

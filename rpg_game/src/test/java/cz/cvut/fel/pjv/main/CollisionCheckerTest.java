@@ -39,18 +39,18 @@ public class CollisionCheckerTest extends TestCase {
         gp.player.worldX = 0;  // set the position of the player on the map
         gp.player.worldY = 0;
 
-        gp.boat = new Boat(gp);  // create a new boat for testing
-        gp.boat.worldX = 0;  // set the position of the boat on the map
-        gp.boat.worldY = 0;
+        gp.ship = new Ship(gp);  // create a new boat for testing
+        gp.ship.worldX = 0;  // set the position of the boat on the map
+        gp.ship.worldY = 0;
 
         boolean result;
         // Case 1: The player is not colliding with the boat
-        gp.boat.solidArea = new Rectangle(100, 100, 32, 32);
+        gp.ship.solidArea = new Rectangle(100, 100, 32, 32);
         result = gp.checker.CheckCollisionBoat(gp.player);
         assertFalse("The player should not be colliding with the boat", result);
 
         // Case 2: The player is colliding with the boat
-        gp.boat.solidArea = new Rectangle(0, 0, 32, 32);
+        gp.ship.solidArea = new Rectangle(0, 0, 32, 32);
         result = gp.checker.CheckCollisionBoat(gp.player);
         assertTrue("The player should be colliding with the boat", result);
     }

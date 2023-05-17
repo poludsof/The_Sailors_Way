@@ -7,10 +7,9 @@ import javax.swing.JFrame;
 import java.io.IOException;
 
 public class Main {
-    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+    public static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        LOGGER.info("This is an INFO level log message!");
         System.setProperty("sun.java2d.opengl", "true");
 
         // Creating a window

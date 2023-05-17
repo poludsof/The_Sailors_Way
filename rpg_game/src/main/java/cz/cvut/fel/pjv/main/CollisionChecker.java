@@ -1,7 +1,6 @@
 package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.entity.Entity;
-import cz.cvut.fel.pjv.entity.Player;
 
 public class CollisionChecker {
     GamePanel gp;
@@ -73,18 +72,10 @@ public class CollisionChecker {
                 gp.obj_arr[i].solidArea.y += gp.obj_arr[i].worldY;
 
                 switch (entity.direction) {
-                    case "up" -> {
-                        entity.solidArea.y -= entity.speed;
-                    }
-                    case "down" -> {
-                        entity.solidArea.y += entity.speed;
-                    }
-                    case "right" -> {
-                        entity.solidArea.x += entity.speed;
-                    }
-                    case "left" -> {
-                        entity.solidArea.x -= entity.speed;
-                    }
+                    case "up" -> entity.solidArea.y -= entity.speed;
+                    case "down" -> entity.solidArea.y += entity.speed;
+                    case "right" -> entity.solidArea.x += entity.speed;
+                    case "left" -> entity.solidArea.x -= entity.speed;
                 }
                 if (gp.obj_arr[i].solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
                     if (gp.obj_arr[i].collision_obj) // is solid obj
@@ -163,8 +154,8 @@ public class CollisionChecker {
         entity.solidArea.x += entity.worldX;  // get position on the map
         entity.solidArea.y += entity.worldY;
 
-        gp.boat.solidArea.x += gp.boat.worldX;  // get position on the map
-        gp.boat.solidArea.y += gp.boat.worldY;
+        gp.ship.solidArea.x += gp.ship.worldX;  // get position on the map
+        gp.ship.solidArea.y += gp.ship.worldY;
 
         switch (entity.direction) {
             case "up" -> entity.solidArea.y -= entity.speed;
@@ -172,13 +163,13 @@ public class CollisionChecker {
             case "right" -> entity.solidArea.x += entity.speed;
             case "left" -> entity.solidArea.x -= entity.speed;
         }
-        if (gp.boat.solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
+        if (gp.ship.solidArea.intersects(entity.solidArea)) { // if the solid area of the object intersects with the solid area of the player, the .intersects returns true
             ret = true;
         }
         entity.solidArea.x = 20;
         entity.solidArea.y = 24;
-        gp.boat.solidArea.x = 100;  // get position on the map
-        gp.boat.solidArea.y = 0;
+        gp.ship.solidArea.x = 100;  // get position on the map
+        gp.ship.solidArea.y = 0;
 
         return ret;
     }

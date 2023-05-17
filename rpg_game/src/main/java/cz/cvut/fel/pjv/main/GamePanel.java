@@ -19,32 +19,25 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class GamePanel extends JPanel implements Runnable{
-    public static enum State {
-        TITLE,
-        GAME,
-        HELP,
-        PAUSE,
-        NEXT_HELP_PAGE,
-        HAPPY_END,
-        GAME_OVER,
-        INVENTORY,
-        LOAD
+    public enum State {
+        TITLE, GAME, HELP, PAUSE, NEXT_HELP_PAGE,
+        HAPPY_END, GAME_OVER,
+        INVENTORY, LOAD
     }
     public State state;
 
-    final int originalTileSize = 20; // 20 x 20 character
-    final int scale = 4;
+    private final int originalTileSize = 20; // 20 x 20 character
+    private final int scale = 4;
 
     public final int tileSize = originalTileSize * scale; // // 20 * 4 = 80 --> 80 x 80
-    public int screen_col = 14;
-    public int screen_row = 10;
+    private final int screen_col = 14;
+    private final int screen_row = 10;
 
     // Size of game screen
-    public int screen_width = tileSize * screen_col; // 768 pixels
-    public int screen_height = tileSize * screen_row; // 576 pixels
+    public int screen_width = tileSize * screen_col; // 1120 pixels
+    public int screen_height = tileSize * screen_row; // 800 pixels
 
-    public int worldCol = 100;
-    public int worldRow = 100;
+    public int worldCol = 100,  worldRow = 100; // size of the map
 
     int FPS = 60;
 
@@ -56,8 +49,8 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker checker = new CollisionChecker(this);
     public PlaceOnTheMap ASetter = new PlaceOnTheMap(this);
     public GameObjects[] obj_arr = new GameObjects[100];
-    private Inventory inventory = new Inventory();
-    public Boat boat = new Boat(this);
+    private final Inventory inventory = new Inventory();
+    public Ship ship = new Ship(this);
     public House house = new House(this);
     public Player player = new Player(this, keyH);
     public Boss boss = new Boss(this);
@@ -66,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable{
     public String fileName = "";
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screen_width, screen_height));
+        this.setPreferredSize(new Dimension(screen_width, screen_height)); // todo 
         this.setBackground(Color.DARK_GRAY);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
@@ -75,12 +68,11 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void setupGame() {
-        ASetter.PlaceObject("rpg_game/target/new_object_data.json");
-        ASetter.PlacePirate("rpg_game/target/new_pirate_data.json");
-        boss.setDefaultValues("rpg_game/target/new_boss_data.json");
+        ASetter.PlaceObject("rpg_game/src/dataJson/new_object_data.json");
+        ASetter.PlacePirate("rpg_game/src/dataJson/new_pirate_data.json");
+        boss.setDefaultValues("rpg_game/src/dataJson/new_boss_data.json");
         state = State.TITLE;
         playMusic(3);
-        //sound.setMusic(3);
     }
 
     public void startGameTread() {
@@ -91,9 +83,9 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void restart() {
         player.setDefaultValues(fileName);
-        ASetter.PlaceObject("rpg_game/target/load_object_data.json");
-        ASetter.PlacePirate("rpg_game/target/load_pirate_data.json");
-        boss.setDefaultValues("rpg_game/target/load_boss_data.json"); // xzxz todo
+        ASetter.PlaceObject("rpg_game/dataJson/load_object_data.json");
+        ASetter.PlacePirate("rpg_game/dataJson/load_pirate_data.json");
+        boss.setDefaultValues("rpg_game/dataJson/load_boss_data.json"); // xzxz todo
         state = GamePanel.State.GAME;
     }
 
@@ -157,7 +149,7 @@ public class GamePanel extends JPanel implements Runnable{
                 }
             }
 
-            boat.draw(g2, this);
+            ship.draw(g2, this);
             house.draw(g2, this);
             if (state != State.HAPPY_END)
                 player.draw(g2);
@@ -299,6 +291,7 @@ public class GamePanel extends JPanel implements Runnable{
         playerDetails.put("sword_count", Integer.toString(player.sword_count));
         playerDetails.put("level", Integer.toString(player.level));
         playerDetails.put("dead_pirate_count", Integer.toString(player.dead_pirate_count));
+        playerDetails.put("max_health", Integer.toString(player.max_health));
 
         try (FileWriter file = new FileWriter("rpg_game/target/load_game.json")) {
             file.write(playerDetails.toJSONString());

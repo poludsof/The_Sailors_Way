@@ -3,17 +3,17 @@ package cz.cvut.fel.pjv.monster;
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.main.GamePanel;
-import cz.cvut.fel.pjv.object.Key;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
+
+import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
 public class Boss extends Entity {
     int time = 1;
@@ -84,10 +84,11 @@ public class Boss extends Entity {
         if (!gp.boss.timeToDamage && gp.player.attacking) {
             if (gp.boss.heart_count > 0) {
                 --gp.boss.heart_count;
+                LOGGER.info("Boss loses 1 health.");
                 gp.boss.showHealth = true;
                 gp.playMusic(6);
             } else {
-                System.out.println("hi");
+                LOGGER.info("You won the boss. The boss is dead..");
                 gp.ASetter.PlaceGoldKey(tmp_x, tmp_y);
                 gp.boss = null;
             }

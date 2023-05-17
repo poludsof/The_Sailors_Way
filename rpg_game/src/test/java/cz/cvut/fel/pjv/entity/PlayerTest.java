@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 public class PlayerTest extends TestCase {
     GamePanel gp = new GamePanel();
     public void testSetDefaultValues() {
-        gp.player.setDefaultValues("target/test_player.json");
+        gp.player.setDefaultValues("rpg_game/src/dataJson/test_player.json");
         assertEquals(999 * gp.tileSize, gp.player.worldX);
         assertEquals(666 * gp.tileSize, gp.player.worldY);
         assertEquals(6, gp.player.speed);

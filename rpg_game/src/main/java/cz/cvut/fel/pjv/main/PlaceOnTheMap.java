@@ -44,6 +44,7 @@ public class PlaceOnTheMap {
             e.printStackTrace();
         }
 
+        // 
         gp.obj_arr[0] = new RDoor();
         gp.obj_arr[0].worldX = 10 * gp.tileSize;
         gp.obj_arr[0].worldY = 88 * gp.tileSize;

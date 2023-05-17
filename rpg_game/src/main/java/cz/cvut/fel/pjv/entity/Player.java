@@ -15,20 +15,21 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import static cz.cvut.fel.pjv.main.Main.LOGGER;
+
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     GameObjects obj = new GameObjects();
     public Dictionary<String, Integer> inventory = new Hashtable<>();
-    public int key_count, dead_pirate_count, rum_count, rum_time, map_count, sword_count;
+    public int key_count, dead_pirate_count, rum_count, rum_time, map_count, sword_count, level, max_health;
     public boolean rum_time_start = false;
-    public int level = 1;
 
-    public final int screenX;
+    public final int screenX; // todo why final
     public final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        super(gp);
+        super(gp); // todo what is this
         this.gp = gp;
         this.keyH = keyH;
 
@@ -42,9 +43,7 @@ public class Player extends Entity {
         solidArea.height = 56;
         solidArea.width = 40;
 
-        String projPath = System.getProperty("user.dir").replace("rpg_game", "");
-
-        setDefaultValues(projPath + "/rpg_game/target/new_game.json");
+        setDefaultValues("rpg_game/src/dataJson/new_game.json");
         getPlayerImage();
     }
 
@@ -52,6 +51,8 @@ public class Player extends Entity {
      * Sets default values for the player's properties, such as coordinates and movement speed.
      */
     public void setDefaultValues(String filename) {
+        LOGGER.info("This is an INFO level log message! from Player");
+
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(filename))  {
             //Read JSON file
@@ -66,6 +67,7 @@ public class Player extends Entity {
             sword_count = Integer.parseInt((String) jsonObject.get("sword_count"));
             level = Integer.parseInt((String) jsonObject.get("level"));
             dead_pirate_count = Integer.parseInt((String) jsonObject.get("dead_pirate_count"));
+            max_health = Integer.parseInt((String) jsonObject.get("max_health"));
 
         } catch (ParseException | IOException e) {
             e.printStackTrace();
@@ -88,7 +90,7 @@ public class Player extends Entity {
     /**
      * Loads the player's image from the resource folder.
      */
-    private void getPlayerImage(){
+    private void getPlayerImage() {
         try {
             up1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up1.png"));
             up2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up2.png"));
@@ -131,8 +133,10 @@ public class Player extends Entity {
             int idx_m = attacking();
             if (idx_m >= 0)
                 gp.pirates[idx_m].fightPirate(idx_m);
-            if (idx_m == -100)
+            if (idx_m == -100) {
+                LOGGER.info("You attack the boss.");
                 gp.boss.fightBoss();
+            }
         }
 
         else if (keyIsPressed()) {
@@ -154,6 +158,7 @@ public class Player extends Entity {
                 speed += 4;
                 rum_time_start = true;
                 rum_time = 0;
+                LOGGER.info("You drank the rum, your speed increased.");
             }
 
             if (keyH.swordButton && sword_count >= 1) {
@@ -173,7 +178,7 @@ public class Player extends Entity {
             gp.checker.CheckCollisionHouse(this);
 
             int idx_obj = gp.checker.CheckCollisionObj(this);
-            obj.pickUpObj(idx_obj, gp, this);
+            GameObjects.pickUpObj(idx_obj, gp);
 
             if (!collision)
                 doMove();
@@ -265,7 +270,6 @@ public class Player extends Entity {
             worldY = currWorldY;
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
-
         }
 
         if (spriteCounter > 25){

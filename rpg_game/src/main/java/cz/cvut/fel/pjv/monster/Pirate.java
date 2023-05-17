@@ -71,7 +71,7 @@ public class Pirate extends Entity {
                 }
                 this.timeToDamage = true;
             }
-            if (gp.player.dead_pirate_count == 3 && gp.player.level == 1) {
+            if (gp.player.dead_pirate_count == 2 && gp.player.level == 1) {
                 gp.ASetter.PlaceFirstKey();
             }
         }

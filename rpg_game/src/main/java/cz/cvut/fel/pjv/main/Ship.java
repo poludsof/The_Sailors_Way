@@ -7,17 +7,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Boat{
+public class Ship {
     public BufferedImage image, image_end, enter_arrow, image_shadow;
     public String name_object;
     public int worldX ;
     public int worldY;
-    public Rectangle solidArea;
-    public Boat(GamePanel gp) {
+    public Rectangle solidArea = new Rectangle(100, 0, 250, 600);
+    public Ship(GamePanel gp) {
         worldX = 88 * gp.tileSize;
         worldY = 2 * gp.tileSize;
-        solidArea = new Rectangle(100, 0, 250, 600);
-        name_object = "Boat";
         try {
             image = ImageIO.read(Key.class.getClassLoader().getResourceAsStream("objects/starship_no_shadow.png"));
             image_shadow = ImageIO.read(Key.class.getClassLoader().getResourceAsStream("objects/starship_with_shadow.png"));
