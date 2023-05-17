@@ -4,15 +4,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed; // Variables to track key presses.
-    public boolean mapButton, rumButton, swordButton;
-    @Override
-    public void keyTyped(KeyEvent k) {
+    // Variables to track key presses.
+    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
 
-    }
+    public boolean mapButton, rumButton, swordButton;  // Variables to track button presses.
 
     @Override
-    public void keyPressed(KeyEvent k) { // Override the keyPressed method of the KeyListener interface.
+    public void keyTyped(KeyEvent keyEvent) { }
+
+    /**
+     * Setting attributes according to pressed keys.
+     */
+    @Override
+    public void keyPressed(KeyEvent k) {
         int key = k.getKeyCode();
 
         // Detect the pressed key and set the appropriate variable.
@@ -27,8 +31,11 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_K) { swordButton = true; }
     }
 
+    /**
+     * Setting attributes according to released keys.
+     */
     @Override
-    public void keyReleased(KeyEvent k) { // Override the keyReleased method of the KeyListener interface.
+    public void keyReleased(KeyEvent k) {
         int key = k.getKeyCode();
         // Detect the released key and set the corresponding variable.
         if (key == KeyEvent.VK_W) { upPressed = false; }
