@@ -38,10 +38,10 @@ public class Boss extends Entity {
             JSONParser jsonParser = new JSONParser();
             try (FileReader reader = new FileReader(filename)) {
                 JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
-                worldX = ((Long) jsonObject.get("worldX")).intValue() * gp.tileSize; // 87
-                worldY = ((Long) jsonObject.get("worldY")).intValue() * gp.tileSize; // 40
-                speed = ((Long) jsonObject.get("speed")).intValue();
-                heart_count = ((Long) jsonObject.get("heart_count")).intValue();
+                worldX = (int) ((long) jsonObject.get("worldX")) * gp.tileSize; // 87
+                worldY = (int) ((long) jsonObject.get("worldY")) * gp.tileSize; // 40
+                speed = (int) ((long) jsonObject.get("speed"));
+                heart_count = (int) ((long) jsonObject.get("heart_count"));
             } catch (ParseException | IOException e) {
                 e.printStackTrace();
             }

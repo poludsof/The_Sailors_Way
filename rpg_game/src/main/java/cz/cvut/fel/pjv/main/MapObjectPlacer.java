@@ -13,38 +13,54 @@ import java.io.IOException;
 public class MapObjectPlacer {
     GamePanel gp;
 
+    /**
+     Constructor for MapObjectPlacer class. Initializes the GamePanel object.
+     */
     public MapObjectPlacer(GamePanel gp) {
         this.gp = gp;
     }
 
-    public void PlaceObject(String filename) { // todo test
+    /**
+     The method reads in a JSON file containing coordinates of game objects and places them on the map.
+     It reads in the object name from the JSON file and creates a new object of that type to be placed on the map.
+     @param filename String name of the JSON file containing the game objects coordinates.
+     */
+    public void PlaceObject(String filename) {
         JSONParser jsonParser = new JSONParser();
 
         try {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(filename));
 
             JSONArray jArray = (JSONArray) jsonObject.get("Objects");
-            for (int i = 0; i < jArray.size(); ++i) {
+
+            // Start filling the array with index 10, the first 10 cells are occupied by unchanged items.
+            for (int i = 10; i < jArray.size(); ++i) {
 
                 JSONObject obj = (JSONObject) jArray.get(i);
+
+                // Get the coordinates and name of the object.
                 JSONArray jsonArray = (JSONArray) obj.get("coordinates");
                 String name = (String) obj.get("Name");
 
-                if (name.equals("Key")) gp.objArray[i + 10] = new Key();
-                if (name.equals("Heart")) gp.objArray[i + 10] = new Heart();
-                if (name.equals("Rum")) gp.objArray[i + 10] = new Rum();
-                if (name.equals("Sword")) gp.objArray[i + 10] = new Sword();
-                if (name.equals("BlackKey")) gp.objArray[i + 10] = new BlackKey();
-                if (name.equals("Map")) gp.objArray[i + 10] = new Map();
+                // Create a new object based on its name.
+                switch (name) {
+                    case "Key" -> gp.objArray[i] = new Key();
+                    case "Heart" -> gp.objArray[i] = new Heart();
+                    case "Rum" -> gp.objArray[i] = new Rum();
+                    case "Sword" -> gp.objArray[i] = new Sword();
+                    case "BlackKey" -> gp.objArray[i] = new BlackKey();
+                    case "Map" -> gp.objArray[i] = new Map();
+                }
 
-                gp.objArray[i + 10].worldX = (int) ((long) jsonArray.get(0)) * gp.tileSize;
-                gp.objArray[i + 10].worldY = (int) ((long) jsonArray.get(1)) * gp.tileSize;
+                // Set the object's coordinates on the map.
+                gp.objArray[i].worldX = (int) ((long) jsonArray.get(0)) * gp.tileSize;
+                gp.objArray[i].worldY = (int) ((long) jsonArray.get(1)) * gp.tileSize;
             }
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
 
-        // todo comment
+        // Place items on the map that cannot be changed by the user.
         gp.objArray[0] = new RDoor();
         gp.objArray[0].worldX = 10 * gp.tileSize;
         gp.objArray[0].worldY = 88 * gp.tileSize;
@@ -77,36 +93,50 @@ public class MapObjectPlacer {
         gp.objArray[7].worldX = 42 * gp.tileSize;
         gp.objArray[7].worldY = 53 * gp.tileSize;
     }
+
+    /**
+     The method places a gold key on the specified tile coordinates on the game map.
+     The key appears at the place where the boss died.
+     */
     public void PlaceGoldKey(int x, int y) {
         gp.objArray[8] = new Key();
         gp.objArray[8].worldX = x * gp.tileSize;
         gp.objArray[8].worldY = y * gp.tileSize;
     }
 
+    /**
+     The method places an iron key on a predefined location on the game map.
+     The key appears after all the pirates on the first level have died.
+     */
     public void PlaceFirstKey() {
         gp.objArray[9] = new BlackKey();
         gp.objArray[9].worldX = 14 * gp.tileSize;
         gp.objArray[9].worldY = 92 * gp.tileSize;
     }
 
-
+    /**
+     The method reads in a JSON file containing coordinates of pirates and places them on the map.
+     It also reads in the health of each pirate and assigns it to the corresponding pirate object.
+     @param filename String name of the JSON file containing the pirates' coordinates and health.
+     */
     public void PlacePirate(String filename) {
         JSONParser jsonParser = new JSONParser();
 
         try {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(filename));
 
+            // Get the "Pirates" array from the JSON object.
             JSONArray jArray = (JSONArray) jsonObject.get("Pirates");
 
-            for (int i = 0; i < jArray.size(); ++i) {
+            for (int i = 0; i < jArray.size(); ++i) {  // Go through each pirate object in the array.
 
                 JSONObject obj = (JSONObject) jArray.get(i);
                 JSONArray jsonArray = (JSONArray) obj.get("coordinates");
 
-                gp.pirates[i] = new Pirate(gp);
+                gp.pirates[i] = new Pirate(gp);  // Create a new Pirate object in the pirates array
 
-                gp.pirates[i].heart_count = (int) ((long) obj.get("health"));
-                gp.pirates[i].worldX = (int) ((long) jsonArray.get(0)) * gp.tileSize;
+                gp.pirates[i].heart_count = (int) ((long) obj.get("health")); // Set the pirate's health.
+                gp.pirates[i].worldX = (int) ((long) jsonArray.get(0)) * gp.tileSize;  // Set the pirate's world coordinates
                 gp.pirates[i].worldY = (int) ((long) jsonArray.get(1)) * gp.tileSize;
             }
         } catch (ParseException | IOException e) {

@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Objects;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -55,17 +56,17 @@ public class Player extends Entity {
         try (FileReader reader = new FileReader(filename))  {
             //Read JSON file
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
-            worldX = ((Long) jsonObject.get("worldX")).intValue() * gp.tileSize; // 10
-            worldY = ((Long) jsonObject.get("worldY")).intValue() * gp.tileSize; // 93
-            speed = ((Long) jsonObject.get("speed")).intValue();
-            heart_count = ((Long) jsonObject.get("heart_count")).intValue();
-            key_count = ((Long) jsonObject.get("key_count")).intValue();
-            rum_count = ((Long) jsonObject.get("rum_count")).intValue();
-            map_count = ((Long) jsonObject.get("map_count")).intValue();
-            sword_count = ((Long) jsonObject.get("sword_count")).intValue();
-            level = ((Long) jsonObject.get("level")).intValue();
-            dead_pirate_count = ((Long) jsonObject.get("dead_pirate_count")).intValue();
-            max_health = ((Long) jsonObject.get("max_health")).intValue();
+            worldX = (int) ((long) jsonObject.get("worldX")) * gp.tileSize; // 10
+            worldY = (int) ((long) jsonObject.get("worldY")) * gp.tileSize; // 93
+            speed = (int) ((long) jsonObject.get("speed"));
+            heart_count = (int) ((long) jsonObject.get("heart_count"));
+            key_count = (int) ((long) jsonObject.get("key_count"));
+            rum_count = (int) ((long) jsonObject.get("rum_count"));
+            map_count = (int) ((long) jsonObject.get("map_count"));
+            sword_count = (int) ((long) jsonObject.get("sword_count"));
+            level = (int) ((long) jsonObject.get("level"));
+            dead_pirate_count = (int) ((long) jsonObject.get("dead_pirate_count"));
+            max_health = (int) ((long) jsonObject.get("max_health"));
 
         } catch (ParseException | IOException e) {
             e.printStackTrace();
@@ -90,19 +91,19 @@ public class Player extends Entity {
      */
     private void getPlayerImage() {
         try {
-            up1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up1.png"));
-            up2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_up2.png"));
-            left1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_left1.png"));
-            left2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_left2.png"));
-            right1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_right1.png"));
-            right2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_right2.png"));
-            down1 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down1.png"));
-            down2 = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png"));
+            up1 = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/sailor_up1.png")));
+            up2 = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/sailor_up2.png")));
+            left1 = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/sailor_left1.png")));
+            left2 = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/sailor_left2.png")));
+            right1 = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/sailor_right1.png")));
+            right2 = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/sailor_right2.png")));
+            down1 = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/sailor_down1.png")));
+            down2 = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/sailor_down2.png")));
 
-            attack_up = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/attack_up.png"));
-            attack_down = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/attack_down.png"));
-            attack_left = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/attack_left.png"));
-            attack_right = ImageIO.read(Player.class.getClassLoader().getResourceAsStream("player/attack_right.png"));
+            attack_up = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/attack_up.png")));
+            attack_down = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/attack_down.png")));
+            attack_left = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/attack_left.png")));
+            attack_right = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("player/attack_right.png")));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
