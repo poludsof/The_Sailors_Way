@@ -35,21 +35,6 @@ public class TileManager {
         loadMap("/maps/map_last.txt");
     }
 
-    private void getMapSize(String map_path) {
-        try {
-            InputStream is = getClass().getResourceAsStream(map_path);
-            assert is != null;
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String line = br.readLine();
-            String[] line2 = line.split(" ");
-            gp.worldCol = line2.length;
-            gp.worldRow = line2.length;
-            br.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Loads tile images from a resource folder into the tile array.
      */

@@ -40,7 +40,7 @@ public class GamePanel extends JPanel {
     private final int rowScreen = 10;
     public int screenWidth = tileSize * colScreen; // 1120 pixels
     public int screenHeight = tileSize * rowScreen; // 800 pixels
-    public int worldCol = 100,  worldRow = 100; // size of the map (in tiles) // todo maybe delete
+    public int worldCol = 100,  worldRow = 100; // size of the map (in tiles)
 
     // HANDLERS
     KeyHandler keyH = new KeyHandler();

@@ -47,7 +47,6 @@ public class GameObjects {
 
             else if (gp.objArray[idx].name_object.equals("Heart")) {
                 gp.objArray[idx] = null;
-                 System.out.println("pick up num:" + idx);
                  if (gp.player.heart_count < gp.player.max_health) {
                     LOGGER.info("Player: +1 health.");
                     ++gp.player.heart_count;
