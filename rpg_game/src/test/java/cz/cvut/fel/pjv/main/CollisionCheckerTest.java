@@ -1,8 +1,8 @@
 package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.entity.Entity;
-import cz.cvut.fel.pjv.monster.Boss;
-import cz.cvut.fel.pjv.monster.Pirate;
+import cz.cvut.fel.pjv.enemy.Boss;
+import cz.cvut.fel.pjv.enemy.Pirate;
 import cz.cvut.fel.pjv.object.House;
 import junit.framework.TestCase;
 

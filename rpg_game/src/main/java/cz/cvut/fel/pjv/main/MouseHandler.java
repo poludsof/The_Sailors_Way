@@ -20,7 +20,7 @@ public class MouseHandler implements MouseListener {
         int mouseX = m.getX();
         int mouseY = m.getY();
 
-        if (mouseX >= gp.screen_width / 2 - 105 && mouseX <= gp.screen_width / 2 + 115) {
+        if (mouseX >= gp.screenWidth / 2 - 105 && mouseX <= gp.screenWidth / 2 + 115) {
             if (mouseY >= 390 && mouseY <= 470) {
                 if (gp.state == GamePanel.State.TITLE) {
                     gp.state = GamePanel.State.LOAD;
@@ -36,7 +36,7 @@ public class MouseHandler implements MouseListener {
                 }
                 else if (gp.state == GamePanel.State.LOAD) {
                     gp.stopMusic();
-                    gp.fileName = "rpg_game/dataJson/load_game.json";
+//                    gp.state = GamePanel.State.GAME;
                     gp.restart();
                 }
             }
@@ -46,12 +46,11 @@ public class MouseHandler implements MouseListener {
             }
         }
 
-        if (mouseX >= gp.screen_width - 100 && mouseX <= gp.screen_width - 20) {
+        if (mouseX >= gp.screenWidth - 100 && mouseX <= gp.screenWidth - 20) {
             if (mouseY >= 20 && mouseY <= 100) {
                 if (gp.state == GamePanel.State.GAME)
                     gp.state = GamePanel.State.PAUSE;
             }
-            //(gp.screen_width - 100, gp.tileSize * 2 - 25, gp.tileSize, gp.tileSize);
             if (mouseY >= gp.tileSize * 2 - 25 && mouseY <= gp.tileSize * 3 - 25) {
                 if (gp.state == GamePanel.State.GAME)
                     gp.state = GamePanel.State.INVENTORY;
@@ -68,37 +67,36 @@ public class MouseHandler implements MouseListener {
         }
 
         //reloadButton = new Rectangle(gp.screen_width / 2 - 40, gp.screen_height / 2 + 120, 80, 80);
-        if (mouseX >= gp.screen_width / 2 - 40 && mouseX <= gp.screen_width / 2 + 40) {
-            if (mouseY >= gp.screen_height / 2 + 120 && mouseY <= gp.screen_height / 2 + 200) {
+        if (mouseX >= gp.screenWidth / 2 - 40 && mouseX <= gp.screenWidth / 2 + 40) {
+            if (mouseY >= gp.screenHeight / 2 + 120 && mouseY <= gp.screenHeight / 2 + 200) {
                 if (gp.state == GamePanel.State.PAUSE)
                     gp.state = GamePanel.State.GAME;
             }
         }
 
         //arrowButton = new Rectangle(gp.screen_width - 180, gp.screen_height - 115, gp.tileSize*2-25, gp.tileSize);
-        if (mouseX >= gp.screen_width - 180 && mouseX <= gp.screen_width - 180 + gp.tileSize*2-25) {
-            if (mouseY >= gp.screen_height - 115 && mouseY <= gp.screen_height - 115 + gp.tileSize) {
+        if (mouseX >= gp.screenWidth - 180 && mouseX <= gp.screenWidth - 180 + gp.tileSize*2-25) {
+            if (mouseY >= gp.screenHeight - 115 && mouseY <= gp.screenHeight - 115 + gp.tileSize) {
                 if (gp.state == GamePanel.State.HELP){
                     gp.state = GamePanel.State.NEXT_HELP_PAGE;
                 }
             }
         }
 
-        //(gp.screen_width - 110, 20, gp.tileSize, gp.tileSize);
-        if (mouseX >= gp.screen_width - 110 && mouseX <= gp.screen_width + gp.tileSize) {
+        if (mouseX >= gp.screenWidth - 110 && mouseX <= gp.screenWidth + gp.tileSize) {
             if (mouseY >= 20 && mouseY <= gp.tileSize + 20) {
                 if (gp.state == GamePanel.State.NEXT_HELP_PAGE)
                     gp.state = GamePanel.State.TITLE;
             }
         }
 
-        //Rectangle(gp.screen_width / 2 - 145, gp.screen_height / 2 + 115, 295, 70);
-        if (mouseX >= gp.screen_width / 2 - 145 && mouseX <= gp.screen_width / 2 + 150) {
-            if (mouseY >= gp.screen_height / 2 + 115 && mouseY <= gp.screen_height / 2 + 185) {
+        if (mouseX >= gp.screenWidth / 2 - 145 && mouseX <= gp.screenWidth / 2 + 150) {
+            if (mouseY >= gp.screenHeight / 2 + 115 && mouseY <= gp.screenHeight / 2 + 185) {
                 if (gp.state == GamePanel.State.GAME_OVER || gp.state == GamePanel.State.HAPPY_END) {
-                    gp.fileName = "src/dataJson/new_game.json"; // update boss todo
+//                    gp.filenameObjects = "rpg_game/src/dataJson/new_game.json"; // update boss todo
                     gp.stopMusic();
-                    gp.restart();
+//                    gp.state = GamePanel.State.GAME;
+                    gp.setupGame();
                 }
             }
         }

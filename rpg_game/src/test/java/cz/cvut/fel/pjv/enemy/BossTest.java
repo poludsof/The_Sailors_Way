@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv.monster;
+package cz.cvut.fel.pjv.enemy;
 
 import cz.cvut.fel.pjv.main.GamePanel;
 import junit.framework.TestCase;

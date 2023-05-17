@@ -33,8 +33,8 @@ public class Player extends Entity {
         this.gp = gp;
         this.keyH = keyH;
 
-        screenX = gp.screen_width / 2 - (gp.tileSize / 2);
-        screenY = gp.screen_height / 2 - (gp.tileSize / 2);
+        screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
+        screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
         // Set the player's solid area
         solidArea = new Rectangle();
@@ -48,11 +48,9 @@ public class Player extends Entity {
     }
 
     /**
-     * Sets default values for the player's properties, such as coordinates and movement speed.
+     * Sets default values for the player's properties.
      */
     public void setDefaultValues(String filename) {
-        LOGGER.info("This is an INFO level log message! from Player");
-
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(filename))  {
             //Read JSON file

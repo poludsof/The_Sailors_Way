@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.swing.JFrame;
-import java.io.IOException;
 
 public class Main {
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
@@ -32,6 +31,6 @@ public class Main {
         window.setVisible(true);
 
         gamePanel.setupGame();
-        gamePanel.startGameTread();
+        gamePanel.startGame();
     }
 }

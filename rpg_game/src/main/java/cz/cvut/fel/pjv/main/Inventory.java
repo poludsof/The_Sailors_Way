@@ -7,14 +7,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Dictionary;
+import java.util.Objects;
 
 public class Inventory {
-
-    int count_row = 0;
-    int count_col = 0;
-    int itemX;
-    int itemY;
-    public void drawInventory(Graphics2D g2, GamePanel gp) {
+    static int count_row = 0;
+    static int count_col = 0;
+    static int itemX;
+    static int itemY;
+    public static void drawInventory(Graphics2D g2, GamePanel gp) {
         count_row = 0;
         count_col = 0;
 
@@ -22,10 +22,10 @@ public class Inventory {
 
         BufferedImage key, map, rum, sword;
         try {
-            key = ImageIO.read(RDoor.class.getClassLoader().getResourceAsStream("objects/key.png"));
-            map = ImageIO.read(RDoor.class.getClassLoader().getResourceAsStream("objects/map.png"));
-            rum = ImageIO.read(RDoor.class.getClassLoader().getResourceAsStream("objects/rum.png"));
-            sword = ImageIO.read(RDoor.class.getClassLoader().getResourceAsStream("objects/sword.png"));
+            key = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("objects/key.png")));
+            map = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("objects/map.png")));
+            rum = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("objects/rum.png")));
+            sword = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("objects/sword.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -81,7 +81,7 @@ public class Inventory {
         }
     }
 
-    public void checkCounter(GamePanel gp, Rectangle inventoryList) {
+    public static void checkCounter(GamePanel gp, Rectangle inventoryList) {
         itemX += gp.tileSize + 10;
         ++count_col;
         if (count_col >= 4) {
@@ -92,7 +92,7 @@ public class Inventory {
         }
     }
 
-    private void drawRectangle(Graphics2D g2, GamePanel gp) {
+    private static void drawRectangle(Graphics2D g2, GamePanel gp) {
         g2.setColor(Color.black);
         g2.setStroke(new BasicStroke(3));
         g2.drawRoundRect(itemX, itemY, gp.tileSize, gp.tileSize, 0, 0);

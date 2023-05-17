@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv.monster;
+package cz.cvut.fel.pjv.enemy;
 
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
@@ -89,7 +89,7 @@ public class Boss extends Entity {
                 gp.playMusic(6);
             } else {
                 LOGGER.info("You won the boss. The boss is dead..");
-                gp.ASetter.PlaceGoldKey(tmp_x, tmp_y);
+                gp.objPlacer.PlaceGoldKey(tmp_x, tmp_y);
                 gp.boss = null;
             }
             this.timeToDamage = true;

@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv.monster;
+package cz.cvut.fel.pjv.enemy;
 
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
@@ -72,7 +72,7 @@ public class Pirate extends Entity {
                 this.timeToDamage = true;
             }
             if (gp.player.dead_pirate_count == 2 && gp.player.level == 1) {
-                gp.ASetter.PlaceFirstKey();
+                gp.objPlacer.PlaceFirstKey();
             }
         }
     }
