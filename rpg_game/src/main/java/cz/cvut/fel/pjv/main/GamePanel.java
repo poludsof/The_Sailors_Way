@@ -7,7 +7,6 @@ import cz.cvut.fel.pjv.object.GameObjects;
 import cz.cvut.fel.pjv.object.House;
 import cz.cvut.fel.pjv.object.RDoor;
 import cz.cvut.fel.pjv.tile.TileManager;
-import org.apache.logging.log4j.core.util.JsonUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -23,7 +22,7 @@ import java.util.Objects;
 
 public class GamePanel extends JPanel {
     public enum State {
-        TITLE, GAME, HELP, PAUSE, NEXT_HELP_PAGE,
+        TITLE, GAME, RULES, PAUSE, NEXT_HELP_PAGE,
         HAPPY_END, GAME_OVER,
         INVENTORY, LOAD
     }
@@ -84,11 +83,13 @@ public class GamePanel extends JPanel {
      Sets the state of the game to TITLE.
      */
     public void setupGame() {
+        state = State.TITLE;
         player.setDefaultValues(filenamePlayer);
         objPlacer.PlaceObject(filenameObjects);
         objPlacer.PlacePirate(filenamePirates);
+        if (boss == null)  // After a boss dies, it must be recreated to start a new game.
+            boss = new Boss(this);
         boss.setDefaultValues(filenameBoss);
-        state = State.TITLE;
         sound.setMusic(3);
     }
 
@@ -146,7 +147,7 @@ public class GamePanel extends JPanel {
         if (state == State.LOAD)
             menu.drawLoad(g2, this);  // Show a menu with the choice: start a new game/load a previous game.
 
-        if (state == State.HELP)
+        if (state == State.RULES)
             menu.drawHelpButton(g2, this);
 
         if (state == State.NEXT_HELP_PAGE)
@@ -168,7 +169,8 @@ public class GamePanel extends JPanel {
 
             if (state != State.HAPPY_END)  // While the game is in progress, the player is being drawn.
                 player.draw(g2);
-            else menu.drawHappyEnd(g2, this);  // Draw the final panel.
+            if (state == State.HAPPY_END)
+                menu.drawHappyEnd(g2, this);  // Draw the final panel.
 
             if (boss != null)  // While the boss is not dead, the boss picture is being drawn.
                 boss.draw(g2, 2);

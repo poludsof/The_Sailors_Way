@@ -7,7 +7,8 @@ public class KeyHandler implements KeyListener {
     // Variables to track key presses.
     public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
 
-    public boolean mapButton, rumButton, swordButton;  // Variables to track button presses.
+    // Variables to track button presses.
+    public boolean mapButton, rumButton, swordButton;
 
     @Override
     public void keyTyped(KeyEvent keyEvent) { }

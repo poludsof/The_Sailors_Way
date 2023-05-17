@@ -31,30 +31,32 @@ public class MapObjectPlacer {
         try {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(filename));
 
-            JSONArray jArray = (JSONArray) jsonObject.get("Objects");
+            JSONArray jsonArray = (JSONArray) jsonObject.get("Objects");
 
-            // Start filling the array with index 10, the first 10 cells are occupied by unchanged items.
-            for (int i = 10; i < jArray.size(); ++i) {
+            for (int i = 0; i < jsonArray.size(); ++i) {
 
-                JSONObject obj = (JSONObject) jArray.get(i);
+                // Start filling the array with index 10, the first 10 cells are occupied by unchanged items.
+                int idx = i + 10;
+
+                JSONObject obj = (JSONObject) jsonArray.get(i);
 
                 // Get the coordinates and name of the object.
-                JSONArray jsonArray = (JSONArray) obj.get("coordinates");
+                JSONArray coordArray = (JSONArray) obj.get("coordinates");
                 String name = (String) obj.get("Name");
 
                 // Create a new object based on its name.
                 switch (name) {
-                    case "Key" -> gp.objArray[i] = new Key();
-                    case "Heart" -> gp.objArray[i] = new Heart();
-                    case "Rum" -> gp.objArray[i] = new Rum();
-                    case "Sword" -> gp.objArray[i] = new Sword();
-                    case "BlackKey" -> gp.objArray[i] = new BlackKey();
-                    case "Map" -> gp.objArray[i] = new Map();
+                    case "Key" -> gp.objArray[idx] = new Key();// todo switch
+                    case "Heart" -> gp.objArray[idx] = new Heart();
+                    case "Rum" -> gp.objArray[idx] = new Rum();
+                    case "Sword" -> gp.objArray[idx] = new Sword();
+                    case "BlackKey" -> gp.objArray[idx] = new BlackKey();
+                    case "Map" -> gp.objArray[idx] = new Map();
                 }
 
-                // Set the object's coordinates on the map.
-                gp.objArray[i].worldX = (int) ((long) jsonArray.get(0)) * gp.tileSize;
-                gp.objArray[i].worldY = (int) ((long) jsonArray.get(1)) * gp.tileSize;
+                // Set the object's coordinates.
+                gp.objArray[idx].worldX = (int) ((long) coordArray.get(0)) * gp.tileSize;
+                gp.objArray[idx].worldY = (int) ((long) coordArray.get(1)) * gp.tileSize;
             }
         } catch (ParseException | IOException e) {
             e.printStackTrace();

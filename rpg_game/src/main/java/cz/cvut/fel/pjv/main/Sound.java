@@ -1,10 +1,12 @@
 package cz.cvut.fel.pjv.main;
-import java.io.IOException;
 import java.net.URL;
 import javax.sound.sampled.*;
 
+/**
+ A class for playing sound effects and music tracks.
+ */
 public class Sound {
-    URL[] url = new URL[10];
+    URL[] url = new URL[10];  // An array of URLs representing the locations of the sound files.
     Clip clip;
     public Sound() {
         url[0] = this.getClass().getClassLoader().getResource("sound/rammstein_reisereise.wav");
@@ -18,17 +20,25 @@ public class Sound {
         url[8] = this.getClass().getClassLoader().getResource("sound/oup.wav");
     }
 
+    /**
+     Sets the music to play based on the index provided.
+     @param idx The index of the music file to play.
+     @throws RuntimeException If there is an error in opening or playing the music file.
+     */
     public void setMusic(int idx) {
         try {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(url[idx]);
             clip = AudioSystem.getClip();
-            clip.open(audioIn);
+            clip.open(audioIn);  // Opens the audio input stream and starts playing the audio.
             clip.start();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     Pauses the currently playing music track.
+     */
     public void pauseTrack() {
         if (clip != null)
             clip.stop();
