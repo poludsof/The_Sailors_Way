@@ -46,7 +46,7 @@ public class MapObjectPlacer {
 
                 // Create a new object based on its name.
                 switch (name) {
-                    case "Key" -> gp.objArray[idx] = new Key();// todo switch
+                    case "Key" -> gp.objArray[idx] = new Key();
                     case "Heart" -> gp.objArray[idx] = new Heart();
                     case "Rum" -> gp.objArray[idx] = new Rum();
                     case "Sword" -> gp.objArray[idx] = new Sword();

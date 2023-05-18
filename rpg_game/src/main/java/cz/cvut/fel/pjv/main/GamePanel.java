@@ -148,7 +148,7 @@ public class GamePanel extends JPanel {
             menu.drawLoad(g2, this);  // Show a menu with the choice: start a new game/load a previous game.
 
         if (state == State.RULES)
-            menu.drawHelpButton(g2, this);
+            menu.drawRulesButton(g2, this);
 
         if (state == State.NEXT_HELP_PAGE)
             menu.drawNextPage(g2, this);
