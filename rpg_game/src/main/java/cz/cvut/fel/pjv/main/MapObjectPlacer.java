@@ -13,6 +13,9 @@ import java.io.IOException;
 
 import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
+/**
+ The MapObjectPlacer class reads JSON files containing game object coordinates and places the objects on the map.
+ */
 public class MapObjectPlacer {
     GamePanel gp;
 

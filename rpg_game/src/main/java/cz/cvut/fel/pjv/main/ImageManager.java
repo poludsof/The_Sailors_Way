@@ -7,6 +7,10 @@ import java.util.Objects;
 
 import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
+/**
+ The ImageManager class is responsible for loading and storing the images used in the game.
+ It provides static fields to access the loaded images.
+ */
 public class ImageManager {
     public static BufferedImage hat_sailor, hat, back_level, background, open_map, sailor, frame, arrow,
                                 full_heart, half_heart, empty_heart,  // hearts

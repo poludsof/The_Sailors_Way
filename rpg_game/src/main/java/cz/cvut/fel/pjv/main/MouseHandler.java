@@ -3,6 +3,9 @@ package cz.cvut.fel.pjv.main;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ The MouseHandler class implements the MouseListener interface to handle mouse events for the GamePanel object.
+ */
 public class MouseHandler implements MouseListener {
     GamePanel gp;
 

@@ -5,6 +5,10 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.JFrame;
 
+/**
+ The main entry point for the game.
+ It creates a window, sets up the game panel, and starts the game.
+ */
 public class Main {
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
 

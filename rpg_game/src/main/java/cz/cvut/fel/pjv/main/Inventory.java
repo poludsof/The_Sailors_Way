@@ -2,6 +2,10 @@ package cz.cvut.fel.pjv.main;
 
 import java.awt.*;
 
+/**
+ The Inventory class is responsible for managing and displaying the player's inventory in the game.
+ It provides methods to draw the inventory on the screen.
+ */
 public class Inventory {
     static int countRow, countCol;
     static int itemX, itemY;

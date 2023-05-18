@@ -28,7 +28,7 @@ public class CollisionCheckerTest extends TestCase {
         entities[1].worldX = 0;
         entities[1].worldY = 0;
 
-        int result = gp.checker.CheckCollisionEntity(gp.player, entities); // Call the method being tested
+        int result = gp.checker.CheckCollisionEntity(gp.player); // Call the method being tested
         assertTrue(gp.player.collision); // Check if player's collision flag is set
         assertEquals(0, result); // Check if the method returned the correct index of the colliding entity
     }

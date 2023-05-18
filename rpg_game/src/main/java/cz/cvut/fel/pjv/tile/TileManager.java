@@ -13,6 +13,10 @@ import java.util.Objects;
 
 import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
+/**
+ The TileManager class handles the management and rendering of tiles in the game.
+ It loads tile data from files, creates tile objects, and draws them on the screen.
+ */
 public class TileManager {
     GamePanel gp;
     public Tile[] tile; // Array with tiles, where each tile stores its name, image, and collision identifier.

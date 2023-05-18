@@ -24,8 +24,8 @@ public class Sound {
 
     /**
      Sets the music to play based on the index provided.
-     @param idx The index of the music file to play.
-     @throws RuntimeException If there is an error in opening or playing the music file.
+     @param idx The index of the music file to play
+     @throws RuntimeException If there is an error in opening or playing the music file
      */
     public void setMusic(int idx) {
         try {

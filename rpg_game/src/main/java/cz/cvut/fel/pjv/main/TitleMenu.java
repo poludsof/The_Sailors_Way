@@ -6,6 +6,10 @@ import java.io.InputStream;
 
 import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
+/**
+ The TitleMenu class represents the title screen menu of the game.
+ It displays the game options and images, allowing the player to navigate through the menu.
+ */
 public class TitleMenu {
     private final Font Bruno; // custom font
 

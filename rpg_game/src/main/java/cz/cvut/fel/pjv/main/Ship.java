@@ -22,7 +22,8 @@ public class Ship {
      The method takes in a Graphics2D object and a GamePanel object, and draws the ship on the screen.
      */
     public void draw(Graphics2D g2, GamePanel gp) {
-        int screenX = worldX - gp.player.worldX + gp.player.screenX;  // Position of the ship on the screen relative to the player.
+        // Position of the ship on the screen relative to the player.
+        int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
         // If the game is not over, it draws the ship with a shadow and an arrow for the player to enter the spaceship.

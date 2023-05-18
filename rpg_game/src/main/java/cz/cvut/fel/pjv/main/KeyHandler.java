@@ -3,6 +3,10 @@ package cz.cvut.fel.pjv.main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ The KeyHandler class is responsible for handling keyboard input in the game.
+ It implements the KeyListener interface to detect key presses and releases.
+ */
 public class KeyHandler implements KeyListener {
     // Variables to track key presses.
     public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;

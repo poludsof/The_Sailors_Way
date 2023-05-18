@@ -22,7 +22,6 @@ import static cz.cvut.fel.pjv.main.Main.LOGGER;
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
-    GameObjects obj = new GameObjects();
     public Dictionary<String, Integer> inventory = new Hashtable<>();
     public int key_count, dead_pirate_count, rum_count, rum_time, map_count, sword_count, level, max_health;
     public boolean rum_time_start = false;
@@ -134,7 +133,6 @@ public class Player extends Entity {
             if (idx_m >= 0)
                 gp.pirates[idx_m].fightPirate(idx_m);
             if (idx_m == -100) {
-                LOGGER.info("You attack the boss."); // todo
                 gp.boss.fightBoss();
             }
         }
@@ -254,16 +252,16 @@ public class Player extends Entity {
             int solidAreaHeight = solidArea.height;
 
             switch (direction) {
-                case "up" -> { worldY -= attackArea.height; }
-                case "down" -> { worldY += attackArea.height; }
-                case "left" -> { worldX -= attackArea.width; }
-                case "right" -> { worldX += attackArea.width; }
+                case "up" -> worldY -= attackArea.height;
+                case "down" -> worldY += attackArea.height;
+                case "left" -> worldX -= attackArea.width;
+                case "right" -> worldX += attackArea.width;
             }
 
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
 
-            idx_pirate = gp.checker.CheckCollisionEntity(this, gp.pirates);
+            idx_pirate = gp.checker.CheckCollisionEntity(this);
             fight_boss = gp.checker.CheckCollisionBoss(this);
 
             worldX = currWorldX;
