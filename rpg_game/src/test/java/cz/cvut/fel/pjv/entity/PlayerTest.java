@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.main.GamePanel;
+import cz.cvut.fel.pjv.main.State;
 import junit.framework.TestCase;
 
 public class PlayerTest extends TestCase {
@@ -35,7 +36,7 @@ public class PlayerTest extends TestCase {
     public void testUpdate() {
         gp.player.heart_count = 0; // check end of game state
         gp.player.update();
-        assertEquals(GamePanel.State.GAME_OVER, gp.state);
+        assertEquals(State.GAME_OVER, gp.state);
 
         gp.player.timeToDamage = true; // check damage timer
         gp.player.damageCounter = 59;

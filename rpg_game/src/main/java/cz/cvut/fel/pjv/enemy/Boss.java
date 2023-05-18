@@ -43,6 +43,7 @@ public class Boss extends Entity {
                 speed = (int) ((long) jsonObject.get("speed"));
                 heart_count = (int) ((long) jsonObject.get("heart_count"));
             } catch (ParseException | IOException e) {
+                LOGGER.error("Error: {}", e.getMessage());
                 e.printStackTrace();
             }
             direction = "down";
@@ -62,6 +63,7 @@ public class Boss extends Entity {
             down1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_down1.png")));
             down2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("boss/boss_down2.png")));
         } catch (IOException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -85,7 +87,7 @@ public class Boss extends Entity {
         if (!gp.boss.timeToDamage && gp.player.attacking) {
             if (gp.boss.heart_count > 0) {
                 --gp.boss.heart_count;
-                LOGGER.info("Boss loses 1 health.");
+                LOGGER.info("You attack the boss. Boss loses 1 health.");
                 gp.boss.showHealth = true;
                 gp.sound.setMusic(6);
             } else {

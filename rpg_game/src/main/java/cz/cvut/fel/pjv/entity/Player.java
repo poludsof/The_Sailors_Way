@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.main.GamePanel;
 import cz.cvut.fel.pjv.main.KeyHandler;
+import cz.cvut.fel.pjv.main.State;
 import cz.cvut.fel.pjv.object.GameObjects;
 
 import javax.imageio.ImageIO;
@@ -115,10 +116,10 @@ public class Player extends Entity {
      */
     public void update() {
         if (heart_count <= 0)
-            gp.state = GamePanel.State.GAME_OVER;
+            gp.state = State.GAME_OVER;
 
         else if (gp.checker.CheckCollisionBoat(this))
-            gp.state = GamePanel.State.HAPPY_END;
+            gp.state = State.HAPPY_END;
 
         if (timeToDamage) {
             damageCounter++;
@@ -133,7 +134,7 @@ public class Player extends Entity {
             if (idx_m >= 0)
                 gp.pirates[idx_m].fightPirate(idx_m);
             if (idx_m == -100) {
-                LOGGER.info("You attack the boss.");
+                LOGGER.info("You attack the boss."); // todo
                 gp.boss.fightBoss();
             }
         }

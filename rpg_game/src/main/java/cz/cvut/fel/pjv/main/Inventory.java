@@ -1,10 +1,6 @@
 package cz.cvut.fel.pjv.main;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
 public class Inventory {
     static int countRow, countCol;
@@ -12,7 +8,7 @@ public class Inventory {
     static int maxCol = 4;
 
     /**
-     * The method draws each item that the player currently has in his inventory to the screen.
+     The method draws each item that the player currently has in his inventory to the screen.
      */
     public static void drawInventory(Graphics2D g2, GamePanel gp) {
         countRow = 0;
@@ -20,17 +16,6 @@ public class Inventory {
 
         // Create a rectangle representing the inventory area.
         Rectangle inventoryList = new Rectangle(380, 250, gp.tileSize * 4 + 60, gp.tileSize * 3 + 50);
-
-        // Load images for inventory items.
-        BufferedImage key, map, rum, sword;
-        try {
-            key = ImageIO.read(Objects.requireNonNull(Inventory.class.getClassLoader().getResourceAsStream("objects/key.png")));
-            map = ImageIO.read(Objects.requireNonNull(Inventory.class.getClassLoader().getResourceAsStream("objects/map.png")));
-            rum = ImageIO.read(Objects.requireNonNull(Inventory.class.getClassLoader().getResourceAsStream("objects/rum.png")));
-            sword = ImageIO.read(Objects.requireNonNull(Inventory.class.getClassLoader().getResourceAsStream("objects/sword.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         // Draw the background of the rectangle for the inventory.
         g2.setColor(new Color(154, 229, 255, 80));
@@ -50,32 +35,32 @@ public class Inventory {
 
         // Iterate through inventory items and draw them on the screen.
         for (int i = 0; i < gp.player.inventory.get("Key"); ++i) {
-            g2.drawImage(key, itemX, itemY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(ImageManager.key, itemX, itemY, gp.tileSize, gp.tileSize, null);
             drawRectangle(g2, gp);
             checkBound(gp, inventoryList);
         }
 
         for (int i = 0; i < gp.player.inventory.get("Map"); ++i) {
-            g2.drawImage(map, itemX, itemY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(ImageManager.map, itemX, itemY, gp.tileSize, gp.tileSize, null);
             drawRectangle(g2, gp);
             checkBound(gp, inventoryList);
         }
 
         for (int i = 0; i < gp.player.inventory.get("Sword"); ++i) {
-            g2.drawImage(sword, itemX, itemY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(ImageManager.sword, itemX, itemY, gp.tileSize, gp.tileSize, null);
             drawRectangle(g2, gp);
             checkBound(gp, inventoryList);
         }
 
         for (int i = 0; i < gp.player.inventory.get("Rum"); ++i) {
-            g2.drawImage(rum, itemX, itemY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(ImageManager.rum, itemX, itemY, gp.tileSize, gp.tileSize, null);
             drawRectangle(g2, gp);
             checkBound(gp, inventoryList);
         }
     }
 
     /**
-     * Move the object coordinates depending on the inventory boundaries.
+     Move the object coordinates depending on the inventory boundaries.
      */
     public static void checkBound(GamePanel gp, Rectangle inventoryList) {
         itemX += gp.tileSize + 10;  // Shift the position by the size of the item + the distance between items.
@@ -89,7 +74,7 @@ public class Inventory {
     }
 
     /**
-     * Draws a black frame around the object in inventory.
+     Draws a black frame around the object in inventory.
      */
     private static void drawRectangle(Graphics2D g2, GamePanel gp) {
         g2.setColor(Color.black);

@@ -2,6 +2,8 @@ package cz.cvut.fel.pjv.main;
 import java.net.URL;
 import javax.sound.sampled.*;
 
+import static cz.cvut.fel.pjv.main.Main.LOGGER;
+
 /**
  A class for playing sound effects and music tracks.
  */
@@ -32,6 +34,7 @@ public class Sound {
             clip.open(audioIn);  // Opens the audio input stream and starts playing the audio.
             clip.start();
         } catch (Exception e) {
+            LOGGER.error("Error: {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }

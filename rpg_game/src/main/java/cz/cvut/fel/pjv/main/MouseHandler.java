@@ -28,25 +28,25 @@ public class MouseHandler implements MouseListener {
         if (mouseX >= gp.screenWidth / 2 - 105 && mouseX <= gp.screenWidth / 2 + 115) {
             if (mouseY >= 390 && mouseY <= 470) {
                 // After pressing the Play button, you will be able to select Start new game/Load previous game
-                if (gp.state == GamePanel.State.TITLE) {
-                    gp.state = GamePanel.State.LOAD;
-                } else if (gp.state == GamePanel.State.LOAD) {  // Pressing the NEW GAME button.
-                    gp.state = GamePanel.State.GAME;
+                if (gp.state == State.TITLE) {
+                    gp.state = State.LOAD;
+                } else if (gp.state == State.LOAD) {  // Pressing the NEW GAME button.
+                    gp.state = State.GAME;
                     gp.sound.pauseTrack();
                 }
             }
             else if (mouseY >= 510 && mouseY <= 590) {
-                if (gp.state == GamePanel.State.TITLE) {  // Pressing the RULES button
-                    gp.state = GamePanel.State.RULES;
-                } else if (gp.state == GamePanel.State.LOAD) {  // Pressing the LOAD GAME button.
+                if (gp.state == State.TITLE) {  // Pressing the RULES button
+                    gp.state = State.RULES;
+                } else if (gp.state == State.LOAD) {  // Pressing the LOAD GAME button.
                     gp.sound.pauseTrack();
-                    gp.restart();
+                    gp.loadGame();
                 }
             }
 
             // The QUIT button at the title menu and at the last menu when the game ends successfully or unsuccessfully.
             else if (mouseY >= 630 && mouseY <= 710) {
-                if (gp.state == GamePanel.State.TITLE || gp.state == GamePanel.State.GAME_OVER || gp.state == GamePanel.State.HAPPY_END)
+                if (gp.state == State.TITLE || gp.state == State.GAME_OVER || gp.state == State.HAPPY_END)
                     System.exit(1);
             }
         }
@@ -56,16 +56,16 @@ public class MouseHandler implements MouseListener {
 
             // Pressing the PAUSE button.
             if (mouseY >= 20 && mouseY <= 100) {
-                if (gp.state == GamePanel.State.GAME)
-                    gp.state = GamePanel.State.PAUSE;
+                if (gp.state == State.GAME)
+                    gp.state = State.PAUSE;
             }
 
             // Pressing the INVENTORY button.
             else if (mouseY >= gp.tileSize * 2 - 25 && mouseY <= gp.tileSize * 3 - 25) {
-                if (gp.state == GamePanel.State.GAME)  // Pressing to open inventory.
-                    gp.state = GamePanel.State.INVENTORY;
-                else if (gp.state == GamePanel.State.INVENTORY) // Pressing to close inventory.
-                    gp.state = GamePanel.State.GAME;
+                if (gp.state == State.GAME)  // Pressing to open inventory.
+                    gp.state = State.INVENTORY;
+                else if (gp.state == State.INVENTORY) // Pressing to close inventory.
+                    gp.state = State.GAME;
             }
 
             // Pressing the SAVE and EXIT button.
@@ -81,31 +81,31 @@ public class MouseHandler implements MouseListener {
         // Pressing the CONTINUE button (triangle on the pause screen).
         if (mouseX >= gp.screenWidth / 2 - 40 && mouseX <= gp.screenWidth / 2 + 40) {
             if (mouseY >= gp.screenHeight / 2 + 120 && mouseY <= gp.screenHeight / 2 + 200) {
-                if (gp.state == GamePanel.State.PAUSE)
-                    gp.state = GamePanel.State.GAME;
+                if (gp.state == State.PAUSE)
+                    gp.state = State.GAME;
             }
         }
 
         // Pressing the NEXT PAGE button in the rules of the game section.
         if (mouseX >= gp.screenWidth - 180 && mouseX <= gp.screenWidth - 180 + gp.tileSize*2-25) {
             if (mouseY >= gp.screenHeight - 115 && mouseY <= gp.screenHeight - 115 + gp.tileSize) {
-                if (gp.state == GamePanel.State.RULES)
-                    gp.state = GamePanel.State.NEXT_HELP_PAGE;
+                if (gp.state == State.RULES)
+                    gp.state = State.NEXT_HELP_PAGE;
             }
         }
 
         // Pressing the RETURN button. After viewing the rules, return to the title menu.
         if (mouseX >= gp.screenWidth - 110 && mouseX <= gp.screenWidth + gp.tileSize) {
             if (mouseY >= 20 && mouseY <= gp.tileSize + 20) {
-                if (gp.state == GamePanel.State.NEXT_HELP_PAGE)
-                    gp.state = GamePanel.State.TITLE;
+                if (gp.state == State.NEXT_HELP_PAGE)
+                    gp.state = State.TITLE;
             }
         }
 
         // Pressing the RESTART button.
         if (mouseX >= gp.screenWidth / 2 - 145 && mouseX <= gp.screenWidth / 2 + 150) {
             if (mouseY >= gp.screenHeight / 2 + 115 && mouseY <= gp.screenHeight / 2 + 185) {
-                if (gp.state == GamePanel.State.GAME_OVER || gp.state == GamePanel.State.HAPPY_END) {
+                if (gp.state == State.GAME_OVER || gp.state == State.HAPPY_END) {
                     gp.sound.pauseTrack();
                     gp.setupGame();
                 }

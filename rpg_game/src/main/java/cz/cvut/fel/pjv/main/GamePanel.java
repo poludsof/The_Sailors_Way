@@ -5,41 +5,33 @@ import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.enemy.Boss;
 import cz.cvut.fel.pjv.object.GameObjects;
 import cz.cvut.fel.pjv.object.House;
-import cz.cvut.fel.pjv.object.RDoor;
 import cz.cvut.fel.pjv.tile.TileManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
+
+import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
 public class GamePanel extends JPanel {
-    public enum State {
-        TITLE, GAME, RULES, PAUSE, NEXT_HELP_PAGE,
-        HAPPY_END, GAME_OVER,
-        INVENTORY, LOAD
-    }
     public State state;
 
     // SIZE OF THE TILES
     private final int originalTileSize = 20; // 20 x 20 character
-    private final int scale = 4;
 
-    public final int tileSize = originalTileSize * scale; // // 20 * 4 = 80 --> 80 x 80
+    public final int tileSize = originalTileSize * 4; // // 20 * 4 = 80 --> 80 x 80, just to fit the GamePanel size
 
     // SCREEN OPTIONS
     private final int colScreen = 14;
     private final int rowScreen = 10;
-    public int screenWidth = tileSize * colScreen; // 1120 pixels
-    public int screenHeight = tileSize * rowScreen; // 800 pixels
-    public int worldCol = 100,  worldRow = 100; // size of the map (in tiles)
+    public final int screenWidth = tileSize * colScreen; // 1120 pixels
+    public final int screenHeight = tileSize * rowScreen; // 800 pixels
+    public final int worldCol = 100,  worldRow = 100; // size of the map (in tiles)
 
     // HANDLERS
     KeyHandler keyH = new KeyHandler();
@@ -80,14 +72,14 @@ public class GamePanel extends JPanel {
 
     /**
      Initializes the game by setting default values for the player, objects, pirates, boss and sound.
-     Sets the state of the game to TITLE.
+     Sets the state of the game to TITLE. Called e.g. when player restarts a game.
      */
     public void setupGame() {
         state = State.TITLE;
         player.setDefaultValues(filenamePlayer);
         objPlacer.PlaceObject(filenameObjects);
         objPlacer.PlacePirate(filenamePirates);
-        if (boss == null)  // After a boss dies, it must be recreated to start a new game.
+        if (boss == null)  // When the boss dies, it must be recreated to start a new game.
             boss = new Boss(this);
         boss.setDefaultValues(filenameBoss);
         sound.setMusic(3);
@@ -106,19 +98,19 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     Restarts the game, reloading the player, objects, pirates and boss
+     Loads the game, loads the player, objects, pirates and boss
      based on the downloaded files, and sets the game state to "GAME".
      */
-    public void restart() {
+    public void loadGame() {
         player.setDefaultValues(filenameLoadPlayer);
         objPlacer.PlaceObject(filenameLoadObjects);
         objPlacer.PlacePirate(filenameLoadPirates);
-        boss.setDefaultValues(filenameLoadBoss); // todo error with update boss
-        state = GamePanel.State.GAME;
+        boss.setDefaultValues(filenameLoadBoss);
+        state = State.GAME;
     }
 
     /**
-     Updates the game by calling the update method for the player, pirates and boss.
+     Updates the game by calling the update method for the player, pirates and boss consequently.
      */
     private void update() {
         if (state == State.GAME) {
@@ -133,19 +125,21 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * This method overrides the paintComponent method of JPanel
-     * and is responsible for painting the components of the game
-     * and releases the resources occupied by the Graphics2D object after use.
-     * Depending on the state of the game, it draws different menus, objects, and buttons.
+     This method overrides the paintComponent method of JPanel
+     and is responsible for painting the components of the game
+     and releases the resources occupied by the Graphics2D object after use.
+     Depending on the state of the game, it draws different menus, objects, and buttons.
      */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);  // Clear the panel's surface.
-        Graphics2D g2 = (Graphics2D) g;  // Create a Graphics2D object from the Graphics object.
-                            // to provides additional functionality for drawing 2D graphics and images on the panel.
+
+        // Creates a Graphics2D object from the Graphics object.
+        // Provides additional functionality for drawing 2D graphics and images on the panel.
+        Graphics2D g2 = (Graphics2D) g;
 
         if (state == State.LOAD)
-            menu.drawLoad(g2, this);  // Show a menu with the choice: start a new game/load a previous game.
+            menu.drawLoad(g2, this);  // Show a menu with a choice: start a new game/load a previous game.
 
         if (state == State.RULES)
             menu.drawRulesButton(g2, this);
@@ -164,18 +158,22 @@ public class GamePanel extends JPanel {
                     obj.draw(g2, this);
             }
 
-            ship.draw(g2, this);  // Drawing special objects on the map.
+            // Drawing special objects on the map.
+            ship.draw(g2, this);
             house.draw(g2, this);
 
-            if (state != State.HAPPY_END)  // While the game is in progress, the player is being drawn.
+            // While the game is in progress, the player is being drawn.
+            if (state != State.HAPPY_END)
                 player.draw(g2);
             if (state == State.HAPPY_END)
                 menu.drawHappyEnd(g2, this);  // Draw the final panel.
 
-            if (boss != null)  // While the boss is not dead, the boss picture is being drawn.
+            // While the boss is not dead, the boss picture is being drawn.
+            if (boss != null)
                 boss.draw(g2, 2);
 
-            for (Entity pirate : pirates) {  // Draw each pirate.
+            // Draw each pirate.
+            for (Entity pirate : pirates) {
                 if (pirate != null)
                     pirate.draw(g2, 1);
             }
@@ -202,7 +200,8 @@ public class GamePanel extends JPanel {
             drawLevels(g2, this);
         }
 
-        g2.dispose(); // Releasing resources occupied by g2
+        // Releasing resources occupied by g2
+        g2.dispose();
     }
 
     /**
@@ -220,20 +219,10 @@ public class GamePanel extends JPanel {
             throw new RuntimeException(e);
         }
 
-        // Reading images from resources.
-        BufferedImage hat, back_level, background;
-        try {
-            hat = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("level/hat_sailor.png")));
-            back_level = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("level/back_level.png")));
-            background = ImageIO.read(Objects.requireNonNull(Player.class.getClassLoader().getResourceAsStream("level/background.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         // Draw images on the screen.
-        g2.drawImage(back_level, 260, 30, gp.tileSize, gp.tileSize,null);
-        g2.drawImage(background, 18, 30, gp.tileSize * 3, gp.tileSize,null);
-        g2.drawImage(hat, 260, -26, gp.tileSize, gp.tileSize,null);
+        g2.drawImage(ImageManager.back_level, 260, 30, gp.tileSize, gp.tileSize,null);
+        g2.drawImage(ImageManager.background, 18, 30, gp.tileSize * 3, gp.tileSize,null);
+        g2.drawImage(ImageManager.hat, 260, -26, gp.tileSize, gp.tileSize,null);
 
         // Displaying text on the screen.
         g2.setFont(Bruno);
@@ -244,25 +233,16 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * The method is called to display the player's health in the form of hearts on the screen.
+     The method is called to display the player's health in the form of 3 hearts on the screen.
      */
     public void drawHearts(Graphics2D g2, GamePanel gp) {
-        // Reading images from resources.
-        BufferedImage full_heart, half_heart, empty_heart;
-        try {
-            empty_heart = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("heart/empty_heart.png")));
-            half_heart = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("heart/half_heart.png")));
-            full_heart = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("heart/full_heart.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         int heartX = 25; // Initial positions for starting to draw the player's health.
         int heartY = 115;
 
         // Draw empty hearts of health.
         for (int i = 0; i < 3; ++i) {
-            g2.drawImage(empty_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(ImageManager.empty_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
             heartX += gp.tileSize + 10;
         } heartX = 25;
 
@@ -270,10 +250,10 @@ public class GamePanel extends JPanel {
         int count = 0;
         while (count < gp.player.heart_count) {
             // Draw one half of the heart.
-            g2.drawImage(half_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(ImageManager.half_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
             ++count;
             if (count < gp.player.heart_count) {  // Draw the other half of the heart.
-                g2.drawImage(full_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
+                g2.drawImage(ImageManager.full_heart, heartX, heartY, gp.tileSize, gp.tileSize, null);
             }
             ++count;
             heartX += gp.tileSize + 10;
@@ -283,19 +263,11 @@ public class GamePanel extends JPanel {
 
     /**
      Displays a map image on the game panel.
-     @throws RuntimeException if the map image file is not found or cannot be read.
+     @throws RuntimeException if the map image file was not found or cannot be read.
      */
     private void showMap(Graphics2D g2, GamePanel gp) {
-        // Reading images from resources.
-        BufferedImage open_map;
-        try {
-            open_map = ImageIO.read(Objects.requireNonNull(RDoor.class.getClassLoader().getResourceAsStream("objects/open_map.jpg")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // Draw images on the screen.
-        g2.drawImage(open_map, 350, 150, gp.tileSize * 6, gp.tileSize * 6, null);
+        // Draw image on the screen.
+        g2.drawImage(ImageManager.open_map, 350, 150, gp.tileSize * 6, gp.tileSize * 6, null);
     }
 
     /**
@@ -319,6 +291,7 @@ public class GamePanel extends JPanel {
             file.write(playerDetails.toJSONString());
             file.flush();
         } catch (IOException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -354,6 +327,7 @@ public class GamePanel extends JPanel {
         try (FileWriter file = new FileWriter(filenameLoadObjects)) {
             file.write(jsonObj.toJSONString());
         } catch (IOException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -383,6 +357,7 @@ public class GamePanel extends JPanel {
         try (FileWriter file = new FileWriter(filenameLoadPirates)) {
             file.write(jsonObj.toJSONString());
         } catch (IOException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -402,6 +377,7 @@ public class GamePanel extends JPanel {
             file.write(bossDetails.toJSONString());
             file.flush();
         } catch (IOException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             e.printStackTrace();
         }
     }

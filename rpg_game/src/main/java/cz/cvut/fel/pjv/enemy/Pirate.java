@@ -1,7 +1,6 @@
 package cz.cvut.fel.pjv.enemy;
 
 import cz.cvut.fel.pjv.entity.Entity;
-import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.main.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -9,6 +8,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
+
+import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
 public class Pirate extends Entity {
     GamePanel gp;
@@ -42,6 +43,7 @@ public class Pirate extends Entity {
             down1 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_down1.png")));
             down2 = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pirate/pirate_down2.png")));
         } catch (IOException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }

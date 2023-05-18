@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.main;
 
 import cz.cvut.fel.pjv.enemy.Pirate;
 import cz.cvut.fel.pjv.object.*;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +10,8 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+
+import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
 public class MapObjectPlacer {
     GamePanel gp;
@@ -59,6 +62,7 @@ public class MapObjectPlacer {
                 gp.objArray[idx].worldY = (int) ((long) coordArray.get(1)) * gp.tileSize;
             }
         } catch (ParseException | IOException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             e.printStackTrace();
         }
 
@@ -142,6 +146,7 @@ public class MapObjectPlacer {
                 gp.pirates[i].worldY = (int) ((long) jsonArray.get(1)) * gp.tileSize;
             }
         } catch (ParseException | IOException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             e.printStackTrace();
         }
     }

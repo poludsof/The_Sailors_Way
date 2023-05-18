@@ -14,7 +14,7 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent keyEvent) { }
 
     /**
-     * Setting attributes according to pressed keys.
+     Setting attributes according to pressed keys.
      */
     @Override
     public void keyPressed(KeyEvent k) {
@@ -33,7 +33,7 @@ public class KeyHandler implements KeyListener {
     }
 
     /**
-     * Setting attributes according to released keys.
+     Setting attributes according to released keys.
      */
     @Override
     public void keyReleased(KeyEvent k) {

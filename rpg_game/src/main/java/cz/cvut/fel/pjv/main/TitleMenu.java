@@ -1,11 +1,10 @@
 package cz.cvut.fel.pjv.main;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
+
+import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
 public class TitleMenu {
     private final Font Bruno; // custom font
@@ -20,6 +19,7 @@ public class TitleMenu {
             assert is != null;
             Bruno = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (IOException | FontFormatException e) {
+            LOGGER.error("Error: {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -30,15 +30,6 @@ public class TitleMenu {
      @param gp the GamePanel object containing information about the game's dimensions and settings
      */
     public void show(Graphics2D g2, GamePanel gp) {
-        // Load images for the hat, sailor, and button frame.
-        BufferedImage hat, sailor, frame;
-        try {
-            hat = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("objects/hat.png")));
-            sailor = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("player/sailor_down2.png")));
-            frame = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/under.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         g2.setFont(Bruno);  // Apply the font.
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 85F));
@@ -54,13 +45,13 @@ public class TitleMenu {
         g2.drawString("RULES", gp.screenWidth / 2 - 95, gp.screenHeight / 2 + 167);
 
         // Draw the hat and sailor images in their positions on the screen.
-        g2.drawImage(hat, gp.screenWidth /2 - 70, gp.screenHeight /2 - 200, gp.tileSize * 2, gp.tileSize * 2,null);
-        g2.drawImage(sailor, 100, gp.screenHeight /2, gp.tileSize * 3, gp.tileSize * 3,null);
+        g2.drawImage(ImageManager.hat_sailor, gp.screenWidth /2 - 70, gp.screenHeight /2 - 200, gp.tileSize * 2, gp.tileSize * 2,null);
+        g2.drawImage(ImageManager.sailor, 100, gp.screenHeight /2, gp.tileSize * 3, gp.tileSize * 3,null);
 
         // Draw the background frames of the buttons and the text at their positions on the screen.
-        g2.drawImage(frame, gp.screenWidth / 2 - 105, 395, 220, 80,null);
-        g2.drawImage(frame, gp.screenWidth / 2 - 105, 515, 220, 80,null);
-        g2.drawImage(frame, gp.screenWidth / 2 - 105, 635, 220, 80,null);
+        g2.drawImage(ImageManager.frame, gp.screenWidth / 2 - 105, 395, 220, 80,null);
+        g2.drawImage(ImageManager.frame, gp.screenWidth / 2 - 105, 515, 220, 80,null);
+        g2.drawImage(ImageManager.frame, gp.screenWidth / 2 - 105, 635, 220, 80,null);
     }
 
     /**
@@ -69,12 +60,6 @@ public class TitleMenu {
      @param gp the GamePanel object containing information about the game's dimensions and settings
      */
     public void drawLoad(Graphics2D g2, GamePanel gp) {
-        BufferedImage frame;
-        try {
-            frame = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/under.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         // Draw the game title.
         g2.setFont(Bruno);
@@ -90,42 +75,30 @@ public class TitleMenu {
         g2.drawString("LOAD", gp.screenWidth / 2 - 80, gp.screenHeight / 2 + 167);
 
         // Draw the frames of the buttons.
-        g2.drawImage(frame, gp.screenWidth / 2 - 105, 395, 220, 80,null);
-        g2.drawImage(frame, gp.screenWidth / 2 - 105, 515, 220, 80,null);
+        g2.drawImage(ImageManager.frame, gp.screenWidth / 2 - 105, 395, 220, 80,null);
+        g2.drawImage(ImageManager.frame, gp.screenWidth / 2 - 105, 515, 220, 80,null);
     }
 
     /**
-     * Displays a button for pausing the game.
+     Displays a button for pausing the game.
      @param g2 the Graphics2D object used to draw on the screen
      @param gp the GamePanel object containing information about the game's dimensions and settings
      */
     public void showPauseButton(Graphics2D g2, GamePanel gp) {
-        BufferedImage pause_button;
-        try {
-            pause_button = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/pause_button.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        g2.drawImage(pause_button, gp.screenWidth - 100, 20, gp.tileSize, gp.tileSize,null);
+        g2.drawImage(ImageManager.pause_button, gp.screenWidth - 100, 20, gp.tileSize, gp.tileSize,null);
     }
 
     /**
-     * Displays a button for opening the player's inventory.
+     Displays a button for opening the player's inventory.
      @param g2 the Graphics2D object used to draw on the screen
      @param gp the GamePanel object containing information about the game's dimensions and settings
      */
     public void showChestButton(Graphics2D g2, GamePanel gp) {
-        BufferedImage chest_button;
-        try {
-            chest_button = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/chest.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        g2.drawImage(chest_button, gp.screenWidth - 100, gp.tileSize * 2 - 25, gp.tileSize, gp.tileSize,null);
+        g2.drawImage(ImageManager.chest_button, gp.screenWidth - 100, gp.tileSize * 2 - 25, gp.tileSize, gp.tileSize,null);
     }
 
     /**
-     * Displays pausing state on the screen.
+     Displays pausing state on the screen.
      @param g2 the Graphics2D object used to draw on the screen
      @param gp the GamePanel object containing information about the game's dimensions and settings
      */
@@ -142,14 +115,7 @@ public class TitleMenu {
         g2.setColor(Color.black);
         g2.drawString("PAUSE", gp.screenWidth / 2 - 165, gp.screenHeight / 2 - 145);
 
-        // Load an image of a play button (triangle).
-        BufferedImage play_button;
-        try {
-            play_button = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/play_button.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        g2.drawImage(play_button, gp.screenWidth / 2 - 40, gp.screenHeight / 2 + 110, gp.tileSize + 15, gp.tileSize + 15,null);
+        g2.drawImage(ImageManager.play_button, gp.screenWidth / 2 - 40, gp.screenHeight / 2 + 110, gp.tileSize + 15, gp.tileSize + 15,null);
     }
 
     /**
@@ -158,14 +124,6 @@ public class TitleMenu {
      @param gp the GamePanel object containing information about the game's dimensions and settings
      */
     public void drawRulesButton(Graphics2D g2, GamePanel gp) {
-        // Load images for the hat and arrow.
-        BufferedImage hat, arrow;
-        try {
-            hat = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("objects/hat.png")));
-            arrow = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/arrow.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         // Set the initial x and y positions for drawing the storyline.
         int x = 50;
@@ -198,12 +156,12 @@ public class TitleMenu {
         for (String line : story.split("\n"))
             g2.drawString(line, x, y += g2.getFontMetrics().getHeight());
 
-        g2.drawImage(hat, gp.screenWidth / 2 - 103, 0, gp.tileSize - 10, gp.tileSize - 10, null);
-        g2.drawImage(arrow, gp.screenWidth - 190, gp.screenHeight - 150, gp.tileSize * 2 - 10, gp.tileSize * 2 - 10, null);
+        g2.drawImage(ImageManager.hat_sailor, gp.screenWidth / 2 - 103, 0, gp.tileSize - 10, gp.tileSize - 10, null);
+        g2.drawImage(ImageManager.arrow, gp.screenWidth - 190, gp.screenHeight - 150, gp.tileSize * 2 - 10, gp.tileSize * 2 - 10, null);
     }
 
     /**
-     * Draw the next page (after the rules of the game) with a description of the player's control.
+     Draw the next page (after the rules of the game) with a description of the player's control.
      @param g2 the Graphics2D object used to draw on the screen
      @param gp the GamePanel object containing information about the game's dimensions and settings
      */
@@ -212,28 +170,17 @@ public class TitleMenu {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
         g2.setColor(Color.white);
 
-        // Load necessary images.
-        BufferedImage key_button, hat, exit_button, space_button;
-        try {
-            hat = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("objects/hat.png")));
-            key_button = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/wasd.png")));
-            exit_button = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/exit_button.png")));
-            space_button = ImageIO.read(Objects.requireNonNull(TitleMenu.class.getClassLoader().getResourceAsStream("buttons/space.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         // Draw the title of the page.
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50F));
         g2.drawString("Player Control", 50, 100);
 
         // Draw the images of the key button, exit button, and hat.
-        g2.drawImage(key_button, 100, 140, gp.tileSize * 3 + 40, gp.tileSize * 2 + 20, null);
-        g2.drawImage(exit_button, gp.screenWidth - 110, 20, gp.tileSize, gp.tileSize, null);
-        g2.drawImage(hat, 220, 0, gp.tileSize - 10, gp.tileSize - 10, null);
+        g2.drawImage(ImageManager.key_button, 100, 140, gp.tileSize * 3 + 40, gp.tileSize * 2 + 20, null);
+        g2.drawImage(ImageManager.exit_button, gp.screenWidth - 110, 20, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(ImageManager.hat_sailor, 220, 0, gp.tileSize - 10, gp.tileSize - 10, null);
 
         // Display information on keyboard controls for the player.
-        g2.drawImage(space_button, 700, 160, gp.tileSize * 3 + 40, gp.tileSize, null);
+        g2.drawImage(ImageManager.space_button, 700, 160, gp.tileSize * 3 + 40, gp.tileSize, null);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25F));
         g2.drawString("SPACE - attack", 710, 300);
 
@@ -314,7 +261,7 @@ public class TitleMenu {
     }
 
     /**
-     * Shows the load button on the screen on the right during the game.
+     Shows the load button on the screen on the right during the game.
      @param g2 the Graphics2D object used to draw on the screen
      @param gp the GamePanel object containing information about the game's dimensions and settings
      */
