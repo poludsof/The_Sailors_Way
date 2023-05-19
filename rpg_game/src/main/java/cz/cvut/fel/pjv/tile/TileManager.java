@@ -74,7 +74,7 @@ public class TileManager {
     }
 
     /**
-     Reads information about all tiles and loads it into an array with names and collision from a text file..
+     Reads information about all tiles and loads it into an array with names and collision from a text file.
      @param tile_path the path to the file with tiles information
      */
     private void loadData(String tile_path) {
