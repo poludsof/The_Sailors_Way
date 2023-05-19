@@ -103,7 +103,7 @@ public class PlayerTest extends TestCase {
     private void checkAttackState() {
         gp.player.setDefaultValues(filename);
 
-        gp.player.keyH.spacePressed = true; // check attack after press space
+        gp.player.keyH.spacePressed = true;
         gp.player.update();
         assertTrue(gp.player.attacking);
     }
@@ -123,7 +123,7 @@ public class PlayerTest extends TestCase {
     }
 
     /**
-     Check if the data has not changed when the rum_key_button is not pressed/pressed.
+     Check if the data has (not) changed when the rum_key_button is not pressed/pressed.
      */
     private void checkRumSpeed() {
         gp.player.setDefaultValues(filename);

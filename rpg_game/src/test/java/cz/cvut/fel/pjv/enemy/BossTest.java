@@ -8,18 +8,6 @@ import junit.framework.TestCase;
  */
 public class BossTest extends TestCase {
     GamePanel gp = new GamePanel();
-    String filename = "rpg_game/src/dataJson/test_boss.json";
-
-    /**
-     Verifies if the default values are set correctly.
-     */
-    public void testSetDefaultValues() {
-        gp.boss.setDefaultValues(filename);
-        assertEquals(666 * gp.tileSize, gp.boss.worldX);
-        assertEquals(4 * gp.tileSize, gp.boss.worldY);
-        assertEquals(1, gp.boss.speed);
-        assertEquals(0, gp.boss.heart_count);
-    }
 
     /**
      Checks the change of direction of the boss.

@@ -195,6 +195,7 @@ public class TitleMenu {
         keyboard[2] = "S - down";
         keyboard[3] = "D - right";
 
+        // Set the initial x and y positions for drawing the keyboard.
         int x = 450, y = 180;
         for (String s : keyboard) {
             g2.drawString(s, x, y += g2.getFontMetrics().getHeight());

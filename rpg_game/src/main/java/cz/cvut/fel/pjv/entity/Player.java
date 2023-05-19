@@ -25,7 +25,6 @@ import static cz.cvut.fel.pjv.main.Main.LOGGER;
 public class Player extends Entity {
     private final int bossIdx = -100;
 
-    GamePanel gp;
     KeyHandler keyH;
 
     public Dictionary <String, Integer> inventory = new Hashtable<>();
@@ -48,7 +47,6 @@ public class Player extends Entity {
      */
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);  // Call the constructor of the superclass (Entity).
-        this.gp = gp;
         this.keyH = keyH;
 
         max_health = 6;
