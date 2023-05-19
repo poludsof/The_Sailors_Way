@@ -27,7 +27,7 @@ public class MapObjectPlacer {
     }
 
     /**
-     The method reads in a JSON file containing coordinates of game objects and places them on the map.
+     The method get coordinates of game objects and places them on the map.
      It reads in the object name from the JSON file and creates a new object of that type to be placed on the map.
      @param filename String name of the JSON file containing the game objects coordinates.
      */

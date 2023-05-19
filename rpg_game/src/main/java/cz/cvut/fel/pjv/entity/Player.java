@@ -180,6 +180,7 @@ public class Player extends Entity {
 
             //  If the button to drink rum is pressed and there is at least one bottle in the inventory.
             if (keyH.rumButton && rum_count >= 1) {
+                LOGGER.info("You drank the rum. Your speed has increased.");
 
                 // Remove one bottle and refresh the contents of the inventory.
                 --rum_count;
@@ -197,6 +198,8 @@ public class Player extends Entity {
 
             //  If the button to apply the sword is pressed and there is at least one sword in the inventory.
             if (keyH.swordButton && sword_count >= 1) {
+                LOGGER.info("You used your sword. Your attack range has increased.");
+
                 // Increases the attack range of the player.
                 attackArea.width = 60;
                 attackArea.height = 60;
@@ -204,7 +207,7 @@ public class Player extends Entity {
 
             // If the rum effect is still going on, and it has already lasted (5 * 60 * 16 =) 3.6 seconds.
             if (rum_time_start && rum_time > 5 * 60) {
-
+                LOGGER.info("The effect of the rum were over. Your speed has become normal.");
                 // Decrease the player's speed back to normal after the rum effect ends.
                 speed -= 4;
                 rum_time_start = false;
