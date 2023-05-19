@@ -37,6 +37,10 @@ public class Player extends Entity {
     public int screenX;
     public int screenY;
 
+    // Variables in order to only write the logger once
+    private boolean msgSword = true;
+    private boolean msgRum = true;
+
     /**
      Constructs a Player object.
      @param gp the GamePanel instance
@@ -180,7 +184,10 @@ public class Player extends Entity {
 
             //  If the button to drink rum is pressed and there is at least one bottle in the inventory.
             if (keyH.rumButton && rum_count >= 1) {
-                LOGGER.info("You drank the rum. Your speed has increased.");
+                if (msgRum) {
+                    LOGGER.info("You drank the rum. Your speed has increased.");
+                    msgRum = false;
+                }
 
                 // Remove one bottle and refresh the contents of the inventory.
                 --rum_count;
@@ -192,13 +199,14 @@ public class Player extends Entity {
                 // The action of rum is limited, so after the player drank the rum, the countdown begins.
                 rum_time_start = true;
                 rum_time = 0;
-
-                LOGGER.info("You drank the rum, your speed increased.");
             }
 
             //  If the button to apply the sword is pressed and there is at least one sword in the inventory.
             if (keyH.swordButton && sword_count >= 1) {
-                LOGGER.info("You used your sword. Your attack range has increased.");
+                if (msgSword) {
+                    LOGGER.info("You used your sword. Your attack range has increased.");
+                    msgSword = false;
+                }
 
                 // Increases the attack range of the player.
                 attackArea.width = 60;
