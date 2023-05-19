@@ -24,17 +24,19 @@ public class CollisionChecker {
         int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height;
 
         // Calculate the positions of each corner of the player to then determine which tiles he is on.
-        // +/- speed predicts which coordinate the player will be at in one step.
-        int entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
-        int entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
-        int entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
-        int entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
+        int entityLeftCol = entityLeftWorldX / gp.tileSize;
+        int entityRightCol = entityRightWorldX / gp.tileSize;
+        int entityTopRow = entityTopWorldY / gp.tileSize;
+        int entityBottomRow = entityBottomWorldY / gp.tileSize;
 
         int tile2, tile1 = 0;
 
         switch (entity.direction) {
             case "up" -> {
-                // Get the tile numbers for the top-left and top-right corners of the entity.
+                // +/- speed predicts which coordinate the player will be at in one step.
+                entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
+
+                // Get the tile numbers for the top-left and top-right corners of the entity
                 tile1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tile2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 if (gp.tileM.tile[tile1].collision || gp.tileM.tile[tile2].collision) {
@@ -42,7 +44,9 @@ public class CollisionChecker {
                 }
             }
             case "down" -> {
-                // Get the tile numbers for the bottom-left and bottom-right corners of the entity.
+                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
+
+                // Get the tile numbers for the bottom-left and bottom-right corners of the entity
                 tile1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
                 tile2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tile1].collision || gp.tileM.tile[tile2].collision) {
@@ -50,7 +54,9 @@ public class CollisionChecker {
                 }
             }
             case "left" -> {
-                // Get the tile numbers for the top-left and bottom-left corners of the entity.
+                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
+
+                // Get the tile numbers for the top-left and bottom-left corners of the entity
                 tile1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tile2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
                 if (gp.tileM.tile[tile1].collision || gp.tileM.tile[tile2].collision) {
@@ -58,7 +64,9 @@ public class CollisionChecker {
                 }
             }
             case "right" -> {
-                // Get the tile numbers for the top-right and bottom-right corners of the entity.
+                entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
+
+                // Get the tile numbers for the top-right and bottom-right corners of the entity
                 tile1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 tile2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tile1].collision || gp.tileM.tile[tile2].collision) {

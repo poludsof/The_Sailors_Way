@@ -5,6 +5,8 @@ import cz.cvut.fel.pjv.main.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import static cz.cvut.fel.pjv.main.Main.LOGGER;
+
 /**
  Represents an entity in the game.
  */
@@ -145,6 +147,8 @@ public class Entity {
             if (!gp.player.timeToDamage) {
                 if (gp.player.heart_count > 0) {
                     --gp.player.heart_count;
+                    LOGGER.info("You were attacked, you lose 1 health point.");
+
                     gp.sound.setMusic(8);  // get damage
                 }
 

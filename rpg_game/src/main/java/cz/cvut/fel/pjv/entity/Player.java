@@ -134,12 +134,16 @@ public class Player extends Entity {
     public void update() {
 
         // If the player's health is zero or less, the game is over.
-        if (heart_count <= 0)
+        if (heart_count <= 0) {
             gp.state = State.GAME_OVER;
+            LOGGER.info("The game is a failure. You have 0 health points.");
+        }
 
         // If the player collides with the ship, the game ends with a happy ending.
-        else if (gp.checker.CheckCollisionShip(this))
+        else if (gp.checker.CheckCollisionShip(this)) {
             gp.state = State.HAPPY_END;
+            LOGGER.info("The game was completed successfully.");
+        }
 
         // If a player gets hit, he has time (16 * 60 = 0,96 sec) to recover.
         if (timeToDamage) {

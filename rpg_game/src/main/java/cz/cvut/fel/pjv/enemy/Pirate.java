@@ -83,12 +83,16 @@ public class Pirate extends Entity {
             if (!gp.pirates[idx].timeToDamage && gp.player.attacking) {
                 if (gp.pirates[idx].heart_count > 0) {
                     --gp.pirates[idx].heart_count;
+                    LOGGER.info("You attack the pirate. Pirate loses 1 health.");
+
                     gp.pirates[idx].showHealth = true;
                     gp.sound.setMusic(6);
                 } else {
 
                     // Remove the boss instance from the game
                     gp.pirates[idx] = null;
+                    LOGGER.info("You the the pirate.");
+
                     ++gp.player.dead_pirate_count;
                 }
 
