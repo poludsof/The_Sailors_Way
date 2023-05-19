@@ -141,6 +141,7 @@ public class TileManager {
                 int screenX = worldX - gp.player.worldX + gp.player.screenX;  // Position of the tile on the screen.
                 int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
+                // Check if the tile is within the visible area of the player's screen.
                 if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
                         && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
                         && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY

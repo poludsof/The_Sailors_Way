@@ -286,7 +286,6 @@ public class GamePanel extends JPanel {
         playerDetails.put("sword_count",player.sword_count);
         playerDetails.put("level", player.level);
         playerDetails.put("dead_pirate_count", player.dead_pirate_count);
-        playerDetails.put("max_health", player.max_health);
         try (FileWriter file = new FileWriter(filenameLoadPlayer)) {
             file.write(playerDetails.toJSONString());
             file.flush();

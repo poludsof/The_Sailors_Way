@@ -46,12 +46,12 @@ public class CollisionCheckerTest extends TestCase {
         boolean result;
         // Case 1: The player is not colliding with the boat
         gp.ship.solidArea = new Rectangle(100, 100, 32, 32);
-        result = gp.checker.CheckCollisionBoat(gp.player);
+        result = gp.checker.CheckCollisionShip(gp.player);
         assertFalse("The player should not be colliding with the boat", result);
 
         // Case 2: The player is colliding with the boat
         gp.ship.solidArea = new Rectangle(0, 0, 32, 32);
-        result = gp.checker.CheckCollisionBoat(gp.player);
+        result = gp.checker.CheckCollisionShip(gp.player);
         assertTrue("The player should be colliding with the boat", result);
     }
 

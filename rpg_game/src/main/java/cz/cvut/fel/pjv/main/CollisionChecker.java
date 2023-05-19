@@ -210,7 +210,7 @@ public class CollisionChecker {
      @param entity The entity for collision check
      @return true/false Collision of the player with ship
      */
-    public boolean CheckCollisionBoat(Entity entity) {
+    public boolean CheckCollisionShip(Entity entity) {
         boolean ret = false;
 
         // Calculate where the solid part of the player is on the map.
