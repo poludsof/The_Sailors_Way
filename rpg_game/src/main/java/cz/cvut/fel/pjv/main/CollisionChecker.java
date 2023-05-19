@@ -240,6 +240,9 @@ public class CollisionChecker {
         gp.ship.solidArea.x = 100;
         gp.ship.solidArea.y = 0;
 
+        if (ret)
+            LOGGER.info("You won the game. Congratulations. Herbert will now be able to fly away on his ship.");
+
         return ret;
     }
 

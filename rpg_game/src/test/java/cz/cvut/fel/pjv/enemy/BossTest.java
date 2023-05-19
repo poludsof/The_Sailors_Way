@@ -16,14 +16,14 @@ public class BossTest extends TestCase {
 
     public void testRandomBossAction() {
         String past_direction = gp.boss.direction;
-        gp.boss.time = 0;
+        gp.boss.frames = 0;
         gp.boss.randomBossAction();
-        assertEquals(1, gp.boss.time);
+        assertEquals(1, gp.boss.frames);
         assertEquals(past_direction, gp.boss.direction); // никак не изменилось
 
-        gp.boss.time = 80;
+        gp.boss.frames = 80;
         gp.boss.randomBossAction();
-        assertEquals(0, gp.boss.time);
+        assertEquals(0, gp.boss.frames);
     }
 
     public void testFightBoss() {

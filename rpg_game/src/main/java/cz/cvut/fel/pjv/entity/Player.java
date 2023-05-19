@@ -19,6 +19,9 @@ import org.json.simple.parser.ParseException;
 
 import static cz.cvut.fel.pjv.main.Main.LOGGER;
 
+/**
+ Represents player in the game.
+ */
 public class Player extends Entity {
     private final int bossIdx = -100;
 
@@ -50,11 +53,7 @@ public class Player extends Entity {
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
         // Set the player's solid area
-        solidArea = new Rectangle();
-        solidArea.x = 20;
-        solidArea.y = 24;
-        solidArea.height = 56;
-        solidArea.width = 40;
+        solidArea = new Rectangle(20, 24, 56, 40);
 
         getPlayerImage();
     }
