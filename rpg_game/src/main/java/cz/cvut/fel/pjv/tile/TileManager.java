@@ -55,24 +55,15 @@ public class TileManager {
             assert is != null;
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            int col = 0;
-            int row = 0;
             // Read the map data line by line.
-            while (col < gp.worldCol && row < gp.worldRow) {
+            for (int row = 0; row < gp.worldRow; ++row) {
                 String line = br.readLine();
 
                 // Parse the numbers in each line and store them in the mapTileNum array.
-                while (col < gp.worldCol) {
+                for (int col = 0; col < gp.worldCol; ++col) {
                     String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
-                    ++col;
-                }
-
-                // Reset the column index and move to the next row.
-                if (col == gp.worldCol) {
-                    col = 0;
-                    ++row;
                 }
             }
             br.close();
