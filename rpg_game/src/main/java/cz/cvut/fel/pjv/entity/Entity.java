@@ -103,7 +103,7 @@ public class Entity {
                 g2.fillRect(screenX + 2, screenY - 18, (fill_health * heart_count + 10) * scale, 8);
             }
 
-            // If the entity has taken damage, it will turn red, and at this time he cannot get another hit.
+            // If the entity has taken damage, it turns red, and during this time he cannot get another hit.
             if (timeToDamage) {
                 AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
                 g2.setComposite(alphaComposite);

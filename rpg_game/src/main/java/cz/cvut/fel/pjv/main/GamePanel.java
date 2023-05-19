@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
     public State state;
 
     // SIZE OF THE TILES
-    private final int originalTileSize = 20; // 20 x 20 character
+    private final int originalTileSize = 20; // 20 x 20 object
 
     public final int tileSize = originalTileSize * 4; // // 20 * 4 = 80 --> 80 x 80, just to fit the GamePanel size
 

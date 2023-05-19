@@ -73,7 +73,7 @@ public class Pirate extends Entity {
 
 
     /**
-     The method is an attack of the pirate by the player.
+     The method is a player's attack on the pirate.
      @param idx the index of the pirate enemy in the pirate array
      */
     public void fightPirate(int idx) {

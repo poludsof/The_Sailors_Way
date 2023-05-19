@@ -98,7 +98,7 @@ public class Player extends Entity {
     }
 
     /**
-     Fills the player's inventory with the current counts of items.
+     Fills the player's inventory with the current items count.
      */
     public void fillInventory() {
         inventory.put("Key", key_count);
@@ -149,7 +149,7 @@ public class Player extends Entity {
             LOGGER.info("The game was completed successfully.");
         }
 
-        // If a player gets hit, he has time (16 * 60 = 0,96 sec) to recover.
+        // If a player gets hit, he has time (16 * 60 = 0,96 sec) to retreat.
         if (timeToDamage) {
             damageCounter++;
             if (damageCounter == 60) {
