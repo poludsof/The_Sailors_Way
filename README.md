@@ -1,4 +1,10 @@
 # The Sailor's Way ⛵
+
+<p align="center">
+  <img width="550" height="300" src="for_readme/game_video.mp4">
+</p>
+
+
 🟧 [Manuál pro uživatele](#manuál-pro-uživatele)
 🟦 [Program documentation](#program-documentation)
 🟩 [Important information](#important-information)
