@@ -1,7 +1,7 @@
 # The Sailor's Way ⛵
 
 <div align="center">
-  <video src="for_readme/game_video.mp4" width="400" />
+  <video src="for_readme/sailor.gif" width="400" />
 </div>
 
 
