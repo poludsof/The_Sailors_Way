@@ -1,8 +1,9 @@
 # The Sailor's Way ⛵
 
-<div align="center">
-  <video src="for_readme/sailor.gif" width="400" />
-</div>
+<p align="center">
+  <img width="550" height="300" src="for_readme/sailor.gif">
+</p>
+
 
 
 🟧 [Manuál pro uživatele](#manuál-pro-uživatele)
