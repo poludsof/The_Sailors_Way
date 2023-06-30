@@ -1,7 +1,7 @@
 # The Sailor's Way ⛵
-+ [Manuál pro uživatele](#manuál-pro-uživatele)
-+ [Program documentation](#program-documentation)
-+ [Important information](#important-information)
+🟧 [Manuál pro uživatele](#manuál-pro-uživatele)
+🟦 [Program documentation](#program-documentation)
+🟩 [Important information](#important-information)
 
 ## Manual for users
 + [Running the game](#running-the-game)
@@ -39,7 +39,7 @@ Before starting the game, you can look at the map and the main journey stages:
 
 As in almost all games, at the end of the journey you will meet the main enemy. If the player has made it to this point, they will try to fight the boss as well.
 
-## Good luck on your journey!
+## 🟧 Good luck on your journey!
 
 
 ---------------
@@ -156,7 +156,7 @@ Unit tests for classes:
 + Brain
 
 ---------------
-## Important information
+## 🟩 Important information
 The actual [Herbert](https://www.youtube.com/shorts/vpQ1OVmMCkY):
 
 <img src="for_readme/herbert.png" width="450"/>
