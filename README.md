@@ -1,10 +1,19 @@
 # The Sailor's Way ⛵
 
-🟧 [Manuál pro uživatele](#manuál-pro-uživatele) | 🟦 [Program documentation](#program-documentation) | 🟩 [Important information](#important-information)
-
 <p align="center">
   <img width="600" height="400" src="for_readme/sailor.gif">
 </p>
+
+A sailor named Herbert embarked on a long voyage on his ship to carry valuable cargo to the other side of the world. Suddenly, however, the ship was attacked by pirates who seized Herbert's ship.
+
+Herbert found himself on an island and realized that he had to find a way to get his ship back and recover everything that had been taken from him. Herbert set out on his journey and many challenges and dangers awaited him. 
+Eventually Herbert found the base of the pirates who had taken his ship and began his mission to get his ship back.
+
+🟧 [Manuál pro uživatele](#manuál-pro-uživatele) 
+
+🟦 [Program documentation](#program-documentation)
+
+🟩 [Important information](#important-information)
 
 ## Manual for users
 + [Running the game](#running-the-game)
