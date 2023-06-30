@@ -1,5 +1,10 @@
-1. [Manuál pro uživatele](#manuál-pro-uživatele)
+[Manuál pro uživatele](#manuál-pro-uživatele)
 # Manuál pro uživatele
+[Running the game](#running-the-game)
+[Title menu](#title-menu)
+[Map](#map)
+[Boss](#boss)
+
 ## Running the game
 
 To run the game on your computer, you can follow the following steps:
