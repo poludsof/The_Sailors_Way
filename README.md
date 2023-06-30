@@ -4,11 +4,9 @@
   <img width="600" height="400" src="for_readme/sailor.gif">
 </p>
 
-<p align="center">
-< 🟧 [Manuál pro uživatele](#manuál-pro-uživatele) | 
-🟦 [Program documentation](#program-documentation) |
-🟩 [Important information](#important-information) >
-</p>
+🟧 [Manuál pro uživatele](#manuál-pro-uživatele)  |  
+🟦 [Program documentation](#program-documentation)  | 
+🟩 [Important information](#important-information)
 
 ## Manual for users
 + [Running the game](#running-the-game)
