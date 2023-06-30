@@ -1,14 +1,14 @@
 # The Sailor's Way ⛵
 
 <p align="center">
-  <img width="580" height="400" src="for_readme/sailor.gif">
+  <img width="600" height="400" src="for_readme/sailor.gif">
 </p>
 
-
-
-🟧 [Manuál pro uživatele](#manuál-pro-uživatele)
-🟦 [Program documentation](#program-documentation)
+<p align="center">
+🟧 [Manuál pro uživatele](#manuál-pro-uživatele) | 
+🟦 [Program documentation](#program-documentation) |
 🟩 [Important information](#important-information)
+</p>
 
 ## Manual for users
 + [Running the game](#running-the-game)
