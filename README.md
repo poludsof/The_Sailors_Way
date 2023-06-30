@@ -102,7 +102,7 @@ The Entity class represents an object in the game that can be displayed on the s
 The variables `worldX` and `worldY` represent the coordinates of the object's location on the map. 
 
 The class also contains a variable `solidArea` - a rectangle that represents the area of the object in which no collision with other objects can occur.
-![coord](for_readme/coord.png)
+<img src="for_readme/coord.png" width="200"/>
 
 #### Player class
 The Player class represents a game character and is inherited from the Entity class.
@@ -113,7 +113,8 @@ Examples of tile types:
 ![tiles](for_readme/tiles.png)
 
 Map example:
-![map_expl](for_readme/map_expl.png)
+
+<img src="for_readme/map_expl.png" width="200"/>
 
 ### Package `object`
 #### GameObjects class
@@ -154,4 +155,4 @@ Unit tests for classes:
 ## Important information
 The actual [Herbert](https://www.youtube.com/shorts/vpQ1OVmMCkY):
 
-<img src="herbert.png" width="400"/>
+<img src="for_readme/herbert.png" width="400"/>
