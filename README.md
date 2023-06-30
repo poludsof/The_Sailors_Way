@@ -21,7 +21,7 @@ To run the game on your computer, you can follow the following steps:
 
 4. In the "URL" field, paste the repository link you copied earlier.
 
-5. Go to the cz.cvut.fel.pjv.main directory and open the Main class, then click the <kbd>run</kbd> button in the upper right corner. <img src="run.png" width="30"/>
+5. Go to the cz.cvut.fel.pjv.main directory and open the Main class, then click the <kbd>run</kbd> button in the upper right corner. <img src="run.png" width="20"/>
 
 6. Then a window will open on the monitor and you can start playing.
 
@@ -39,10 +39,10 @@ Before starting the game, you can look at the map and the main journey stages:
 
 As in almost all games, at the end of the journey you will meet the main enemy. If the player has made it to this point, they will try to fight the boss as well.
 
-### Good luck on your journey!
+## Good luck on your journey!
 
 
-
+---------------
 ## Program documentation
 + [Code structure](#code-structure)
 + [List of images and other files](#list-of-images-and-other-files)
@@ -154,4 +154,4 @@ Unit tests for classes:
 ## Important information
 The actual [Herbert](https://www.youtube.com/shorts/vpQ1OVmMCkY):
 
-<img src="herbert.png" width="300"/>
+<img src="herbert.png" width="400"/>
