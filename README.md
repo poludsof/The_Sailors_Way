@@ -7,6 +7,7 @@
 A sailor named Herbert embarked on a long voyage on his ship to carry valuable cargo to the other side of the world. Suddenly, however, the ship was attacked by pirates who seized Herbert's ship.
 
 Herbert found himself on an island and realized that he had to find a way to get his ship back and recover everything that had been taken from him. Herbert set out on his journey and many challenges and dangers awaited him. 
+
 Eventually Herbert found the base of the pirates who had taken his ship and began his mission to get his ship back.
 
 🟧 [Manuál pro uživatele](#manuál-pro-uživatele) 
