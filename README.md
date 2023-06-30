@@ -112,11 +112,11 @@ The Player class represents a game character and is inherited from the Entity cl
 #### Tile and TileManager class
 Examples of tile types:
 
-<img src="for_readme/tiles.png" width="500"/>
+<img src="for_readme/tiles.png" width="700"/>
 
 Map example:
 
-<img src="for_readme/map_expl.png" width="400"/>
+<img src="for_readme/map_expl.png" width="500"/>
 
 ### Package `object`
 #### GameObjects class
@@ -136,7 +136,7 @@ All the necessary images, such as backgrounds, a world map, and sound effects ar
 ## Diagram
 This diagram is a graphical representation of the project structure. It shows how the classes in the project are interconnected and how they interact with each other.
 
-<img src="for_readme/datagramPJV3.png" width="600"/>
+<img src="for_readme/datagramPJV3.png" width="800"/>
 
 ## Tests
 Unit tests for classes:
@@ -159,4 +159,4 @@ Unit tests for classes:
 ## Important information
 The actual [Herbert](https://www.youtube.com/shorts/vpQ1OVmMCkY):
 
-<img src="for_readme/herbert.png" width="400"/>
+<img src="for_readme/herbert.png" width="450"/>
