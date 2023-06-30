@@ -153,5 +153,5 @@ Unit tests for classes:
 ---------------
 ## Important information
 The actual [Herbert](https://www.youtube.com/shorts/vpQ1OVmMCkY):
-
+<img src="herbert.png" width="45"/>
 ![herbert](herbert.png){width=45}
