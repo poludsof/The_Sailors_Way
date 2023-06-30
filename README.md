@@ -1,7 +1,7 @@
 # The Sailor's Way ⛵
 
 <p align="center">
-  <img width="550" height="300" src="for_readme/sailor.gif">
+  <img width="580" height="400" src="for_readme/sailor.gif">
 </p>
 
 
