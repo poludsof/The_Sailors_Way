@@ -21,7 +21,7 @@ To run the game on your computer, you can follow the following steps:
 
 4. In the "URL" field, paste the repository link you copied earlier.
 
-5. Go to the cz.cvut.fel.pjv.main directory and open the Main class, then click the <kbd>run</kbd> button in the upper right corner. ![run](run.png){width=3}
+5. Go to the cz.cvut.fel.pjv.main directory and open the Main class, then click the <kbd>run</kbd> button in the upper right corner. <img src="run.png" width="30"/>
 
 6. Then a window will open on the monitor and you can start playing.
 
@@ -153,5 +153,5 @@ Unit tests for classes:
 ---------------
 ## Important information
 The actual [Herbert](https://www.youtube.com/shorts/vpQ1OVmMCkY):
-<img src="herbert.png" width="45"/>
-![herbert](herbert.png){width=45}
+
+<img src="herbert.png" width="300"/>
