@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-🟧 [Manuál pro uživatele](#manuál-pro-uživatele) | 
+< 🟧 [Manuál pro uživatele](#manuál-pro-uživatele) | 
 🟦 [Program documentation](#program-documentation) |
-🟩 [Important information](#important-information)
+🟩 [Important information](#important-information) >
 </p>
 
 ## Manual for users
