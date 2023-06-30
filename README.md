@@ -1,4 +1,4 @@
-
+1. [Manuál pro uživatele](#manuál-pro-uživatele)
 # Manuál pro uživatele
 ## Running the game
 
