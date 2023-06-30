@@ -103,7 +103,7 @@ The variables `worldX` and `worldY` represent the coordinates of the object's lo
 
 The class also contains a variable `solidArea` - a rectangle that represents the area of the object in which no collision with other objects can occur.
 
-<img src="for_readme/coord.png" width="400"/>
+<img src="for_readme/coord.png" width="350"/>
 
 #### Player class
 The Player class represents a game character and is inherited from the Entity class.
@@ -112,11 +112,11 @@ The Player class represents a game character and is inherited from the Entity cl
 #### Tile and TileManager class
 Examples of tile types:
 
-<img src="for_readme/tiles.png" width="300"/>
+<img src="for_readme/tiles.png" width="500"/>
 
 Map example:
 
-<img src="for_readme/map_expl.png" width="300"/>
+<img src="for_readme/map_expl.png" width="400"/>
 
 ### Package `object`
 #### GameObjects class
@@ -136,7 +136,7 @@ All the necessary images, such as backgrounds, a world map, and sound effects ar
 ## Diagram
 This diagram is a graphical representation of the project structure. It shows how the classes in the project are interconnected and how they interact with each other.
 
-<img src="for_readme/datagramPJV3.png" width="400"/>
+<img src="for_readme/datagramPJV3.png" width="600"/>
 
 ## Tests
 Unit tests for classes:
