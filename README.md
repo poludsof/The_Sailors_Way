@@ -21,7 +21,7 @@ To run the game on your computer, you can follow the following steps:
 
 4. In the "URL" field, paste the repository link you copied earlier.
 
-5. Go to the cz.cvut.fel.pjv.main directory and open the Main class, then click the <kbd>run</kbd> button in the upper right corner. <img src="run.png" width="20"/>
+5. Go to the cz.cvut.fel.pjv.main directory and open the Main class, then click the <kbd>run</kbd> button in the upper right corner. <img src="for_readme/run.png" width="20"/>
 
 6. Then a window will open on the monitor and you can start playing.
 
@@ -33,7 +33,7 @@ During the game, the user can pause the game, see what is in his inventory, or s
 ### Map
 Before starting the game, you can look at the map and the main journey stages:
 
-![open_map](open_map.jpg)
+![open_map](for_readme/open_map.jpg)
 
 ### Boss
 
@@ -102,7 +102,7 @@ The Entity class represents an object in the game that can be displayed on the s
 The variables `worldX` and `worldY` represent the coordinates of the object's location on the map. 
 
 The class also contains a variable `solidArea` - a rectangle that represents the area of the object in which no collision with other objects can occur.
-![coord](uploads/a8b6c8b402c8677667eedfa08bbeb192/coord.png){width=30}
+![coord](for_readme/coord.png)
 
 #### Player class
 The Player class represents a game character and is inherited from the Entity class.
@@ -110,10 +110,10 @@ The Player class represents a game character and is inherited from the Entity cl
 ### Package `tile`
 #### Tile and TileManager class
 Examples of tile types:
-![Screenshot_from_2023-04-12_22-19-11](uploads/5863383721faa99abe02144e7655d736/Screenshot_from_2023-04-12_22-19-11.png)
+![tiles](for_readme/tiles.png)
 
 Map example:
-![map_expl](uploads/44f756fba017924df0ec86e815634024/map_expl.png){width=70}
+![map_expl](for_readme/map_expl.png)
 
 ### Package `object`
 #### GameObjects class
@@ -127,11 +127,11 @@ Classes that represent the enemies in the game.
 
 ## List of images and other files
 All the necessary images, such as backgrounds, a world map, and sound effects are in the `resources` package and are then organized into folders by category.
-![Screenshot_from_2023-04-11_22-41-40](uploads/30dc5ef9a947688b2e435ba8a2466ab1/Screenshot_from_2023-04-11_22-41-40.png)
+![resources](for_readme/resources.png)
 
 ## Diagram
 This diagram is a graphical representation of the project structure. It shows how the classes in the project are interconnected and how they interact with each other.
-![datagramPJV3](uploads/b5524a61b5ed9430dc04c4c4b58299cf/datagramPJV3.png)
+![datagramPJV3](for_readme/datagramPJV3.png)
 
 ## Tests
 Unit tests for classes:
