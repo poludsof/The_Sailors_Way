@@ -1,8 +1,8 @@
 # The Sailor's Way ⛵
 
-<p align="center">
-  <video width="550" height="300" src="for_readme/game_video.mp4">
-</p>
+<div align="center">
+  <video src="for_readme/game_video.mp4" width="400" />
+</div>
 
 
 🟧 [Manuál pro uživatele](#manuál-pro-uživatele)
