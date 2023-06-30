@@ -1,9 +1,12 @@
-[Manuál pro uživatele](#manuál-pro-uživatele)
-# Manuál pro uživatele
-[Running the game](#running-the-game)
-[Title menu](#title-menu)
-[Map](#map)
-[Boss](#boss)
++ [Manuál pro uživatele](#manuál-pro-uživatele)
++ [Manuál pro uživatele](#manuál-pro-uživatele)
++ [Important information](#important-information)
+
+# Manual for users
++ [Running the game](#running-the-game)
++ [Title menu](#title-menu)
++ [Map](#map)
++ [Boss](#boss)
 
 ## Running the game
 
@@ -39,7 +42,7 @@ As in almost all games, at the end of the journey you will meet the main enemy. 
 
 
 ---------------
-### Other important information
+## Important information
 The actual [Herbert](https://www.youtube.com/shorts/vpQ1OVmMCkY):
 
 ![herbert](uploads/3b51573ab70b7d0c849e9f453d00c20e/herbert.png){width=45%}
