@@ -50,7 +50,7 @@ As in almost all games, at the end of the journey you will meet the main enemy. 
 + [Tests](#tests)
 + [Resources](#resources)
   
-## Code structure
+## 🟦 Code structure
 ### Package `main`
 #### 🔷 Main class 
 
@@ -128,21 +128,21 @@ The classes `Door`, `Equipment`, `Heart`, `Key`, `Weapon` and others are inherit
 #### 🔷 Boss class, Pirate class
 Classes that represent the enemies in the game.
 
-## List of images and other files
+## 🟦 List of images and other files
 All the necessary images, such as backgrounds, a world map, and sound effects are in the `resources` package and are then organized into folders by category.
 
 ![resources](for_readme/resources.png)
 
-## Diagram
+## 🟦 Diagram
 This diagram is a graphical representation of the project structure. It shows how the classes in the project are interconnected and how they interact with each other.
 
 <img src="for_readme/datagramPJV3.png" width="800"/>
 
-## Tests
+## 🟦 Tests
 Unit tests for classes:
 `BossTest`, `PlayerTest`, `CollisionCheckerTest`, `GameObjectsTest`
 
-## Resources 🧠
+## 🟦 Resources 🧠
 + Stack Overflow: [stackoverflow.com](https://stackoverflow.com/) ,  [Java2D OpenGL](https://stackoverflow.com/questions/35641229/java2d-opengl-graphics-acceleration-not-working)
 
 + YouTube: [RyiSnow](https://www.youtube.com/@RyiSnow)
