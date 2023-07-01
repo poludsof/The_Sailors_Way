@@ -10,7 +10,7 @@ Herbert found himself on an island and realized that he had to find a way to get
 
 Eventually Herbert found the base of the pirates who had taken his ship and began his mission to get his ship back.
 
-🟧 [Manuál pro uživatele](#manuál-pro-uživatele) 
+🟧 [Manual for users](#manual-for-users) 
 
 🟦 [Program documentation](#program-documentation)
 
